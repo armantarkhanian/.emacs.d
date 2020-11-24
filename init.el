@@ -245,6 +245,9 @@ With argument ARG, do this that many times."
     :mode "\\.js\\'"
     :mode "\\.json\\'")
 
+(use-package protobuf-mode
+    :ensure t)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
