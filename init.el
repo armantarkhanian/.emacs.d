@@ -80,8 +80,11 @@
     (find-file "~/.emacs.d/backups")
     )
 
-(global-set-key (kbd "C-x C-j") 'hs-minor-mode) ;; Включить сворачивание кода
-(global-set-key (kbd "C-j") 'hs-toggle-hiding) ;; Свернуть/развернуть блок кода
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+(global-set-key (kbd "C--") 'hs-hide-block)
+(global-set-key (kbd "C-=") 'hs-show-block)
+
 (require 'imenu)
 (setq imenu-auto-rescan      t)
 (setq imenu-use-popup-menu nil)
@@ -146,6 +149,11 @@
     (compile (concat "go run " (buffer-name)))
     )
 
+(defun tidy ()
+    (interactive)
+    (compile "go mod tidy")
+    )
+
 (defun build ()
     (interactive)
     (compile "go build")
@@ -166,7 +174,6 @@
     (toggle-frame-fullscreen)
     )
 
-
 (defun backward-delete-word (arg)
     "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
@@ -176,6 +183,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-n") 'gotoUp)
 (global-set-key (kbd "M-p") 'gotoDown)
+(global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-x C-g") 'goto-line)
 (global-set-key (kbd "C-r") 'replace-string)
 ;;; end of main config
@@ -241,8 +249,8 @@ With argument ARG, do this that many times."
 (use-package web-mode
     :ensure t
     :mode "\\.html\\'"
-    :mode "\\.css\\'"
     :mode "\\.js\\'"
+    :mode "\\.vue\\'"
     :mode "\\.json\\'")
 
 (use-package protobuf-mode
@@ -265,8 +273,10 @@ With argument ARG, do this that many times."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(current-language-environment "UTF-8")
+ '(custom-safe-themes
+   '("2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "5b809c3eae60da2af8a8cfba4e9e04b4d608cb49584cb5998f6e4a1c87c057c4" "71e5acf6053215f553036482f3340a5445aee364fb2e292c70d9175fb0cc8af7" "d74c5485d42ca4b7f3092e50db687600d0e16006d8fa335c69cf4f379dbd0eee" default))
  '(package-selected-packages
-   '(flycheck lsp-ui web-mode yasnippet lsp-mode go-mode company doom-themes use-package)))
+   '(vue-mode js2-mode cobalt yaml-mode sql-indent flycheck lsp-ui web-mode yasnippet lsp-mode go-mode company doom-themes use-package)))
 
 (defun reverse-input-method (input-method)
     "Build the reverse mapping of single letters from INPUT-METHOD."
