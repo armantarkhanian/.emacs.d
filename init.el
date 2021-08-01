@@ -4,7 +4,6 @@
 	    ("melpa-stb" . "https://stable.melpa.org/packages/")
 	    ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
-(setq use-package-always-ensure t)
 (unless (require 'use-package nil t)
     (package-refresh-contents)
     (package-install 'use-package)
@@ -14,6 +13,20 @@
 (when window-system (set-frame-size (selected-frame) 110 32))
 (setq warning-minimum-level :emergency)
 
+(unless (require 'all-the-icons nil t)
+    (use-package all-the-icons
+        :ensure t)
+    (all-the-icons-install-fonts))
+
+(use-package all-the-icons
+    :ensure t)
+
+(use-package all-the-icons-dired
+    :ensure t)
+
+(use-package neotree
+    :ensure t)
+
 (use-package doom-themes
     :ensure t
     :config
@@ -22,14 +35,17 @@
           doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
     ;; Enable flashing mode-line on errors
-    (doom-themes-visual-bell-config))
+    (doom-themes-visual-bell-config)
+    (doom-themes-neotree-config)
+    (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+    (doom-themes-treemacs-config)
+    )
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
 (load-theme 'doom-snazzy t)
-;;(load-theme 'vs-light t)
 
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
@@ -38,6 +54,7 @@
 (global-hl-line-mode 1) ;; Подсвечивать текущую строку
 ;;(set-face-background 'hl-line "#ccc")
 ;;(set-face-foreground 'highlight nil)
+
 
 (global-display-line-numbers-mode)
 (setq inhibit-splash-screen   t)
@@ -109,6 +126,14 @@
 (add-hook 'yaml-mode-hook
           (lambda ()
               (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+(add-hook 'dired-mode-hook
+          (lambda()
+              (define-key dired-mode-map "b" 'dired-up-directory)
+              (dired-hide-details-mode)
+              ))
 
 (setq-default indicate-empty-lines nil)
 (setq-default indicate-buffer-boundaries 'left)
@@ -309,7 +334,7 @@ With argument ARG, do this that many times."
  '(objed-cursor-color "#d02b61")
  '(package-selected-packages
    (quote
-    (jetbrains github-modern-theme dockerfile-mode dart-mode intellij-theme vs-light-theme github-theme vue-mode js2-mode cobalt yaml-mode sql-indent flycheck lsp-ui web-mode yasnippet lsp-mode go-mode company doom-themes use-package)))
+    (neotree tabbar powerline all-the-icons-dired jetbrains github-modern-theme dockerfile-mode dart-mode intellij-theme vs-light-theme github-theme vue-mode js2-mode cobalt yaml-mode sql-indent flycheck lsp-ui web-mode yasnippet lsp-mode go-mode company doom-themes use-package)))
  '(pdf-view-midnight-colors (cons "#dddddd" "#1b1d1e"))
  '(rustic-ansi-faces
    ["#1b1d1e" "#d02b61" "#60aa00" "#d08928" "#6c9ef8" "#b77fdb" "#00aa80" "#dddddd"])
