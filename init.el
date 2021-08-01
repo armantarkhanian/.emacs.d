@@ -311,6 +311,14 @@ With argument ARG, do this that many times."
     )
 
 (custom-set-variables
- '(lsp-go-analyses (quote (("fieldalignment" . t))))
- '(lsp-go-hover-kind "NoDocumentation")
- )
+ '(lsp-eldoc-enable-hover nil)
+ '(lsp-go-analyses
+   (quote
+    (("fieldalignment" . t)
+     ("unusedparams" . t)
+     ("assign" . t)
+     ("unusedwrite" . t))))
+ '(lsp-go-hover-kind "FullDocumentation")
+ '(lsp-go-use-gofumpt t)
+ '(lsp-ui-doc-max-height 30)
+ '(lsp-ui-doc-max-width 60))
