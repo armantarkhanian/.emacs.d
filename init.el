@@ -56,7 +56,8 @@
 (use-package lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
-    :hook (go-mode . lsp-deferred)    
+    :hook (go-mode . lsp-deferred)
+    :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
     :config (progn
                 ;; use flycheck, not flymake
@@ -311,6 +312,10 @@ With argument ARG, do this that many times."
     )
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(lsp-eldoc-enable-hover nil)
  '(lsp-go-analyses
    (quote
@@ -321,4 +326,13 @@ With argument ARG, do this that many times."
  '(lsp-go-hover-kind "FullDocumentation")
  '(lsp-go-use-gofumpt t)
  '(lsp-ui-doc-max-height 30)
- '(lsp-ui-doc-max-width 60))
+ '(lsp-ui-doc-max-width 60)
+ '(package-selected-packages
+   (quote
+    (lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
