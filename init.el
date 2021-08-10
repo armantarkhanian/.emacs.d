@@ -273,9 +273,11 @@ With argument ARG, do this that many times."
 (use-package web-mode
     :ensure t
     :mode "\\.html\\'"
-    :mode "\\.js\\'"
+    :mode "\\.json\\'"
     :mode "\\.vue\\'"
-    :mode "\\.json\\'")
+    :mode "\\.js\\'")
+
+(setq company-dabbrev-downcase nil)
 
 (use-package protobuf-mode
     :ensure t)
@@ -362,7 +364,7 @@ With argument ARG, do this that many times."
  '(lsp-ui-doc-max-width 60)
  '(package-selected-packages
    (quote
-    (vue-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
+    (xref-js2 js2-refactor js2-mode json-mode vue-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
