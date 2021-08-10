@@ -254,6 +254,8 @@ With argument ARG, do this that many times."
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'flycheck-mode)
 
+(add-hook 'before-save-hook 'fmt)
+
 
 (defun fmt ()
     (interactive)    
@@ -311,6 +313,38 @@ With argument ARG, do this that many times."
     (find-file default-directory)
     )
 
+(require 'subr-x)
+
+(defun vue-new-component ()
+    (interactive)
+    (setq projectFolder (read-directory-name "Enter path to  /src folder of Vue-js project: "))
+    (setq projectFolder (string-remove-suffix "/" projectFolder))
+    (setq projectFolder (concat projectFolder "/components"))
+    (setq componentName (read-from-minibuffer "New component name: "))
+    (setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
+    (make-directory dir)
+    (setq templateFile (concat dir "/" componentName ".vue"))
+    (setq scriptFile (concat dir "/script.js"))
+    (setq styleFile (concat dir "/style.css"))
+    (setq scriptFileContent (concat "export default {
+    name: '" componentName "'
+}
+"))
+    (setq templateFileContent (concat "<template>
+    <div>
+        " componentName " component" "
+    </div>
+</template>
+
+<script src=\"./script.js\"></script>
+
+<style src=\"./style.css\"></style>
+"))
+    (write-region scriptFileContent nil scriptFile)
+    (write-region "" nil styleFile)
+    (write-region templateFileContent nil templateFile)
+    )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -329,7 +363,7 @@ With argument ARG, do this that many times."
  '(lsp-ui-doc-max-width 60)
  '(package-selected-packages
    (quote
-    (lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
+    (vue-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
