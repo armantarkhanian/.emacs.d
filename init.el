@@ -317,9 +317,8 @@ With argument ARG, do this that many times."
 
 (defun vue-new-component ()
     (interactive)
-    (setq projectFolder (read-directory-name "Enter path to  /src folder of Vue-js project: "))
-    (setq projectFolder (string-remove-suffix "/" projectFolder))
-    (setq projectFolder (concat projectFolder "/components"))
+    (setq projectFolder (read-directory-name "Enter path to /components folder of Vue-js project: "))
+    (setq projectFolder (string-remove-suffix "/" projectFolder))    
     (setq componentName (read-from-minibuffer "New component name: "))
     (setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
     (make-directory dir)
