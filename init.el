@@ -338,7 +338,7 @@ With argument ARG, do this that many times."
 
 <script src=\"./script.js\"></script>
 
-<style src=\"./style.css\"></style>
+<style src=\"./style.css\" scoped></style>
 "))
     (write-region scriptFileContent nil scriptFile)
     (write-region "" nil styleFile)
