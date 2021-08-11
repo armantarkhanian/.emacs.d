@@ -1,9 +1,10 @@
+
 (require 'package)
 (setq package-archives
       '(
         ("gnu" . "https://elpa.gnu.org/packages/")
-	    ("melpa-stb" . "https://stable.melpa.org/packages/")
-	    ("melpa" . "https://melpa.org/packages/")
+        ("melpa-stb" . "https://stable.melpa.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
         ))
 (package-initialize)
 (unless (require 'use-package nil t)
@@ -214,18 +215,23 @@
     )
 
 (defun backward-delete-word (arg)
-    "Delete characters backward until encountering the beginning of a word.
-With argument ARG, do this that many times."
     (interactive "p")
     (delete-region (point) (progn (backward-word arg) (point))))
 
+(defun forward-delete-word (arg)
+    (interactive "p")
+    (delete-region (point) (progn (forward-word arg) (point))))
+
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
-(global-set-key (kbd "M-n") 'gotoUp)
-(global-set-key (kbd "M-p") 'gotoDown)
+(global-set-key (kbd "M-<backspace>") 'backward-delete-word)
+(global-set-key (kbd "M-d") 'forward-delete-word)
+(global-set-key (kbd "M-p") 'backward-page)
+(global-set-key (kbd "M-n") 'forward-page)
+(global-set-key (kbd "C-M-p") 'backward-paragraph)
+(global-set-key (kbd "C-M-n") 'forward-paragraph)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-x C-g") 'goto-line)
 (global-set-key (kbd "C-r") 'replace-string)
-;;; end of main config
 
 ;; optional package to get the error squiggles as you edit
 (use-package flycheck
@@ -270,11 +276,55 @@ With argument ARG, do this that many times."
     (setq company-idle-delay 0)
     (setq company-minimum-prefix-length 1))
 
+;; (use-package polymode
+;;     :ensure t
+;;     :config
+
+;;     (setq polymode-minor-mode-map nil) ;; disable all hot keys setted by polymode
+;;     )
+
+;; (define-hostmode poly-web-mode-hostmode :mode 'web-mode)
+
+;; (define-innermode poly-css-web-mode-innermode
+;;     :mode 'css-mode
+;;     :head-matcher "<style .*>"
+;;     :tail-matcher "</style>"
+;;     :head-mode 'host
+;;     :tail-mode 'host)
+
+;; (define-innermode poly-js2-web-mode-innermode
+;;     :mode 'js2-mode
+;;     :head-matcher "<script>"
+;;     :tail-matcher "</script>"
+;;     :head-mode 'host
+;;     :tail-mode 'host)
+
+;; (define-polymode poly-web-mode
+;;     :hostmode 'poly-web-mode-hostmode
+;;     :innermodes '(poly-css-web-mode-innermode
+;;                   poly-js2-web-mode-innermode)
+;;     )
+
+;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . poly-web-mode))
+
+(use-package multi-web-mode
+    :ensure
+    :mode "\\.vue\\'"
+    :config
+    (setq mweb-default-major-mode 'web-mode)
+    (setq mweb-tags '(                      
+                      (css-mode "<style.*>" "</style>")
+                      ))
+    (setq mweb-filename-extensions '("vue" "html"))
+    )
+
+(multi-web-global-mode 1)
+
+
 (use-package web-mode
     :ensure t
     :mode "\\.html\\'"
     :mode "\\.json\\'"
-    :mode "\\.vue\\'"
     :mode "\\.js\\'")
 
 (setq company-dabbrev-downcase nil)
@@ -317,16 +367,14 @@ With argument ARG, do this that many times."
 
 (require 'subr-x)
 
-(defun vue-new-component ()
+(defun new-vue-component ()
     (interactive)
-    (setq projectFolder (read-directory-name "Enter path to /components folder of Vue-js project: "))
-    (setq projectFolder (string-remove-suffix "/" projectFolder))    
+    (setq projectFolder (read-directory-name "Enter path to /components directory: "))
+    (setq projectFolder (string-remove-suffix "/" projectFolder))
     (setq componentName (read-from-minibuffer "New component name: "))
     (setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
     (make-directory dir)
     (setq templateFile (concat dir "/" componentName ".vue"))
-    (setq scriptFile (concat dir "/script.js"))
-    (setq styleFile (concat dir "/style.css"))
     (setq scriptFileContent (concat "export default {
     name: '" componentName "'
 }
@@ -337,13 +385,20 @@ With argument ARG, do this that many times."
     </div>
 </template>
 
-<script src=\"./script.js\"></script>
+<script>
+    export default {
+        name: '" componentName "'
+    }
+</script>
 
-<style src=\"./style.css\" scoped></style>
+<style scoped>
+* {
+
+}
+</style>
 "))
-    (write-region scriptFileContent nil scriptFile)
-    (write-region "" nil styleFile)
     (write-region templateFileContent nil templateFile)
+    (find-file templateFile)
     )
 
 (custom-set-variables
@@ -364,7 +419,7 @@ With argument ARG, do this that many times."
  '(lsp-ui-doc-max-width 60)
  '(package-selected-packages
    (quote
-    (xref-js2 js2-refactor js2-mode json-mode vue-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
+    (js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
