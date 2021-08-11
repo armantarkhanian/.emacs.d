@@ -223,12 +223,8 @@
 
 (defun custom-kill-line ()
     (interactive)
-    (setq currentPoint (point))
-    (if (eq currentPoint (line-end-position))
-        (delete-region (line-beginning-position) (line-end-position))
-        (delete-region currentPoint (line-end-position))
-        )
-    (indent-for-tab-command)
+    (delete-region (point) (line-end-position))
+    (delete-char 1)
     )
 
 (defun my-delete-line ()
