@@ -1,4 +1,3 @@
-
 (require 'package)
 (setq package-archives
       '(
@@ -17,7 +16,7 @@
 (setq warning-minimum-level :emergency)
 
 (use-package yasnippet
-    :ensure t 
+    :ensure t
     :commands yas-minor-mode
     :hook (go-mode . yas-minor-mode))
 
@@ -25,7 +24,7 @@
     :ensure t)
 
 (use-package all-the-icons
-    :ensure t    
+    :ensure t
     (all-the-icons-install-fonts))
 
 (use-package all-the-icons-dired
@@ -222,13 +221,32 @@
     (interactive "p")
     (delete-region (point) (progn (forward-word arg) (point))))
 
+(defun custom-kill-line ()
+    (interactive)
+    (setq currentPoint (point))
+    (if (eq currentPoint (line-end-position))
+        (delete-region (line-beginning-position) (line-end-position))
+        (delete-region currentPoint (line-end-position))
+        )
+    (indent-for-tab-command)
+    )
+
+(defun my-delete-line ()
+    "Delete text from current position to end of line char.
+This command does not push text to `kill-ring'."
+    (interactive)
+    (delete-region (point) (progn (end-of-line) (point))))
+
+
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
+(global-set-key (kbd "C-k") 'custom-kill-line)
 (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-d") 'forward-delete-word)
 (global-set-key (kbd "M-p") 'backward-page)
 (global-set-key (kbd "M-n") 'forward-page)
 (global-set-key (kbd "C-M-p") 'backward-paragraph)
 (global-set-key (kbd "C-M-n") 'forward-paragraph)
+(global-set-key (kbd "C-M-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-x C-g") 'goto-line)
 (global-set-key (kbd "C-r") 'replace-string)
@@ -262,10 +280,21 @@
 
 (add-hook 'before-save-hook 'fmt)
 
-
 (defun fmt ()
-    (interactive)    
+    (interactive)
     (indent-region (point-min) (point-max))
+    (delete-trailing-whitespace)
+    )
+
+(defun rpl()
+    (interactive)
+    (setq currentPoint (point))
+    (goto-char (point-min))
+    (setq old (read-from-minibuffer "Old string: "))
+    (setq new (read-from-minibuffer "New string: "))
+    (while (re-search-forward old nil t)
+        (replace-match new))
+    (goto-char currentPoint)
     )
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
@@ -276,43 +305,12 @@
     (setq company-idle-delay 0)
     (setq company-minimum-prefix-length 1))
 
-;; (use-package polymode
-;;     :ensure t
-;;     :config
-
-;;     (setq polymode-minor-mode-map nil) ;; disable all hot keys setted by polymode
-;;     )
-
-;; (define-hostmode poly-web-mode-hostmode :mode 'web-mode)
-
-;; (define-innermode poly-css-web-mode-innermode
-;;     :mode 'css-mode
-;;     :head-matcher "<style .*>"
-;;     :tail-matcher "</style>"
-;;     :head-mode 'host
-;;     :tail-mode 'host)
-
-;; (define-innermode poly-js2-web-mode-innermode
-;;     :mode 'js2-mode
-;;     :head-matcher "<script>"
-;;     :tail-matcher "</script>"
-;;     :head-mode 'host
-;;     :tail-mode 'host)
-
-;; (define-polymode poly-web-mode
-;;     :hostmode 'poly-web-mode-hostmode
-;;     :innermodes '(poly-css-web-mode-innermode
-;;                   poly-js2-web-mode-innermode)
-;;     )
-
-;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . poly-web-mode))
-
 (use-package multi-web-mode
     :ensure
     :mode "\\.vue\\'"
     :config
     (setq mweb-default-major-mode 'web-mode)
-    (setq mweb-tags '(                      
+    (setq mweb-tags '(
                       (css-mode "<style.*>" "</style>")
                       ))
     (setq mweb-filename-extensions '("vue" "html"))
