@@ -42,6 +42,14 @@
     :ensure t
     (all-the-icons-install-fonts))
 
+(use-package goto-line-preview
+    :ensure t)
+
+;; (use-package doom-modeline
+;;     :ensure t
+;;     :init (doom-modeline-mode 1))
+;; (setq doom-modeline-minor-modes nil)
+
 (use-package all-the-icons-dired
     :ensure t)
 
@@ -72,6 +80,8 @@
     :config
     (load-theme 'vscode-dark-plus t))
 
+(setq vscode-dark-plus-invert-hl-todo nil)
+
 
 (use-package lsp-mode
     :ensure t
@@ -90,10 +100,19 @@
 (use-package flycheck-golangci-lint
     :ensure t)
 
+;; (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+(set-face-attribute 'region nil :background "#333" :foreground nil)
 (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (show-paren-mode 1)
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#888")
+(set-face-attribute 'show-paren-match nil :weight 'regular)
+
+;;((t
+;;  (:weight regular :foreground "#888" :background "#1e1e1e")))
+
 (global-hl-line-mode 1) ;; Подсвечивать текущую строку
 ;;(set-face-background 'hl-line "#ccc")
 ;;(set-face-foreground 'highlight nil)
@@ -109,6 +128,8 @@
 
 (global-set-key (kbd "M-<up>") 'scroll-down-line)
 (global-set-key (kbd "M-<down>") 'scroll-up-line)
+(global-set-key (kbd "C-<right>") 'flycheck-next-error)
+(global-set-key (kbd "C-<left>") 'flycheck-previous-error)
 
 (defvar --backup-directory "~/.emacs.d/backups")
 (if (not (file-exists-p --backup-directory))
@@ -184,6 +205,7 @@
 (setq-default indicate-empty-lines nil)
 (setq-default indicate-buffer-boundaries 'left)
 (set-face-attribute 'default nil :font "Monospace 12")
+;;(set-face-attribute 'default nil :font "Hack 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -271,7 +293,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-M-n") 'forward-paragraph)
 (global-set-key (kbd "C-M-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
-(global-set-key (kbd "C-x C-g") 'goto-line)
+(global-set-key (kbd "C-x C-g") 'goto-line-preview)
 (global-set-key (kbd "C-r") 'replace-string)
 
 ;; optional package to get the error squiggles as you edit
@@ -466,7 +488,7 @@ This command does not push text to `kill-ring'."
  '(lsp-ui-doc-max-width 60)
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
@@ -505,4 +527,5 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(mode-line ((t (:background "#333" :foreground "#fafafa" :weight normal))))
+ '(tab-bar ((t (:background "#1e1e1e" :weight normal :width normal)))))
