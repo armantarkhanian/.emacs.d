@@ -1,11 +1,12 @@
 (require 'package)
 (setq package-archives
       '(
-        ("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa-stb" . "https://stable.melpa.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
         ))
 (package-initialize)
+
 (unless (require 'use-package nil t)
     (package-refresh-contents)
     (package-install 'use-package)
@@ -19,6 +20,20 @@
     :ensure t
     :commands yas-minor-mode
     :hook (go-mode . yas-minor-mode))
+
+(use-package highlight-indent-guides
+    :ensure t)
+
+(use-package magit
+    :ensure t)
+
+(defun my-highlighter (level responsive display)
+    (if (> 1 level)
+        nil
+        (highlight-indent-guides--highlighter-default level responsive display)))
+
+(setq highlight-indent-guides-highlighter-function 'my-highlighter)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (use-package yasnippet-snippets
     :ensure t)
@@ -51,7 +66,12 @@
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-(load-theme 'doom-snazzy t)
+;;(load-theme 'vs-light t)
+(use-package vscode-dark-plus-theme
+    :ensure t
+    :config
+    (load-theme 'vscode-dark-plus t))
+
 
 (use-package lsp-mode
     :ensure t
@@ -67,6 +87,11 @@
     :ensure t
     :commands lsp-ui-mode)
 
+(use-package flycheck-golangci-lint
+    :ensure t)
+
+(eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (show-paren-mode 1)
 (global-hl-line-mode 1) ;; Подсвечивать текущую строку
@@ -81,6 +106,9 @@
       use-dialog-box nil
       visible-bell t)
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+(global-set-key (kbd "M-<up>") 'scroll-down-line)
+(global-set-key (kbd "M-<down>") 'scroll-up-line)
 
 (defvar --backup-directory "~/.emacs.d/backups")
 (if (not (file-exists-p --backup-directory))
@@ -155,7 +183,7 @@
 
 (setq-default indicate-empty-lines nil)
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace Bold 12")
+(set-face-attribute 'default nil :font "Monospace 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -226,7 +254,6 @@
     (delete-region (point) (line-end-position))
     (delete-char 1)
     )
-
 (defun my-delete-line ()
     "Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
@@ -280,6 +307,7 @@ This command does not push text to `kill-ring'."
     (interactive)
     (indent-region (point-min) (point-max))
     (delete-trailing-whitespace)
+    ;;(delete-blank-lines)
     )
 
 (defun rpl()
@@ -400,20 +428,78 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#21252B" "#E06C75" "#98C379" "#E5C07B" "#61AFEF" "#C678DD" "#56B6C2" "#ABB2BF"])
+ '(cursor-type '(bar . 2))
+ '(custom-safe-themes
+   '("bf815eb0b3031589aa53b6e01c57fa31e6fd367286204d2c15b6c07173ac63dc" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "d916b686ba9f23a46ee9620c967f6039ca4ea0e682c1b9219450acee80e10e40" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
+ '(ensime-sem-high-faces
+   '((var :foreground "#000000" :underline
+      (:style wave :color "yellow"))
+     (val :foreground "#000000")
+     (varField :foreground "#600e7a" :slant italic)
+     (valField :foreground "#600e7a" :slant italic)
+     (functionCall :foreground "#000000" :slant italic)
+     (implicitConversion :underline
+      (:color "#c0c0c0"))
+     (implicitParams :underline
+      (:color "#c0c0c0"))
+     (operator :foreground "#000080")
+     (param :foreground "#000000")
+     (class :foreground "#20999d")
+     (trait :foreground "#20999d" :slant italic)
+     (object :foreground "#5974ab" :slant italic)
+     (package :foreground "#000000")
+     (deprecated :strike-through "#000000")))
+ '(exwm-floating-border-color "#2e2f37")
+ '(fci-rule-color "#3E4451")
+ '(highlight-indent-guides-method 'character)
+ '(highlight-tail-colors ((("#2d3e3e" "#2d3e3e") . 0) (("#333d49" "#333d49") . 20)))
+ '(jdee-db-active-breakpoint-face-colors (cons "#282a36" "#57c7ff"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#282a36" "#5af78e"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#282a36" "#848688"))
  '(lsp-eldoc-enable-hover nil)
- '(lsp-go-analyses
-   (quote
-    (("fieldalignment" . t)
-     ("unusedparams" . t)
-     ("assign" . t)
-     ("unusedwrite" . t))))
+ '(lsp-go-analyses '(("unusedparams" . t) ("assign" . t) ("unusedwrite" . t)))
  '(lsp-go-hover-kind "FullDocumentation")
  '(lsp-go-use-gofumpt t)
  '(lsp-ui-doc-max-height 30)
  '(lsp-ui-doc-max-width 60)
+ '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   (quote
-    (js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))))
+   '(magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+ '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
+ '(rustic-ansi-faces
+   ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
+ '(tetris-x-colors
+   [[229 192 123]
+    [97 175 239]
+    [209 154 102]
+    [224 108 117]
+    [152 195 121]
+    [198 120 221]
+    [86 182 194]])
+ '(vc-annotate-background "#282a36")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#5af78e")
+    (cons 40 "#8df793")
+    (cons 60 "#c0f898")
+    (cons 80 "#f3f99d")
+    (cons 100 "#f7e38c")
+    (cons 120 "#fbcd7c")
+    (cons 140 "#ffb86c")
+    (cons 160 "#ff9e88")
+    (cons 180 "#ff84a4")
+    (cons 200 "#ff6ac1")
+    (cons 220 "#ff659d")
+    (cons 240 "#ff607a")
+    (cons 260 "#ff5c57")
+    (cons 280 "#e06663")
+    (cons 300 "#c1716f")
+    (cons 320 "#a27b7b")
+    (cons 340 "#e2e4e5")
+    (cons 360 "#e2e4e5")))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
