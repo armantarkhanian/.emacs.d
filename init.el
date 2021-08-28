@@ -21,6 +21,11 @@
     :commands yas-minor-mode
     :hook (go-mode . yas-minor-mode))
 
+;;(use-package projectile
+;;    :ensure t)
+
+;;(projectile-mode 1)
+
 (use-package highlight-indent-guides
     :ensure t)
 
@@ -32,8 +37,9 @@
         nil
         (highlight-indent-guides--highlighter-default level responsive display)))
 
-(setq highlight-indent-guides-highlighter-function 'my-highlighter)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;;(setq highlight-indent-guides-highlighter-function 'my-highlighter)
+
+;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (use-package yasnippet-snippets
     :ensure t)
@@ -74,14 +80,12 @@
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-;;(load-theme 'vs-light t)
 (use-package vscode-dark-plus-theme
-    :ensure t
-    :config
-    (load-theme 'vscode-dark-plus t))
+    :ensure t)
 
-(setq vscode-dark-plus-invert-hl-todo nil)
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/vscode-light-plus-theme")
 
+(load-theme 'vscode-dark-plus t)
 
 (use-package lsp-mode
     :ensure t
@@ -107,8 +111,8 @@
 
 (show-paren-mode 1)
 (set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#888")
-(set-face-attribute 'show-paren-match nil :weight 'regular)
+(set-face-foreground 'show-paren-match "white")
+(set-face-attribute 'show-paren-match nil :weight 'bold)
 
 ;;((t
 ;;  (:weight regular :foreground "#888" :background "#1e1e1e")))
@@ -130,6 +134,11 @@
 (global-set-key (kbd "M-<down>") 'scroll-up-line)
 (global-set-key (kbd "C-<right>") 'flycheck-next-error)
 (global-set-key (kbd "C-<left>") 'flycheck-previous-error)
+(global-set-key (kbd "C-<left>") 'flycheck-previous-error)
+
+(global-set-key (kbd "C-<tab>") 'buffer-menu)
+;; (global-set-key (kbd "C-<tab>") 'switch-to-next-buffer)
+;; (global-set-key (kbd "C-<tab> backspace") 'switch-to-prev-buffer)
 
 (defvar --backup-directory "~/.emacs.d/backups")
 (if (not (file-exists-p --backup-directory))
@@ -165,7 +174,7 @@
 (setq inhibit-splash-screen   t)
 (setq ingibit-startup-message t)
 (show-paren-mode t)
-(setq show-paren-style 'expression)
+(setq show-paren-style 'parenthesis)
 (electric-pair-mode    1)
 (electric-indent-mode  1)
 (delete-selection-mode t)
@@ -204,7 +213,7 @@
 
 (setq-default indicate-empty-lines nil)
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace 12")
+(set-face-attribute 'default nil :font "Monospace 11")
 ;;(set-face-attribute 'default nil :font "Hack 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
@@ -274,14 +283,12 @@
 (defun custom-kill-line ()
     (interactive)
     (delete-region (point) (line-end-position))
-    (delete-char 1)
     )
 (defun my-delete-line ()
     "Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
     (interactive)
     (delete-region (point) (progn (end-of-line) (point))))
-
 
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "C-k") 'custom-kill-line)
@@ -452,9 +459,11 @@ This command does not push text to `kill-ring'."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#21252B" "#E06C75" "#98C379" "#E5C07B" "#61AFEF" "#C678DD" "#56B6C2" "#ABB2BF"])
+ '(column-number-mode t)
  '(cursor-type '(bar . 2))
  '(custom-safe-themes
-   '("bf815eb0b3031589aa53b6e01c57fa31e6fd367286204d2c15b6c07173ac63dc" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "d916b686ba9f23a46ee9620c967f6039ca4ea0e682c1b9219450acee80e10e40" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
+   '("801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "1df2d767cc1b5ed78626f93f06c24ac15144a28b7420364769bf63cd23e420d3" "303cfaa6ce6653d3299583f9f002107487860b701d314fff589b7df77263d5fd" "205e4d3eb91d528237d49db05bd83a4f4de9d6c0b965c1c7d68fb958c36a7b7c" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" "8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "ae88c445c558b7632fc2d72b7d4b8dfb9427ac06aa82faab8d760fff8b8f243c" "8f0a782ba26728fa692d35e82367235ec607d0c836e06bc39eb750ecc8e08258" "bf815eb0b3031589aa53b6e01c57fa31e6fd367286204d2c15b6c07173ac63dc" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "d916b686ba9f23a46ee9620c967f6039ca4ea0e682c1b9219450acee80e10e40" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
+ '(display-time-day-and-date nil)
  '(ensime-sem-high-faces
    '((var :foreground "#000000" :underline
       (:style wave :color "yellow"))
@@ -477,21 +486,33 @@ This command does not push text to `kill-ring'."
  '(fci-rule-color "#3E4451")
  '(highlight-indent-guides-method 'character)
  '(highlight-tail-colors ((("#2d3e3e" "#2d3e3e") . 0) (("#333d49" "#333d49") . 20)))
+ '(hl-paren-background-colors '("#2492db" "#95a5a6" nil))
+ '(hl-paren-colors '("#ecf0f1" "#ecf0f1" "#c0392b"))
  '(jdee-db-active-breakpoint-face-colors (cons "#282a36" "#57c7ff"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#282a36" "#5af78e"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#282a36" "#848688"))
+ '(linum-format 'dynamic)
  '(lsp-eldoc-enable-hover nil)
  '(lsp-go-analyses '(("unusedparams" . t) ("assign" . t) ("unusedwrite" . t)))
  '(lsp-go-hover-kind "FullDocumentation")
  '(lsp-go-use-gofumpt t)
  '(lsp-ui-doc-max-height 30)
  '(lsp-ui-doc-max-width 60)
+ '(nrepl-message-colors
+   '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
+ '(show-paren-mode t)
+ '(show-paren-style 'parenthesis)
+ '(size-indication-mode nil)
+ '(sml/active-background-color "#34495e")
+ '(sml/active-foreground-color "#ecf0f1")
+ '(sml/inactive-background-color "#dfe4ea")
+ '(sml/inactive-foreground-color "#34495e")
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
@@ -527,5 +548,7 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "#333" :foreground "#fafafa" :weight normal))))
+ '(mode-line ((t nil)))
+ '(show-paren-match ((t (:foreground "white" :weight bold))))
  '(tab-bar ((t (:background "#1e1e1e" :weight normal :width normal)))))
+(put 'upcase-region 'disabled nil)
