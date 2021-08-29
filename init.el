@@ -16,18 +16,43 @@
 (when window-system (set-frame-size (selected-frame) 110 32))
 (setq warning-minimum-level :emergency)
 
+(use-package webpaste
+    :ensure t
+    :bind (
+           ("C-c C-p C-r" . webpaste-paste-region)
+           )
+    :config
+    (progn
+        (setq webpaste-provider-priority '("dpaste.org" "ix.io"))))
+
 (use-package yasnippet
     :ensure t
     :commands yas-minor-mode
     :hook (go-mode . yas-minor-mode))
 
-;;(use-package projectile
-;;    :ensure t)
-
-;;(projectile-mode 1)
-
 (use-package highlight-indent-guides
     :ensure t)
+
+(use-package ace-jump-mode
+    :ensure t)
+
+(global-set-key (kbd "M-m") 'ace-jump-mode)
+
+(use-package expand-region
+    :ensure t)
+
+(use-package selected
+    :ensure t
+    :commands selected-minor-mode
+    :bind (:map selected-keymap
+                ("q" . selected-off)
+                ("c" . webpaste-paste-region)
+                ("u" . upcase-region)
+                ("d" . downcase-region)
+                ("w" . count-words-region)
+                ("m" . apply-macro-to-region-lines)))
+
+(selected-global-mode 1)
 
 (use-package magit
     :ensure t)
@@ -83,7 +108,9 @@
 (use-package vscode-dark-plus-theme
     :ensure t)
 
-;;(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/vscode-light-plus-theme")
+(use-package vscode-light-plus-theme
+    :load-path "~/.emacs.d/elpa/vscode-light-plus-theme/"
+    :ensure t)
 
 (load-theme 'vscode-dark-plus t)
 
@@ -129,6 +156,7 @@
       use-dialog-box nil
       visible-bell t)
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-j") 'newline-and-indent)
 
 (global-set-key (kbd "M-<up>") 'scroll-down-line)
 (global-set-key (kbd "M-<down>") 'scroll-up-line)
@@ -457,12 +485,14 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#21252B" "#E06C75" "#98C379" "#E5C07B" "#61AFEF" "#C678DD" "#56B6C2" "#ABB2BF"])
  '(column-number-mode t)
  '(cursor-type '(bar . 2))
  '(custom-safe-themes
-   '("801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "1df2d767cc1b5ed78626f93f06c24ac15144a28b7420364769bf63cd23e420d3" "303cfaa6ce6653d3299583f9f002107487860b701d314fff589b7df77263d5fd" "205e4d3eb91d528237d49db05bd83a4f4de9d6c0b965c1c7d68fb958c36a7b7c" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" "8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "ae88c445c558b7632fc2d72b7d4b8dfb9427ac06aa82faab8d760fff8b8f243c" "8f0a782ba26728fa692d35e82367235ec607d0c836e06bc39eb750ecc8e08258" "bf815eb0b3031589aa53b6e01c57fa31e6fd367286204d2c15b6c07173ac63dc" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "d916b686ba9f23a46ee9620c967f6039ca4ea0e682c1b9219450acee80e10e40" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
+   '("5681d942c53f3dc2cf1b229318c3c72f81a271fce1937125ac39237a44151973" "349da127fde96292ac2020211a86f82917c3529ffc165e0749f9ccbb4a034e36" "9edf8f919cd749e363b2c090e7fdaa441d109c6b14d7413dbe6d30d50f320550" "05e1471a91228c4ff340f996e16ecade4b5027a473da8c747e7ee03bec05de99" "db8ce71267124e08c5d8b710a6628ca3476397367d579aba85456de62d570800" "53641db0fc56ba1d66c12b435f18d9f3569d8e2020c3e463a23e523a6d1586ab" "b61efaaa40a6bb681c0228aea90cca3db7bbf56070822be51086e097cf5a71cc" "ae3d18ed243d1782365a665d6a3af4e48bfd307bc8d7c54f7aa0ba2346db72b2" "f714cca172bfe1ca626e488a696d3af0defd044db9ecddb9055d3132fe861397" "9f9fe7c0a848c05d56200f99b79aff349a5810ee865cc273ec221db6b378e530" "0ce9f16a63c7017c90483cf3c877b5cb36c3c1528c29000e111837e058915469" "9e96d8878de13f975331c1755e224b9fa1dfbfeeee4b3e5ecf88584f9ece796e" "9b85ff1fdf060d2f3c5dfd1694e8314c643cc095530b963e8c241f452d6f4e90" "3c6be79921436833b081cae99368f50de55941313ba0267c0093fb4394956d8a" "8dc00551702c012c65654076fa0ce8b2228e90d5d9af7b5bb046db65a45b5587" "c8e4632e3ebff67bc2d47e6b36bd345bd2fb4c7a5fdd7c3dfd09a745702c2bdb" "9de09bf9269f2dd08fefb620bf26c9aa8dc664e113260af814333a56f59cb2b3" "bd242cdf786c47edd3be40e45bc95ac76e389d0cb1d3f0a586f4ca7acf2e2c89" "fe2539ccf78f28c519541e37dc77115c6c7c2efcec18b970b16e4a4d2cd9891d" "8146edab0de2007a99a2361041015331af706e7907de9d6a330a3493a541e5a6" "0b3aee906629ac7c3bd994914bf252cf92f7a8b0baa6d94cb4dfacbd4068391d" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" "da186cce19b5aed3f6a2316845583dbee76aea9255ea0da857d1c058ff003546" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" "7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "1df2d767cc1b5ed78626f93f06c24ac15144a28b7420364769bf63cd23e420d3" "303cfaa6ce6653d3299583f9f002107487860b701d314fff589b7df77263d5fd" "205e4d3eb91d528237d49db05bd83a4f4de9d6c0b965c1c7d68fb958c36a7b7c" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" "8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "ae88c445c558b7632fc2d72b7d4b8dfb9427ac06aa82faab8d760fff8b8f243c" "8f0a782ba26728fa692d35e82367235ec607d0c836e06bc39eb750ecc8e08258" "bf815eb0b3031589aa53b6e01c57fa31e6fd367286204d2c15b6c07173ac63dc" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "d916b686ba9f23a46ee9620c967f6039ca4ea0e682c1b9219450acee80e10e40" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
  '(display-time-day-and-date nil)
  '(ensime-sem-high-faces
    '((var :foreground "#000000" :underline
@@ -488,6 +518,22 @@ This command does not push text to `kill-ring'."
  '(highlight-tail-colors ((("#2d3e3e" "#2d3e3e") . 0) (("#333d49" "#333d49") . 20)))
  '(hl-paren-background-colors '("#2492db" "#95a5a6" nil))
  '(hl-paren-colors '("#ecf0f1" "#ecf0f1" "#c0392b"))
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#3a81c3")
+     ("OKAY" . "#3a81c3")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#42ae2c")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
  '(jdee-db-active-breakpoint-face-colors (cons "#282a36" "#57c7ff"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#282a36" "#5af78e"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#282a36" "#848688"))
@@ -502,7 +548,7 @@ This command does not push text to `kill-ring'."
    '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
@@ -542,7 +588,8 @@ This command does not push text to `kill-ring'."
     (cons 320 "#a27b7b")
     (cons 340 "#e2e4e5")
     (cons 360 "#e2e4e5")))
- '(vc-annotate-very-old-color nil))
+ '(vc-annotate-very-old-color nil)
+ '(webpaste-return-url-hook nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -552,3 +599,4 @@ This command does not push text to `kill-ring'."
  '(show-paren-match ((t (:foreground "white" :weight bold))))
  '(tab-bar ((t (:background "#1e1e1e" :weight normal :width normal)))))
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
