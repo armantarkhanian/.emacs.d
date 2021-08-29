@@ -38,8 +38,6 @@
 
 (global-set-key (kbd "M-m") 'ace-jump-mode)
 
-(use-package expand-region
-    :ensure t)
 
 (use-package selected
     :ensure t
@@ -54,13 +52,13 @@
 
 (selected-global-mode 1)
 
-(use-package magit
-    :ensure t)
+;;(use-package magit
+;;    :ensure t)
 
-(defun my-highlighter (level responsive display)
-    (if (> 1 level)
-        nil
-        (highlight-indent-guides--highlighter-default level responsive display)))
+;;(defun my-highlighter (level responsive display)
+;;    (if (> 1 level)
+;;        nil
+;;        (highlight-indent-guides--highlighter-default level responsive display)))
 
 ;;(setq highlight-indent-guides-highlighter-function 'my-highlighter)
 
@@ -108,9 +106,9 @@
 (use-package vscode-dark-plus-theme
     :ensure t)
 
-(use-package vscode-light-plus-theme
-    :load-path "~/.emacs.d/elpa/vscode-light-plus-theme/"
-    :ensure t)
+;; (use-package vscode-light-plus-theme
+;;     :load-path "~/.emacs.d/elpa/vscode-light-plus-theme/"
+;;     :ensure t)
 
 (load-theme 'vscode-dark-plus t)
 
@@ -548,7 +546,7 @@ This command does not push text to `kill-ring'."
    '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(yaml-mode expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
