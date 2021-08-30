@@ -16,6 +16,12 @@
 (when window-system (set-frame-size (selected-frame) 110 32))
 (setq warning-minimum-level :emergency)
 
+(defun calc-region (point mark)
+    (interactive "r")
+    (setq result (calc-eval (buffer-substring point mark)))
+    (insert (concat " = " result))
+    )
+
 (use-package webpaste
     :ensure t
     :bind (
@@ -38,11 +44,11 @@
 
 (global-set-key (kbd "M-m") 'ace-jump-mode)
 
-
 (use-package selected
     :ensure t
     :commands selected-minor-mode
     :bind (:map selected-keymap
+                ("r" . calc-region)
                 ("q" . selected-off)
                 ("c" . webpaste-paste-region)
                 ("u" . upcase-region)
@@ -546,7 +552,7 @@ This command does not push text to `kill-ring'."
    '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(yaml-mode expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(smartparens json-reformat yaml-mode expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])
