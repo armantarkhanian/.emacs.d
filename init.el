@@ -22,6 +22,91 @@
     (insert (concat " = " result))
     )
 
+(use-package restclient
+    :ensure t)
+
+(use-package mark-multiple
+    :ensure t)
+
+(use-package multiple-cursors
+    :ensure t)
+
+(global-set-key (kbd "C->") 'mark-next-like-this)
+
+(use-package mwim
+    :ensure t
+    :config
+    (global-set-key (kbd "M-a") 'mwim-beginning)
+    (global-set-key (kbd "M-e") 'mwim-end)
+    )
+
+(use-package dumb-jump
+    :ensure t)
+
+;; to make it work install
+;; apt-get install silversearcher-ag
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
+(use-package bm
+    :ensure t
+    :demand t
+
+    :init
+    ;; restore on load (even before you require bm)
+    (setq bm-restore-repository-on-load t)
+
+    ;; remove bookmark after jump
+    ;; (setq temporary-bookmark-p t)
+
+    :config
+    ;; Allow cross-buffer 'next'
+    (setq bm-cycle-all-buffers t)
+
+    ;; where to store persistant files
+    (setq bm-repository-file "~/.emacs.d/bm-repository")
+
+    ;; save bookmarks
+    (setq-default bm-buffer-persistence t)
+
+    ;; Loading the repository from file when on start up.
+    (add-hook 'after-init-hook 'bm-repository-load)
+
+    ;; Saving bookmarks
+    (add-hook 'kill-buffer-hook #'bm-buffer-save)
+
+    ;; Saving the repository to file when on exit.
+    ;; kill-buffer-hook is not called when Emacs is killed, so we
+    ;; must save all bookmarks first.
+    (add-hook 'kill-emacs-hook #'(lambda nil
+                                     (bm-buffer-save-all)
+                                     (bm-repository-save)))
+
+    ;; The `after-save-hook' is not necessary to use to achieve persistence,
+    ;; but it makes the bookmark data in repository more in sync with the file
+    ;; state.
+    (add-hook 'after-save-hook #'bm-buffer-save)
+
+    ;; Restoring bookmarks
+    (add-hook 'find-file-hooks   #'bm-buffer-restore)
+    (add-hook 'after-revert-hook #'bm-buffer-restore)
+
+    ;; The `after-revert-hook' is not necessary to use to achieve persistence,
+    ;; but it makes the bookmark data in repository more in sync with the file
+    ;; state. This hook might cause trouble when using packages
+    ;; that automatically reverts the buffer (like vc after a check-in).
+    ;; This can easily be avoided if the package provides a hook that is
+    ;; called before the buffer is reverted (like `vc-before-checkin-hook').
+    ;; Then new bookmarks can be saved before the buffer is reverted.
+    ;; Make sure bookmarks is saved before check-in (and revert-buffer)
+    (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
+
+
+    :bind (
+           ("M-1" . bm-toggle)
+           ("M-2" . bm-previous)
+           ("M-3" . bm-next))
+    )
+
 (use-package webpaste
     :ensure t
     :bind (
@@ -42,7 +127,12 @@
 (use-package ace-jump-mode
     :ensure t)
 
-(global-set-key (kbd "M-m") 'ace-jump-mode)
+(use-package block-nav
+    :ensure t
+    :config
+    )
+
+(global-set-key (kbd "C-$") 'ace-jump-mode)
 
 (use-package selected
     :ensure t
@@ -125,8 +215,8 @@
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
     :config (progn
-                ;; use flycheck, not flymake
-                (setq lsp-prefer-flymake nil)))
+                (setq lsp-prefer-flymake nil))
+    )
 
 (use-package lsp-ui
     :ensure t
@@ -137,6 +227,7 @@
 
 ;; (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 (set-face-attribute 'region nil :background "#333" :foreground nil)
+
 (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
@@ -264,6 +355,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq x-select-enable-clipboard t)
 
+;;(global-set-key (kbd "C-x b") 'buffer-menu)
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+
 (defun gotoUp ()
     (interactive)
     (goto-char (point-max))
@@ -335,17 +429,14 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-x C-g") 'goto-line-preview)
 (global-set-key (kbd "C-r") 'replace-string)
 
-;; optional package to get the error squiggles as you edit
 (use-package flycheck
     :ensure t)
 
-;;; For modes using [company](https://company-mode.github.io/) for tab
-;;; completion add
 (use-package company
     :init
-    (setq company-idle-delay t  ; avoid auto completion popup, use TAB
-                                        ; to show it
-	      company-tooltip-align-annotations t)
+    (setq company-idle-delay t)
+	(setq company-tooltip-align-annotations t)
+    (setq company-dabbrev-char-regexp "[A-z:-]")
     :hook (after-init . global-company-mode)
     :bind
     (:map prog-mode-map
@@ -552,7 +643,7 @@ This command does not push text to `kill-ring'."
    '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(objed-cursor-color "#ff5c57")
  '(package-selected-packages
-   '(smartparens json-reformat yaml-mode expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
+   '(multiple-cursors mark-multiple restclient dumb-jump dump-jump block-nav mwim bm smartparens json-reformat yaml-mode expand-region webpaste selected ace-jump-mode tango-plus-theme spacemacs-theme centaur-tabs tao-theme vscode-light-plus-theme github-theme github-modern-theme flatui-theme projectile goto-line-preview goto-line-previw doom-modeline tabbar magit git-emacs git highlight-indent-guides highlight-indentation highlight-indents vs-light-theme intellij-theme flycheck-golangci-lint js3-mode poly-markdown xref-js2 js2-refactor js2-mode json-mode multi-web-mode lsp-python-ms protobuf-mode web-mode go-mode company flycheck lsp-ui lsp-mode doom-themes neotree all-the-icons-dired yasnippet-snippets yasnippet use-package))
  '(pdf-view-midnight-colors (cons "#f9f9f9" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5c57" "#5af78e" "#f3f99d" "#57c7ff" "#ff6ac1" "#9aedfe" "#f9f9f9"])

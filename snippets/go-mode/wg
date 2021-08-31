@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: wg
+# key: wg
+# --
+type customType struct {
+	error       error
+	goroutineID int
+}
+numGoroutines := 3
+ch := make(chan customType, numGoroutines)
+for n := 1; n <= numGoroutines; n++ {
+	go func(i int) {
+		var err error
+		defer func() {
+			ch <- customType{
+				goroutineID: i,
+				error:       err,
+			}
+		}()
+		if i%2 == 0 {
+			err = errors.New("invalid number")
+		}
+	}(n)
+}
+for n := 1; n <= numGoroutines; n++ {
+	resp := <-ch
+	if resp.error != nil {
+		fmt.Println(resp.goroutineID, "goroutine has an error:", resp.error)
+		continue
+	}
+	fmt.Println(resp.goroutineID, "goroutine is done")
+}
+fmt.Println("All goroutines done")

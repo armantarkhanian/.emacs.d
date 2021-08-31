@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hw
+# key: hw
+# contributor : @armantarkhanian
+# --
+package main
+
+import (
+    "fmt"
+)
+
+func main() {$0
+    fmt.Println("Hello, world")
+}
