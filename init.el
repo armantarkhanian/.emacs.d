@@ -215,7 +215,8 @@
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
     :config (progn
-                (setq lsp-prefer-flymake nil))
+                (setq lsp-prefer-flymake nil)
+                (setq lsp-flycheck-enable t))
     )
 
 (use-package lsp-ui
