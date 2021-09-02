@@ -274,9 +274,10 @@
 
 (use-package
     rainbow-mode
-    :ensure t)
+    :ensure t
+    :init
+    (rainbow-mode 1))
 
-(rainbow-mode 1)
 
 (use-package
     flycheck-golangci-lint
