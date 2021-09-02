@@ -1,7 +1,7 @@
 (deftheme default "Created 2021-09-02.")
 
 (custom-theme-set-faces 'default '(default ((t
-                                             (:family "DejaVu Sans Mono"
+                                             (:family "Monospace"
                                                       :foundry "PfEd"
                                                       :width normal
                                                       :height 113
@@ -13,8 +13,8 @@
                                                       :strike-through nil
                                                       :box nil
                                                       :inverse-video nil
-                                                      :foreground "black"
-                                                      :background "white"
+                                                      :foreground "white"
+                                                      :background "black"
                                                       :stipple nil
                                                       :inherit nil))))
                         '(cursor ((((background light))

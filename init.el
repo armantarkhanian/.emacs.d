@@ -227,7 +227,11 @@
     (setq doom-themes-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
     )
 
-;;(load-theme 'github-modern t)
+(use-package vscode-dark-plus-theme
+    :ensure t
+    :config
+    (load-theme 'vscode-dark-plus t)
+    )
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -259,14 +263,15 @@
     :commands lsp-ui-mode
     :config
     ;; (setq lsp-ui-doc-alignment 'window)
-    (setq lsp-ui-doc-border "#dfdfdf")
+    ;;(setq lsp-ui-doc-border "#dfdfdf")
     ;; (setq lsp-ui-doc-header nil)
     ;; (setq lsp-ui-doc-max-height 30)
     ;; (setq lsp-ui-doc-max-width 70)
     ;; (setq lsp-ui-doc-position 'top)
     ;; (setq lsp-ui-doc-use-webkit nil)
-    (set-face-attribute 'lsp-ui-doc-background nil
-                        :background "#f9f9f9"))
+    ;;(set-face-attribute 'lsp-ui-doc-background nil
+    ;;:background "#f9f9f9")
+    )
 
 (use-package
     elisp-format
@@ -674,7 +679,7 @@ This command does not push text to `kill-ring'."
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
  '(cursor-type '(bar . 2))
  '(custom-safe-themes
-   '("1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" default))
+   '("303cfaa6ce6653d3299583f9f002107487860b701d314fff589b7df77263d5fd" "98ef70f6028d10db0a3e1178b741df39c2dfefad97eda6ff1f17d5e83fe32179" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" default))
  '(display-time-day-and-date nil)
  '(exwm-floating-border-color "#121212")
  '(fci-rule-color "#515151")
