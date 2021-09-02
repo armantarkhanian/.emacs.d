@@ -146,7 +146,6 @@
 
 (global-set-key (kbd "M-m") 'ace-jump-char-mode)
 (global-set-key (kbd "M-o") 'next-window-any-frame)
-(global-set-key (kbd "C-x 1") nil)
 
 (use-package
     ace-window
@@ -154,8 +153,7 @@
 
 (use-package
     block-nav
-    :ensure t
-    :config)
+    :ensure t)
 
 (use-package
     selected
@@ -479,8 +477,32 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-n") 'forward-page)
 ;;(global-set-key (kbd "C-M-p") 'upBlock)
 ;;(global-set-key (kbd "C-M-n") 'downBlock)
-(global-set-key (kbd "C-M-p") 'backward-paragraph)
-(global-set-key (kbd "C-M-n") 'forward-paragraph)
+
+(defun backwardParagraph()
+    (interactive)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    )
+
+
+(defun forwardParagraph()
+    (interactive)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    )
+
+(global-set-key (kbd "C-M-p") 'backwardParagraph)
+(global-set-key (kbd "C-M-n") 'forwardParagraph)
 (global-set-key (kbd "C-M-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-x C-g") 'goto-line-preview)
