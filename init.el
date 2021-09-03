@@ -29,6 +29,25 @@
                    mark)))
     (insert (concat " = " result)))
 
+(use-package
+    html-to-markdown
+    :ensure t)
+
+(defun md()
+    (interactive)
+    (setq s (buffer-substring (point-min) (point-max)))
+    (setq s1 (html-to-markdown-string s))
+    (write-region s1 nil "./README.md")
+    )
+
+(use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+
 (use-package key-chord
     :ensure t
     :config
@@ -249,7 +268,6 @@
     lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
-    :hook (multi-web-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
@@ -580,7 +598,7 @@ This command does not push text to `kill-ring'."
     :ensure t
     :config (setq mweb-default-major-mode 'web-mode)
     (setq mweb-tags '((css-mode "<style.*>" "</style>")))
-    (setq mweb-filename-extensions '("vue" "html")))
+    (setq mweb-filename-extensions '("vue")))
 
 (multi-web-global-mode 1)
 
@@ -689,7 +707,7 @@ This command does not push text to `kill-ring'."
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")
  '(package-selected-packages
-   '(typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
+   '(html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
  '(pdf-view-midnight-colors (cons "#d4d4d4" "#191919"))
  '(rustic-ansi-faces
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
