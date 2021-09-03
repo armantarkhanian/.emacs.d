@@ -35,12 +35,18 @@
 
 (defun md()
     (interactive)
+    (if (equal (buffer-name) "README.html")
+        (saveREADME)))
+
+(defun saveREADME()
     (setq s (buffer-substring (point-min) (point-max)))
     (setq s1 (html-to-markdown-string s))
-    (write-region s1 nil "./README.md")
-    )
+    (write-region s1 nil "./README.md"))
 
-(use-package markdown-mode
+(add-hook 'before-save-hook #'md)
+
+(use-package
+    markdown-mode
     :ensure t
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
@@ -48,7 +54,8 @@
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 
-(use-package key-chord
+(use-package
+    key-chord
     :ensure t
     :config
     ;; (key-chord-define-global "fj" 'ace-jump-char-mode)
@@ -138,7 +145,6 @@
     ;; Then new bookmarks can be saved before the buffer is reverted.
     ;; Make sure bookmarks is saved before check-in (and revert-buffer)
     (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
-
     :bind (("M-1" . bm-toggle)
            ("M-2" . bm-previous)
            ("M-3" . bm-next)))
@@ -172,8 +178,7 @@
     (switch-to-next-buffer)
     (setq name (buffer-name))
     (if (equal "*" (substring name 0 1))
-        (switchNextBuffer)
-        ))
+        (switchNextBuffer)))
 
 (global-set-key (kbd "M-o") 'switchNextBuffer)
 
@@ -254,11 +259,10 @@
     (setq doom-themes-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
     )
 
-(use-package vscode-dark-plus-theme
+(use-package
+    vscode-dark-plus-theme
     :ensure t
-    :config
-    (load-theme 'vscode-dark-plus t)
-    )
+    :config (load-theme 'vscode-dark-plus t))
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -298,8 +302,7 @@
 
 (use-package
     rainbow-mode
-    :ensure t
-    )
+    :ensure t)
 
 (rainbow-mode 1)
 
@@ -410,7 +413,8 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace 11")
+(set-face-attribute 'default nil
+                    :font "Monospace 11")
 ;;(set-face-attribute 'default nil :font "Hack 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
@@ -510,8 +514,7 @@ This command does not push text to `kill-ring'."
     (previous-line)
     (previous-line)
     (previous-line)
-    (previous-line)
-    )
+    (previous-line))
 
 
 (defun forwardParagraph()
@@ -522,8 +525,7 @@ This command does not push text to `kill-ring'."
     (next-line)
     (next-line)
     (next-line)
-    (next-line)
-    )
+    (next-line))
 
 (global-set-key (kbd "C-M-p") 'backwardParagraph)
 (global-set-key (kbd "C-M-n") 'forwardParagraph)
@@ -563,7 +565,7 @@ This command does not push text to `kill-ring'."
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'flycheck-mode)
 
-(add-hook 'before-save-hook 'fmt)
+(add-hook 'before-save-hook #'fmt)
 
 (defun fmt ()
     (interactive)
