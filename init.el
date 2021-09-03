@@ -32,8 +32,16 @@
 (use-package key-chord
     :ensure t
     :config
-    (key-chord-define-global "fj" 'ace-jump-char-mode)
+    ;; (key-chord-define-global "fj" 'ace-jump-char-mode)
     )
+
+(key-chord-mode 1)
+
+(global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
+
+(use-package
+    typescript-mode
+    :ensure t)
 
 (use-package
     ibuffer-sidebar
@@ -48,6 +56,10 @@
     :ensure t)
 
 (use-package
+    dockerfile-mode
+    :ensure t)
+
+(use-package
     mark-multiple
     :ensure t)
 
@@ -56,20 +68,6 @@
     :ensure t)
 
 (global-set-key (kbd "C->") 'mark-next-like-this)
-
-(use-package
-    mwim
-    :ensure t
-    :config (global-set-key (kbd "M-a") 'mwim-beginning)
-    (global-set-key (kbd "M-e") 'mwim-end))
-
-(use-package
-    dumb-jump
-    :ensure t)
-
-;; to make it work install
-;; apt-get install silversearcher-ag
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 (use-package
     bm
@@ -156,17 +154,12 @@
     (setq name (buffer-name))
     (if (equal "*" (substring name 0 1))
         (switchNextBuffer)
-        )
-    )
+        ))
 
 (global-set-key (kbd "M-o") 'switchNextBuffer)
 
 (use-package
     ace-window
-    :ensure t)
-
-(use-package
-    block-nav
     :ensure t)
 
 (use-package
@@ -215,6 +208,7 @@
     doom-modeline
     :ensure t
     :init (doom-modeline-mode 1))
+
 (setq doom-modeline-minor-modes nil)
 
 (use-package
@@ -251,19 +245,12 @@
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-;;(use-package vscode-dark-plus-theme
-;;    :ensure t)
-
-;; (use-package vscode-light-plus-theme
-;;     :load-path "~/.emacs.d/elpa/vscode-light-plus-theme/"
-;;     :ensure t)
-
-;;(load-theme 'vscode-dark-plus t)
-
 (use-package
     lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
+    :hook (multi-web-mode . lsp-deferred)
+    :hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
@@ -294,17 +281,17 @@
 (use-package
     rainbow-mode
     :ensure t
-    :init
-    (rainbow-mode 1))
+    )
 
+(rainbow-mode 1)
 
-(use-package
-    flycheck-golangci-lint
-    :ensure t)
+;; (use-package
+;;    flycheck-golangci-lint
+;;    :ensure t)
 
 ;;(set-face-attribute 'region nil :background "#ccc" :foreground "#ffffFF")
 
-(eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+;; (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (show-paren-mode 1)
 ;;(set-face-background 'show-paren-match "#dfdfdf")
@@ -374,6 +361,8 @@
 (tool-bar-mode     -1)
 (scroll-bar-mode   -1)
 (blink-cursor-mode 1)
+(setq-default cursor-type 'box)
+(set-cursor-color "green")
 (setq use-dialog-box     nil)
 (setq redisplay-dont-pause t)
 (setq ring-bell-function 'ignore)
@@ -401,9 +390,9 @@
                                (dired-hide-details-mode)))
 
 (setq-default indicate-empty-lines nil)
+
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil
-                    :font "Monospace 11")
+(set-face-attribute 'default nil :font "Monospace 11")
 ;;(set-face-attribute 'default nil :font "Hack 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
@@ -421,9 +410,8 @@
 (setq scroll-conservatively 10000)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq x-select-enable-clipboard t)
-
 ;;(global-set-key (kbd "C-x b") 'buffer-menu)
-(global-set-key (kbd "C-x C-b") 'buffer-menu)
+;;(global-set-key (kbd "C-x C-b") 'buffer-menu)
 
 (defun gotoUp ()
     (interactive)
@@ -495,8 +483,6 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-d") 'forward-delete-word)
 (global-set-key (kbd "M-p") 'backward-page)
 (global-set-key (kbd "M-n") 'forward-page)
-;;(global-set-key (kbd "C-M-p") 'upBlock)
-;;(global-set-key (kbd "C-M-n") 'downBlock)
 
 (defun backwardParagraph()
     (interactive)
@@ -586,13 +572,12 @@ This command does not push text to `kill-ring'."
     :config
     ;; Optionally enable completion-as-you-type behavior.
     (setq company-idle-delay 0)
+    (setq company-dabbrev-downcase nil)
     (setq company-minimum-prefix-length 1))
 
 (use-package
     multi-web-mode
-
-    :ensure
-    :mode "\\.vue\\'"
+    :ensure t
     :config (setq mweb-default-major-mode 'web-mode)
     (setq mweb-tags '((css-mode "<style.*>" "</style>")))
     (setq mweb-filename-extensions '("vue" "html")))
@@ -606,8 +591,6 @@ This command does not push text to `kill-ring'."
     :mode "\\.html\\'"
     :mode "\\.json\\'"
     :mode "\\.js\\'")
-
-(setq company-dabbrev-downcase nil)
 
 (use-package
     protobuf-mode
@@ -691,7 +674,6 @@ This command does not push text to `kill-ring'."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
- '(cursor-type '(bar . 2))
  '(custom-safe-themes
    '("2f1ed0c737c498295c7b72396cb9c168556b7bfc637967ec2fba044b63d55ece" "9c45a0351e89fe6e950ed7ff7c7bf785344dcb56598e6d97532c638c90000309" "665fbb8e59d19f13bb1f1215af8180758b464eefe239b9a59ccd57486958b68b" "62eca1d5615ff9695691704030914c470e6a6c0244d5049893715bcbd202c0dd" "8543bb312515c9e477f629a729c2bf8a4f71332c5756f32f3cb5fbbd0a0a785a" "303cfaa6ce6653d3299583f9f002107487860b701d314fff589b7df77263d5fd" "98ef70f6028d10db0a3e1178b741df39c2dfefad97eda6ff1f17d5e83fe32179" "1d44ec8ec6ec6e6be32f2f73edf398620bb721afeed50f75df6b12ccff0fbb15" "f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" default))
  '(display-time-day-and-date nil)
@@ -707,7 +689,7 @@ This command does not push text to `kill-ring'."
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")
  '(package-selected-packages
-   '(key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
+   '(typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
  '(pdf-view-midnight-colors (cons "#d4d4d4" "#191919"))
  '(rustic-ansi-faces
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
