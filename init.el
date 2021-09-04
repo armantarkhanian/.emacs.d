@@ -281,13 +281,13 @@
     :ensure t
     :hook (sql-mode . sqlup-mode))
 
-(setq-default sql-use-indent-support nil)
+(setq-default sql-use-indent-support t)
 
 (use-package
     lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
-    ;;:hook (sql-mode . lsp-deferred)
+    :hook (sql-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
