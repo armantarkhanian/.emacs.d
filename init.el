@@ -250,8 +250,8 @@
     :ensure t
     :config
     ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (setq doom-themes-enable-bold t    ;; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ;; if nil, italics is universally disabled
 
     ;; Enable flashing mode-line on errors
     (doom-themes-visual-bell-config)
@@ -268,10 +268,26 @@
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
+
+(setq lsp-sqls-connections
+      '(((driver . "mysql") (dataSourceName . "emacs:#localhost$IJD874387lsdkljfij!@tcp(localhost:3306)/db"))))
+
+;; (defun my-sql-mode-hook ()
+;;     (setq indent-line-function 'common-lisp-indent-function))
+
+;; (add-hook 'sql-mode-hook 'my-sql-mode-hook)
+(use-package
+    sqlup-mode
+    :ensure t
+    :hook (sql-mode . sqlup-mode))
+
+(setq-default sql-use-indent-support nil)
+
 (use-package
     lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
+    ;;:hook (sql-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
@@ -621,6 +637,15 @@ This command does not push text to `kill-ring'."
  '(("\\<\\(\\|int\\|string\\|bool\\|byte\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|true\\|uint\\|uint8\\|uintptr\\)\\>"
     . font-lock-type-face)))
 
+(font-lock-add-keywords
+ 'sql-mode
+ '(("\\<\\(\\|int\\|string\\|\\|TINYINT\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|datetime\\|bigint\\|\\|uintptr\\)\\>"
+    . font-lock-type-face)))
+
+(font-lock-add-keywords
+ 'sql-mode
+ '(("\\<\\(\\|\\|string\\|UNSIGNED\\|\\|if\\|complex64\\|use\\|uint16\\|false\\|float32\\|float64\\|\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|\\|\\|AUTO_INCREMENT\\|uintptr\\)\\>"
+    . font-lock-keyword-face)))
 
 (defun reverse-input-method (input-method)
     "Build the reverse mapping of single letters from INPUT-METHOD."
@@ -709,7 +734,7 @@ This command does not push text to `kill-ring'."
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")
  '(package-selected-packages
-   '(html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
+   '(indent-tools sql-sqlline sqlup-mode sql-smie format-sql reformatter sql-indent sqlformat html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
  '(pdf-view-midnight-colors (cons "#d4d4d4" "#191919"))
  '(rustic-ansi-faces
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
@@ -748,3 +773,4 @@ This command does not push text to `kill-ring'."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)
