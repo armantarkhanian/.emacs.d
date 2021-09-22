@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: newerr
-# key: newerr
-# --
-errors.New("$1")

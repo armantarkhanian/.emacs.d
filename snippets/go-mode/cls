@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: struct
-# key: cls
-# --
-// $1 
-type ${1:} struct {
-  $0
-}
