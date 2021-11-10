@@ -21,6 +21,8 @@
 ;; (global-set-key (kbd "S-<left>") 'windmove-left)
 ;; (global-set-key (kbd "S-<right>") 'windmove-right)
 
+(global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
+
 (defun calc-region (point mark)
     (interactive "r")
     (setq result (calc-eval
