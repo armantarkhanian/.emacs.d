@@ -18,14 +18,6 @@
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/keybindings.el")
 
-(defun calc-region (point mark)
-    (interactive "r")
-    (setq result (calc-eval
-                  (buffer-substring
-                   point
-                   mark)))
-    (insert (concat " = " result)))
-
 (use-package
     graphql-mode
     :ensure t

@@ -1,3 +1,11 @@
+(defun calc-region (point mark)
+    (interactive "r")
+    (setq result (calc-eval
+                  (buffer-substring
+                   point
+                   mark)))
+    (insert (concat " = " result)))
+
 (defun switchNextBuffer()
     (interactive)
     (switch-to-next-buffer)
