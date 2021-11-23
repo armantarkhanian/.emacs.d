@@ -15,6 +15,7 @@
 (setq warning-minimum-level
       :emergency)
 
+(load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/keybindings.el")
 
 (defun calc-region (point mark)
@@ -34,16 +35,6 @@
     html-to-markdown
     :ensure t)
 
-(defun md()
-    (interactive)
-    (if (equal (buffer-name) "README.html")
-        (saveREADME)))
-
-(defun saveREADME()
-    (setq s (buffer-substring (point-min) (point-max)))
-    (setq s1 (html-to-markdown-string s))
-    (write-region s1 nil "./README.md"))
-
 (add-hook 'before-save-hook #'md)
 
 (use-package
@@ -59,12 +50,10 @@
     key-chord
     :ensure t
     :config
-    ;; (key-chord-define-global "fj" 'ace-jump-char-mode)
+    ;;(key-chord-define-global "fj" 'ace-jump-char-mode)
     )
 
 (key-chord-mode 1)
-
-
 
 (use-package
     typescript-mode
@@ -94,57 +83,35 @@
     multiple-cursors
     :ensure t)
 
-
-
 (use-package
     bm
     :ensure t
     :demand t
     :init
-    ;; restore on load (even before you require bm)
+
     (setq bm-restore-repository-on-load t)
 
-    ;; remove bookmark after jump
-    ;; (setq temporary-bookmark-p t)
     :config
-    ;; Allow cross-buffer 'next'
+
     (setq bm-cycle-all-buffers t)
 
-    ;; where to store persistant files
     (setq bm-repository-file "~/.emacs.d/bm-repository")
 
-    ;; save bookmarks
     (setq-default bm-buffer-persistence t)
 
-    ;; Loading the repository from file when on start up.
     (add-hook 'after-init-hook 'bm-repository-load)
 
-    ;; aving bookmarks
     (add-hook 'kill-buffer-hook #'bm-buffer-save)
 
-    ;; Saving the repository to file when on exit.
-    ;; kill-buffer-hook is not called when Emacs is killed, so we
-    ;; must save all bookmarks first.
     (add-hook 'kill-emacs-hook #'(lambda nil (bm-buffer-save-all)
                                          (bm-repository-save)))
 
-    ;; The `after-save-hook' is not necessary to use to achieve persistence,
-    ;; but it makes the bookmark data in repository more in sync with the file
-    ;; state.
     (add-hook 'after-save-hook #'bm-buffer-save)
 
     ;; Restoring bookmarks
     (add-hook 'find-file-hooks   #'bm-buffer-restore)
     (add-hook 'after-revert-hook #'bm-buffer-restore)
 
-    ;; The `after-revert-hook' is not necessary to use to achieve persistence,
-    ;; but it makes the bookmark data in repository more in sync with the file
-    ;; state. This hook might cause trouble when using packages
-    ;; that automatically reverts the buffer (like vc after a check-in).
-    ;; This can easily be avoided if the package provides a hook that is
-    ;; called before the buffer is reverted (like `vc-before-checkin-hook').
-    ;; Then new bookmarks can be saved before the buffer is reverted.
-    ;; Make sure bookmarks is saved before check-in (and revert-buffer)
     (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
     :bind (("M-1" . bm-toggle)
            ("M-2" . bm-previous)
@@ -173,13 +140,6 @@
 (use-package
     ace-jump-mode
     :ensure t)
-
-(defun switchNextBuffer()
-    (interactive)
-    (switch-to-next-buffer)
-    (setq name (buffer-name))
-    (if (equal "*" (substring name 0 1))
-        (switchNextBuffer)))
 
 
 
@@ -371,9 +331,7 @@
       auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
       )
 
-(defun backups()
-    (interactive)
-    (find-file "~/.emacs.d/backups"))
+
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
@@ -446,102 +404,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq x-select-enable-clipboard t)
 
-(defun gotoUp ()
-    (interactive)
-    (goto-char (point-max)))
-
-(defun gotoDown ()
-    (interactive)
-    (goto-char (point-min)))
-
-(defun run ()
-    (interactive)
-    (compile (concat "go run " (buffer-file-name))))
-
-(defun tidy ()
-    (interactive)
-    (compile "go mod tidy"))
-
-(defun build ()
-    (interactive)
-    (compile "go build"))
-
-(defun install ()
-    (interactive)
-    (compile "go install"))
-
-(defun conf()
-    (interactive)
-    (find-file "~/.emacs.d/init.el"))
-
-(defun ful ()
-    (interactive)
-    (toggle-frame-fullscreen))
-
-(defun backward-delete-word (arg)
-    (interactive "p")
-    (delete-region (point)
-                   (progn (backward-word arg)
-                          (point))))
-
-(defun forward-delete-word (arg)
-    (interactive "p")
-    (delete-region (point)
-                   (progn (forward-word arg)
-                          (point))))
-
-(defun custom-kill-line ()
-    (interactive)
-    (delete-region (point)
-                   (line-end-position)))
-(defun my-delete-line ()
-    "Delete text from current position to end of line char.
-This command does not push text to `kill-ring'."
-    (interactive)
-    (delete-region (point)
-                   (progn (end-of-line)
-                          (point))))
-
-(defun upBlock()
-    (interactive)
-    (re-search-backward "[}{]" nil t 1))
-
-(defun downBlock()
-    (interactive)
-    (re-search-forward "[{}]" nil t 1))
-
-
-
-
-
-
-
-
-(defun backwardParagraph()
-    (interactive)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line))
-
-
-(defun forwardParagraph()
-    (interactive)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line))
-
-
-
-
-
 (use-package
     flycheck
     :ensure t)
@@ -574,24 +436,6 @@ This command does not push text to `kill-ring'."
 (add-hook 'go-mode-hook #'flycheck-mode)
 
 (add-hook 'before-save-hook #'fmt)
-
-(defun fmt ()
-    (interactive)
-    (indent-region (point-min)
-                   (point-max))
-    (delete-trailing-whitespace)
-    ;;(delete-blank-lines)
-    )
-
-(defun rpl()
-    (interactive)
-    (setq currentPoint (point))
-    (goto-char (point-min))
-    (setq old (read-from-minibuffer "Old string: "))
-    (setq new (read-from-minibuffer "New string: "))
-    (while (re-search-forward old nil t)
-        (replace-match new))
-    (goto-char currentPoint))
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package
@@ -665,44 +509,7 @@ This command does not push text to `kill-ring'."
 
 (reverse-input-method 'russian-computer)
 
-(defun dir ()
-    (interactive)
-    (find-file default-directory))
-
 (require 'subr-x)
-
-(defun new-vue-component ()
-    (interactive)
-    (setq projectFolder (read-directory-name "Enter path to /components directory: "))
-    (setq projectFolder (string-remove-suffix "/" projectFolder))
-    (setq componentName (read-from-minibuffer "New component name: "))
-    (setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
-    (make-directory dir)
-    (setq templateFile (concat dir "/" componentName ".vue"))
-    (setq scriptFileContent (concat "export default {
-    name: '" componentName "'
-}
-"))
-    (setq templateFileContent (concat "<template>
-    <div>
-        " componentName " component" "
-    </div>
-</template>
-
-<script>
-    export default {
-        name: '" componentName "'
-    }
-</script>
-
-<style scoped>
-* {
-
-}
-</style>
-"))
-    (write-region templateFileContent nil templateFile)
-    (find-file templateFile))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
