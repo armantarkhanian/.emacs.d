@@ -1,3 +1,11 @@
+(defun find-file-as-root ()
+    (interactive)
+    (setq fileName (read-file-name "Find file: "))
+
+    (setq fullFileName (expand-file-name fileName))
+    (setq rootFile (concat "/su::" fullFileName))
+    (find-file rootFile))
+
 (defun calc-region (point mark)
     (interactive "r")
     (setq result (calc-eval
