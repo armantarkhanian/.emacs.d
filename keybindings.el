@@ -1,4 +1,4 @@
-;; Navigation
+;; navigation
 (global-set-key (kbd "S-<up>")        'windmove-up)
 (global-set-key (kbd "S-<down>")      'windmove-down)
 (global-set-key (kbd "S-<left>")      'windmove-left)
@@ -12,11 +12,11 @@
 (global-set-key (kbd "C-x C-g")       'goto-line-preview)
 (global-set-key (kbd "M-o")           'switchNextBuffer)
 
-;; FLYCHECK
+;; flycheck
 (global-set-key (kbd "C-<right>")     'flycheck-next-error)
 (global-set-key (kbd "C-<left>")      'flycheck-previous-error)
 
-;; LSP
+;; lsp
 (global-set-key (kbd "C-M-.")         'lsp-goto-implementation)
 (global-set-key (kbd "C-j")           'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j")         'ace-jump-char-mode)
