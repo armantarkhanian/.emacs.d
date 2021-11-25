@@ -1,3 +1,7 @@
+(defun share (point mark)
+    (interactive "r")
+    (webpaste--paste-text (buffer-substring point mark)))
+
 (defun find-file-as-root ()
     (interactive)
     (setq fileName (read-file-name "Find file: "))
@@ -61,7 +65,9 @@
 
 (defun conf()
     (interactive)
-    (find-file "~/.emacs.d/init.el"))
+    (if (display-graphic-p)
+        (find-file "~/.emacs.d/init_window.el")
+        (find-file "~/.emacs.d/init_nw.el")))
 
 (defun ful ()
     (interactive)
@@ -136,6 +142,7 @@ This command does not push text to `kill-ring'."
     (while (re-search-forward old nil t)
         (replace-match new))
     (goto-char currentPoint))
+
 (defun new-vue-component ()
     (interactive)
     (setq projectFolder (read-directory-name "Enter path to /components directory: "))

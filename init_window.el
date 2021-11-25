@@ -20,6 +20,10 @@
 (load "~/.emacs.d/keybindings.el")
 
 (use-package
+    helm
+    :ensure t)
+
+(use-package
     graphql-mode
     :ensure t
     ;;:defer
@@ -372,6 +376,7 @@
 (setq show-paren-style 'parenthesis)
 (electric-pair-mode    1)
 (electric-indent-mode  1)
+;;artaktarkhayan1@gmail.comm
 (delete-selection-mode t)
 (tooltip-mode      -1)
 (menu-bar-mode     -1)
