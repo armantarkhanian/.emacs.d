@@ -2,6 +2,10 @@
     (interactive "r")
     (webpaste--paste-text (buffer-substring point mark)))
 
+(defun push()
+    (interactive)
+    (shell-command "/bin/bash ~/.emacs.d/push"))
+
 (defun find-file-as-root ()
     (interactive)
     (setq fileName (read-file-name "Find file: "))
