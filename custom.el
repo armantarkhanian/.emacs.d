@@ -2,7 +2,7 @@
     (interactive "r")
     (webpaste--paste-text (buffer-substring point mark)))
 
-(defun push()
+(defun save-config ()
     (interactive)
     (shell-command "/bin/bash ~/.emacs.d/push"))
 
