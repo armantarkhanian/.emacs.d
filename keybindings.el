@@ -18,11 +18,11 @@
 
 ;; lsp
 (global-set-key (kbd "C-M-.")         'lsp-goto-implementation)
-(global-set-key (kbd "C-j")           'lsp-execute-code-action)
+(global-set-key (kbd "C-j")           'newline-and-indent)
+(global-set-key (kbd "C-<return>")    'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j")         'ace-jump-char-mode)
 (global-set-key (kbd "C->")           'mark-next-like-this)
 (global-set-key (kbd "RET")           'newline-and-indent)
-(global-set-key (kbd "C-j")           'newline-and-indent)
 (global-set-key (kbd "C-<tab>")       'buffer-menu)
 (global-set-key (kbd "C--")           'hs-hide-block)
 (global-set-key (kbd "C-=")           'hs-show-block)

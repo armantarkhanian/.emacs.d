@@ -24,6 +24,10 @@
     :ensure t)
 
 (use-package
+    edit-indirect
+    :ensure t)
+
+(use-package
     graphql-mode
     :ensure t
     ;;:defer
@@ -343,7 +347,7 @@
 ;;(set-face-foreground 'highlight nil)
 
 
-(global-display-line-numbers-mode)
+(global-display-line-numbers-mode 1)
 (setq inhibit-splash-screen   t)
 (setq ingibit-startup-message t)
 (setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
