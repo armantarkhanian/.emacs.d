@@ -20,6 +20,13 @@
 (load "~/.emacs.d/keybindings.el")
 
 (use-package
+    no-littering
+    :ensure t
+    :config
+    (setq auto-save-file-name-transforms
+          `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
+(use-package
     helm
     :ensure t)
 
@@ -208,13 +215,16 @@
     ;;:defer
     )
 
+(unless (package-installed-p 'all-the-icons)
+    (use-package
+        all-the-icons
+        :ensure t
+        :init
+        (all-the-icons-install-fonts)))
+
 (use-package
     all-the-icons
-    :ensure t
-    ;;:defer
-    :init
-    ;;(all-the-icons-install-fonts)
-    )
+    :ensure t)
 
 (use-package
     goto-line-preview
@@ -352,21 +362,21 @@
 (setq ingibit-startup-message t)
 (setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
 
-(defvar --backup-directory "~/.emacs.d/backups")
+;; (defvar --backup-directory "~/.emacs.d/backups")
 
-(if (not (file-exists-p --backup-directory))
-    (make-directory --backup-directory t))
-(setq backup-directory-alist `(("." . ,--backup-directory)))
-(setq make-backup-files t ; backup of a file the first time it is saved.
-      backup-by-copying t ; don't clobber symlinks
-      version-control t   ; version numbers for backup files
-      delete-old-versions t      ; delete excess backup files silently
-      delete-by-moving-to-trash t kept-old-versions 6 ; oldest versions to keep when a new numbered backup is made (default: 2)
-      kept-new-versions 9 ; newest versions to keep when a new numbered backup is made (default: 2)
-      auto-save-default t ; auto-save every buffer that visits a file
-      auto-save-timeout 20 ; number of seconds idle time before auto-save (default: 30)
-      auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
-      )
+;; (if (not (file-exists-p --backup-directory))
+;;     (make-directory --backup-directory t))
+;; (setq backup-directory-alist `(("." . ,--backup-directory)))
+;; (setq make-backup-files t ; backup of a file the first time it is saved.
+;;       backup-by-copying t ; don't clobber symlinks
+;;       version-control t   ; version numbers for backup files
+;;       delete-old-versions t      ; delete excess backup files silently
+;;       delete-by-moving-to-trash t kept-old-versions 6 ; oldest versions to keep when a new numbered backup is made (default: 2)
+;;       kept-new-versions 9 ; newest versions to keep when a new numbered backup is made (default: 2)
+;;       auto-save-default t ; auto-save every buffer that visits a file
+;;       auto-save-timeout 20 ; number of seconds idle time before auto-save (default: 30)
+;;       auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
+;;       )
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
