@@ -22,6 +22,7 @@
 
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
+(global-set-key (kbd "C-M-/") 'lsp-goto-test)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
 (global-set-key (kbd "C->") 'mark-next-like-this)
