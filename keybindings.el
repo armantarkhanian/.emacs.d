@@ -11,6 +11,8 @@
 (global-set-key (kbd "C-M-n")         'forwardParagraph)
 (global-set-key (kbd "C-x C-g")       'goto-line-preview)
 (global-set-key (kbd "M-o")           'switchNextBuffer)
+(global-set-key (kbd "C-x k")         'kill-buffer)
+(global-set-key (kbd "C-x C-k")       'kill-buffer)
 
 ;; flycheck
 (global-set-key (kbd "C-<right>")     'flycheck-next-error)
