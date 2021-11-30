@@ -21,6 +21,7 @@
       :emergency)
 
 (require 'ibuffer)
+(setq-default ibuffer-use-header-line nil)
 
 (add-hook 'ibuffer-hook
           (lambda ()
