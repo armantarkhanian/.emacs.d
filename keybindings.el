@@ -13,6 +13,8 @@
 (global-set-key (kbd "M-o")           'switchNextBuffer)
 (global-set-key (kbd "C-x k")         'kill-buffer)
 (global-set-key (kbd "C-x C-k")       'kill-buffer)
+(global-set-key (kbd "C-M-<return>")  'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<backspace>")  'mc/unmark-next-like-this)
 
 ;; flycheck
 (global-set-key (kbd "C-<right>")     'flycheck-next-error)
