@@ -22,11 +22,13 @@
 
 (require 'ibuffer)
 (setq-default ibuffer-use-header-line nil)
+(setq-default ibuffer-default-sorting-mode 'alphabetic)
 
 (add-hook 'ibuffer-hook
           (lambda ()
               (if (not default-buffers-shown)
-                  (ibuffer-filter-by-name "^[^\*]"))))
+                  (ibuffer-filter-by-name "^[^\*]"))
+              (ibuffer-update)))
 
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/keybindings.el")

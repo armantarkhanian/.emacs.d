@@ -1,5 +1,10 @@
 (setq default-buffers-shown nil)
 
+(defun ibufferVisitBuffer (&optional single)
+    (interactive "P")
+    (ibuffer-visit-buffer single)
+    (kill-buffer "*Ibuffer*"))
+
 (defun ibuffer/toggle-default-buffers ()
     (interactive)
     (ibuffer-filter-disable)
@@ -7,8 +12,7 @@
         (ibuffer-filter-by-name "^[^\*]")
         (ibuffer-filter-by-name ""))
 
-    (setq default-buffers-shown (not default-buffers-shown))
-    (ibuffer-do-sort-by-alphabetic))
+    (setq default-buffers-shown (not default-buffers-shown)))
 
 (defun share (point mark)
     (interactive "r")
