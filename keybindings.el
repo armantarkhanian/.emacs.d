@@ -26,24 +26,11 @@
 (global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "RET") 'newline-and-indent)
+
 (global-set-key (kbd "C-<tab>") 'ibuffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "C-h") 'ibuffer/toggle-default-buffers)
-
-(setq default-buffers-shown nil)
-
-(defun ibuffer/toggle-default-buffers ()
-    (interactive)
-    (ibuffer-filter-disable)
-    (if default-buffers-shown
-        (progn
-            ;; (message "shown now")
-            (ibuffer-filter-by-name "^[^\*]"))
-        (progn
-            ;; (message "not shown now")
-            (ibuffer-filter-by-name "")))
-
-    (setq default-buffers-shown (not default-buffers-shown)))
+(define-key ibuffer-mode-map (kbd "h") 'ibuffer/toggle-default-buffers)
 
 (global-set-key (kbd "C--") 'hs-hide-block)
 (global-set-key (kbd "C-=") 'hs-show-block)

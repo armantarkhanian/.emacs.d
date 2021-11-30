@@ -1,3 +1,18 @@
+(setq default-buffers-shown nil)
+
+(defun ibuffer/toggle-default-buffers ()
+    (interactive)
+    (ibuffer-filter-disable)
+    (if default-buffers-shown
+        (progn
+            ;; (message "shown now")
+            (ibuffer-filter-by-name "^[^\*]"))
+        (progn
+            ;; (message "not shown now")
+            (ibuffer-filter-by-name "")))
+
+    (setq default-buffers-shown (not default-buffers-shown)))
+
 (defun share (point mark)
     (interactive "r")
     (webpaste--paste-text (buffer-substring point mark)))
@@ -72,7 +87,7 @@
 
 (defun hotkeys()
     (interactive)
-        (find-file "~/.emacs.d/keybindings.el"))
+    (find-file "~/.emacs.d/keybindings.el"))
 
 (defun ful ()
     (interactive)
