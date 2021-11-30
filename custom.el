@@ -1,3 +1,66 @@
+(defun test (&optional include-declaration &key display-action)
+    (interactive "P")
+    (findLocations "textDocument/references"
+                   (list :context `(:includeDeclaration ,(lsp-json-bool include-declaration)))
+                   :display-action display-action
+                   :references? t)
+    )
+
+(cl-defun findLocations (method &optional extra &key display-action references?)
+    (let ((loc (lsp-request method
+                            (append (lsp--text-document-position-params) extra))))
+        (setq data loc)
+        (if (seq-empty-p loc)
+            (lsp--error "Not found for: %s" (or (thing-at-point 'symbol t) ""))
+            (lsp-show-xrefs (lspLocationsToXrefItems loc) display-action references?)
+            )))
+
+(defun lspLocationsToXrefItems (locations)
+    "Return a list of `xref-item' given LOCATIONS, which can be of
+type Location, LocationLink, Location[] or LocationLink[]."
+    (setq locations
+          (pcase locations
+              ((seq (or (Location)
+                        (LocationLink)))
+               (append locations nil))
+              ((or (Location)
+                   (LocationLink))
+               (list locations))))
+
+    (cl-labels ((get-xrefs-in-file
+                    (file-locs)
+                    (-let [(filename . matches) file-locs]
+                        (if (string-suffix-p "_test.go" filename)
+                            (progn
+                                (condition-case err
+                                    (let ((visiting (find-buffer-visiting filename))
+                                          (fn (lambda (loc)
+                                                  (lsp-with-filename filename
+                                                      (lsp--xref-make-item filename
+                                                                           (lsp--location-range loc))))))
+                                        (if visiting
+                                            (with-current-buffer visiting
+                                                (seq-map fn matches))
+                                            (when (file-readable-p filename)
+                                                (with-temp-buffer
+                                                    (insert-file-contents-literally filename)
+                                                    (seq-map fn matches)))))
+                                    (error (lsp-warn "Failed to process xref entry for filename '%s': %s"
+                                                     filename (error-message-string err)))
+                                    (file-error (lsp-warn "Failed to process xref entry, file-error, '%s': %s"
+                                                          filename (error-message-string err)))))
+                            ))))
+
+        (->> locations
+             (seq-sort #'lsp--location-before-p)
+             (seq-group-by (-compose #'lsp--uri-to-path #'lsp--location-uri))
+             (seq-map #'get-xrefs-in-file)
+             (apply #'nconc))))
+
+(defun mock()
+    (interactive)
+    (shell-command "gomocker"))
+
 (setq default-buffers-shown nil)
 
 (defun ibufferVisitBuffer (&optional single)
@@ -89,6 +152,10 @@
 (defun hotkeys()
     (interactive)
     (find-file "~/.emacs.d/keybindings.el"))
+
+(defun custom()
+    (interactive)
+    (find-file "~/.emacs.d/custom.el"))
 
 (defun ful ()
     (interactive)

@@ -1,3 +1,14 @@
+(require 'subr-x)
+(require 'ibuffer)
+(setq-default ibuffer-use-header-line nil)
+(setq-default ibuffer-default-sorting-mode 'alphabetic)
+
+(add-hook 'ibuffer-hook
+          (lambda ()
+              (if (not default-buffers-shown)
+                  (ibuffer-filter-by-name "^[^\*]"))
+              (ibuffer-update)))
+
 (if (display-graphic-p)
     (load "~/.emacs.d/init_window.el")
     (load "~/.emacs.d/init_window.el")

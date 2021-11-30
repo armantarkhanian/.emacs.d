@@ -1,4 +1,5 @@
 #!/bin/bash
+cd ~/.emacs.d/
 git add ~/.emacs.d/push
 git add ~/.emacs.d/init.el
 git add ~/.emacs.d/init_nw.el

@@ -36,9 +36,6 @@
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 
 
-(define-key ibuffer-mode-map [remap ibuffer-visit-buffer] 'ibufferVisitBuffer)
-
-
 (define-key ibuffer-mode-map (kbd "<backspace>") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "C-k") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "k") 'kill-this-buffer)
