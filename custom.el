@@ -1,10 +1,6 @@
 (defun test (&optional include-declaration &key display-action)
     (interactive "P")
-    (findLocations "textDocument/references"
-                   (list :context `(:includeDeclaration ,(lsp-json-bool include-declaration)))
-                   :display-action display-action
-                   :references? t)
-    )
+    (findLocations "textDocument/references" nil :display-action display-action))
 
 (cl-defun findLocations (method &optional extra &key display-action references?)
     (let ((loc (lsp-request method
@@ -12,7 +8,11 @@
         (setq data loc)
         (if (seq-empty-p loc)
             (lsp--error "Not found for: %s" (or (thing-at-point 'symbol t) ""))
-            (lsp-show-xrefs (lspLocationsToXrefItems loc) display-action references?)
+            (lsp-show-xrefs items display-action references?)
+            ;; (progn
+            ;;     (setq items (lspLocationsToXrefItems loc))
+            ;;     (if (eq (length '(items)) 1)
+            ;;         (xref-quit-and-goto-xref items)))
             )))
 
 (defun lspLocationsToXrefItems (locations)
