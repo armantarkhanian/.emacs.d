@@ -1,7 +1,11 @@
 (require 'package)
-(setq package-archives '(("melpa-stb" . "https://stable.melpa.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")))
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("gnu" . "http://elpa.gnu.org/packages/") t)
+
 (package-initialize)
 
 (unless
@@ -25,6 +29,20 @@
     :config
     (setq auto-save-file-name-transforms
           `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
+(use-package
+    magit
+    :ensure t
+    :config
+    (setq magit-ediff-dwim-show-on-hunks t))
+
+(use-package
+    vdiff
+    :ensure t)
+
+(use-package
+    vdiff-magit
+    :ensure t)
 
 (use-package
     helm
@@ -194,11 +212,6 @@
                 ("m" . apply-macro-to-region-lines)))
 
 (selected-global-mode 1)
-
-;;(use-package magit
-;;    :ensure t
-;;;;:defer
-;;)
 
 ;;(defun my-highlighter (level responsive display)
 ;;    (if (> 1 level)
