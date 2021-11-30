@@ -93,15 +93,6 @@
     )
 
 (use-package
-    ibuffer-sidebar
-    :ensure t
-    ;;:defer
-    :commands (ibuffer-sidebar-toggle-sidebar)
-    :config (setq ibuffer-sidebar-use-custom-font t)
-    ;;(setq ibuffer-sidebar-face `(:family "Helvetica" :height 140))
-    )
-
-(use-package
     restclient
     :ensure t
     ;;:defer
@@ -255,15 +246,18 @@
 
 (use-package
     all-the-icons-dired
-    :ensure t
-    ;;:defer
-    )
+    :ensure t)
 
-(use-package
-    neotree
-    :ensure t
-    ;;:defer
-    )
+;; (use-package
+;;     neotree
+;;     :ensure t
+;;     :config
+;;     (neotree-show)
+;;     (setq-default neo-show-hidden-files t)
+;;     (setq-default neo-autorefresh t)
+;;     (setq-default neo-mode-line-type 'none)
+;;     (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;;     )
 
 (setq custom-safe-themes t)
 
@@ -583,7 +577,6 @@
  '(exwm-floating-border-color "#121212")
  '(fci-rule-color "#515151")
  '(highlight-tail-colors ((("#1d2416" "#1d2416") . 0) (("#232c30" "#202c30") . 20)))
- '(ibuffer-sidebar-refresh-timer 0)
  '(jdee-db-active-breakpoint-face-colors (cons "#171F24" "#FFFFFF"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#171F24" "#468800"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#171F24" "#777778"))
@@ -592,7 +585,7 @@
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")
  '(package-selected-packages
-   '(graphql-mode dap-mode go-dlv indent-tools sql-sqlline sqlup-mode sql-smie format-sql reformatter sql-indent sqlformat html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
+   '(graphql-mode dap-mode go-dlv indent-tools sql-sqlline sqlup-mode sql-smie format-sql reformatter sql-indent sqlformat html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
  '(pdf-view-midnight-colors (cons "#d4d4d4" "#191919"))
  '(rustic-ansi-faces
    ["#191919" "#FF5E5E" "#468800" "#E9FDAC" "#8CDAFF" "#C586C0" "#85DDFF" "#d4d4d4"])
