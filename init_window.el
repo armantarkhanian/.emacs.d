@@ -31,6 +31,7 @@
               (ibuffer-update)))
 
 (load "~/.emacs.d/custom.el")
+(load "~/.emacs.d/remaps.el")
 (load "~/.emacs.d/keybindings.el")
 
 (use-package

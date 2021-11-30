@@ -2,8 +2,8 @@
 
 (defun ibufferVisitBuffer (&optional single)
     (interactive "P")
-    (ibuffer-visit-buffer single)
-    (kill-buffer "*Ibuffer*"))
+    (ibuffer-visit-buffer single))
+;;(kill-buffer "*Ibuffer*"))
 
 (defun ibuffer/toggle-default-buffers ()
     (interactive)

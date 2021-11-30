@@ -27,13 +27,14 @@
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
+;; ibuffer
 (global-set-key (kbd "C-<tab>") 'ibuffer)
-(global-set-key (kbd "C-<return>") 'ibuffer)
 (global-set-key (kbd "C-h") 'ibuffer)
-(define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 
 (define-key ibuffer-mode-map (kbd "C-h") 'ibuffer-visit-buffer)
 (define-key ibuffer-mode-map (kbd "C-<return>") 'ibuffer-visit-buffer)
+(define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
+
 
 (define-key ibuffer-mode-map [remap ibuffer-visit-buffer] 'ibufferVisitBuffer)
 

@@ -5,5 +5,6 @@ git add ~/.emacs.d/init_nw.el
 git add ~/.emacs.d/init_window.el
 git add ~/.emacs.d/custom.el
 git add ~/.emacs.d/keybindings.el
+git add ~/.emacs.d/remaps.el
 git commit -m "auto commit"
 git push
