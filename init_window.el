@@ -22,23 +22,10 @@
 
 (require 'ibuffer)
 
-(use-package ibuffer-projectile
-    :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
-    :hook ((ibuffer . (lambda ()
-                          (ibuffer-projectile-set-filter-groups)
-                          (unless (eq ibuffer-sorting-mode 'alphabetic)
-                              (ibuffer-do-sort-by-alphabetic)))))
-    :config
-    (setq ibuffer-projectile-prefix
-          (if (icons-displayable-p)
-              (concat
-               (all-the-icons-octicon "file-directory"
-                                      :face ibuffer-filter-group-name-face
-                                      :v-adjust 0.0
-                                      :height 1.0)
-               " ")
-              "Project: ")))
-
+(add-hook 'ibuffer-hook
+          (lambda ()
+              (if (not default-buffers-shown)
+                  (ibuffer-filter-by-name "^[^\*]"))))
 
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/keybindings.el")
