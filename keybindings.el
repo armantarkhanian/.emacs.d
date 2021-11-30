@@ -28,8 +28,12 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 (global-set-key (kbd "C-<tab>") 'ibuffer)
+(global-set-key (kbd "C-h") 'ibuffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
-(define-key ibuffer-mode-map (kbd "C-h") 'ibuffer/toggle-default-buffers)
+(define-key ibuffer-mode-map (kbd "C-h") 'kill-this-buffer)
+(define-key ibuffer-mode-map (kbd "<backspace>") 'kill-this-buffer)
+(define-key ibuffer-mode-map (kbd "C-k") 'kill-this-buffer)
+(define-key ibuffer-mode-map (kbd "k") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "h") 'ibuffer/toggle-default-buffers)
 
 (global-set-key (kbd "C--") 'hs-hide-block)

@@ -4,14 +4,11 @@
     (interactive)
     (ibuffer-filter-disable)
     (if default-buffers-shown
-        (progn
-            ;; (message "shown now")
-            (ibuffer-filter-by-name "^[^\*]"))
-        (progn
-            ;; (message "not shown now")
-            (ibuffer-filter-by-name "")))
+        (ibuffer-filter-by-name "^[^\*]")
+        (ibuffer-filter-by-name ""))
 
-    (setq default-buffers-shown (not default-buffers-shown)))
+    (setq default-buffers-shown (not default-buffers-shown))
+    (ibuffer-do-sort-by-alphabetic))
 
 (defun share (point mark)
     (interactive "r")
