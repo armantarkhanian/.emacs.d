@@ -70,6 +70,10 @@
         (find-file "~/.emacs.d/init_window.el")
         (find-file "~/.emacs.d/init_nw.el")))
 
+(defun hotkeys()
+    (interactive)
+        (find-file "~/.emacs.d/keybindings.el"))
+
 (defun ful ()
     (interactive)
     (toggle-frame-fullscreen))

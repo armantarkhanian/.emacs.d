@@ -20,6 +20,26 @@
 (setq warning-minimum-level
       :emergency)
 
+(require 'ibuffer)
+
+(use-package ibuffer-projectile
+    :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
+    :hook ((ibuffer . (lambda ()
+                          (ibuffer-projectile-set-filter-groups)
+                          (unless (eq ibuffer-sorting-mode 'alphabetic)
+                              (ibuffer-do-sort-by-alphabetic)))))
+    :config
+    (setq ibuffer-projectile-prefix
+          (if (icons-displayable-p)
+              (concat
+               (all-the-icons-octicon "file-directory"
+                                      :face ibuffer-filter-group-name-face
+                                      :v-adjust 0.0
+                                      :height 1.0)
+               " ")
+              "Project: ")))
+
+
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/keybindings.el")
 
@@ -229,6 +249,37 @@
 (use-package
     all-the-icons
     :ensure t)
+
+(use-package all-the-icons-ibuffer
+    :ensure t
+    :init
+    (all-the-icons-ibuffer-mode 1)
+    :config
+    ;; Whether display the icons.
+    (setq all-the-icons-ibuffer-icon t)
+
+    ;; Whether display the colorful icons.
+    ;; It respects `all-the-icons-color-icons'.
+    (setq all-the-icons-ibuffer-color-icon t)
+
+    ;; The default icon size in ibuffer.
+    (setq all-the-icons-ibuffer-icon-size 1.0)
+
+    ;; The default vertical adjustment of the icon in ibuffer.
+    (setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+
+    ;; Use human readable file size in ibuffer.
+    (setq  all-the-icons-ibuffer-human-readable-size t)
+
+    ;; A list of ways to display buffer lines with `all-the-icons'.
+    ;; See `ibuffer-formats' for details.
+    all-the-icons-ibuffer-formats
+
+    ;; Slow Rendering
+    ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+    ;; you can try setting the following variable
+    (setq inhibit-compacting-font-caches t)
+    )
 
 (use-package
     goto-line-preview

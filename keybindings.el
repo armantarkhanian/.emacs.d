@@ -27,7 +27,6 @@
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-<tab>") 'ibuffer)
-
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 
 (global-set-key (kbd "C--") 'hs-hide-block)
