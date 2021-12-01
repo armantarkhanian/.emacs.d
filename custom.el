@@ -1,20 +1,18 @@
-(defun lsp-goto-test (&optional include-declaration &key display-action)
+(defun custom/lsp-goto-test (&optional include-declaration &key display-action)
     (interactive "P")
-    (findLocations "textDocument/references" nil :display-action display-action))
+    (custom/lsp-find-references "textDocument/references" nil :display-action display-action))
 
-(cl-defun findLocations (method &optional extra &key display-action references?)
+(defun custom/lsp-find-references (method &optional extra &key display-action references?)
     (let ((loc (lsp-request method
                             (append (lsp--text-document-position-params) extra))))
         (setq data loc)
         (if (seq-empty-p loc)
             (lsp--error "Not found for: %s" (or (thing-at-point 'symbol t) ""))
             (progn
-                (setq items (lspLocationsToXrefItems loc))
-                (if (eq (length '(items)) 1)
-                    (xref-quit-and-goto-xref items)
-                    (lsp-show-xrefs items display-action references?))))))
+                (setq items (custom/lsp-locations-to-xref-items loc))
+                (lsp-show-xrefs items display-action references?)))))
 
-(defun lspLocationsToXrefItems (locations)
+(defun custom/lsp-locations-to-xref-items (locations)
     "Return a list of `xref-item' given LOCATIONS, which can be of
 type Location, LocationLink, Location[] or LocationLink[]."
     (setq locations
