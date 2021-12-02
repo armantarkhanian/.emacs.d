@@ -8,6 +8,14 @@
 
 (package-initialize)
 
+;; spead-up lsp-mode
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024 50)) ;; 50mb
+(setq lsp-log-io nil)
+(setq lsp-file-watch-threshold 2000)
+(setq lsp-enable-file-watchers nil)
+;;(setq lsp-idle-delay 0.500)
+
 (unless
     (require 'use-package nil t)
     (package-refresh-contents)
@@ -340,6 +348,17 @@
 
 (setq-default sql-use-indent-support t)
 
+;; (use-package
+;;     eglot
+;;     :ensure t)
+
+;; (defun eglot-go-install-save-hooks ()
+;;     (add-hook 'before-save-hook #'eglot-format-buffer t t)
+;;     (add-hook 'before-save-hook #'eglot-code-action-organize-imports t t))
+
+;; (add-hook 'go-mode-hook #'eglot-go-install-save-hooks)
+;; (add-hook 'go-mode-hook 'eglot-ensure)
+
 (use-package
     lsp-mode
     :ensure t
@@ -514,7 +533,8 @@
 (use-package
     go-mode
     :ensure t
-    :config (setq lsp-go-hover-kind "FullDocumentation")
+    :config
+    (setq lsp-go-hover-kind "FullDocumentation")
     (setq lsp-go-use-gofumpt t)
     ;; (setq lsp-go-analyses '(
     ;;                         ("nilness" . t)
@@ -528,8 +548,8 @@
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-(add-hook 'go-mode-hook #'flycheck-mode)
 (add-hook 'go-mode-hook #'lsp)
+(add-hook 'go-mode-hook #'flycheck-mode)
 
 (add-hook 'before-save-hook #'fmt)
 

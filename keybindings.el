@@ -22,6 +22,7 @@
 
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
+;;(global-set-key (kbd "C-M-.") 'eglot-find-implementation)
 (global-set-key (kbd "C-M-/") 'custom/lsp-goto-test)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
