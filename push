@@ -1,11 +1,11 @@
 #!/bin/bash
-cd ~/.emacs.d/
-git add push
-git add init.el
-git add init_nw.el
-git add init_window.el
-git add custom.el
-git add keybindings.el
-git add remaps.el
-git commit -m "auto commit"
-git push
+(cd ~/.emacs.d/;
+ git add push;
+ git add init.el;
+ git add init_nw.el;
+ git add init_window.el;
+ git add custom.el;
+ git add keybindings.el;
+ git add remaps.el;
+ git commit -m "auto commit";
+ git push;)
