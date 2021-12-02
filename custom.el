@@ -1,3 +1,7 @@
+(defun not ()
+    (interactive)
+    (find-file "~/.emacs.d/notes"))
+
 (defun custom/lsp-goto-test (&optional include-declaration &key display-action)
     (interactive "P")
     (custom/lsp-find-references "textDocument/references" nil :display-action display-action))

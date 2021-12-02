@@ -1,6 +1,7 @@
 #!/bin/bash
 (cd ~/.emacs.d/;
  git add push;
+ git add notes;
  git add init.el;
  git add init_nw.el;
  git add init_window.el;
