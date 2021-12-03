@@ -1,3 +1,24 @@
-note 1
+SELECT
+t.table_guid,t.title,
+t.number,
+t.capacity,
+r.restaurant_guid
+FROM
+tables t,
+restaurant r
+WHERE
+t.enabled = TRUE AND
+t.restaurant_id  = r.id
 
-tyep
+SELECT
+t.table_guid,
+t.title,
+t.number,
+t.capacity,
+r.restaurant_guid
+FROM
+tables t,
+restaurant r
+WHERE
+t.enabled = TRUE AND
+t.restaurant_id  = r.id

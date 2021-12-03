@@ -1,4 +1,10 @@
-(defun not ()
+(defun beautify-json ()
+    (interactive)
+    (let ((b (if mark-active (min (point) (mark)) (point-min)))
+          (e (if mark-active (max (point) (mark)) (point-max))))
+        (shell-command-on-region b e "python3 -mjson.tool" (current-buffer) t)))
+
+(defun no ()
     (interactive)
     (find-file "~/.emacs.d/notes"))
 
