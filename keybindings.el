@@ -1,3 +1,4 @@
+(global-set-key (kbd "<backtab>") 'insertTab)
 ;; navigation
 (global-set-key (kbd "S-<up>") 'windmove-up)
 (global-set-key (kbd "S-<down>") 'windmove-down)

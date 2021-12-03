@@ -16,6 +16,10 @@
 (setq lsp-enable-file-watchers nil)
 ;;(setq lsp-idle-delay 0.500)
 
+(use-package jq-format
+	:ensure t
+	:after json-mode)
+
 (unless
     (require 'use-package nil t)
     (package-refresh-contents)

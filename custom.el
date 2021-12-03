@@ -1,3 +1,7 @@
+(defun insertTab()
+(interactive)
+(insert "	"))
+
 (defun beautify-json ()
     (interactive)
     (let ((b (if mark-active (min (point) (mark)) (point-min)))
