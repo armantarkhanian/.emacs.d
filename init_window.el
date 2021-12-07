@@ -20,6 +20,9 @@
 	:ensure t
 	:after json-mode)
 
+(use-package yaml-mode
+	:ensure t)
+
 (unless
     (require 'use-package nil t)
     (package-refresh-contents)

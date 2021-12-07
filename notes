@@ -1,24 +1,56 @@
-SELECT
-t.table_guid,t.title,
-t.number,
-t.capacity,
-r.restaurant_guid
-FROM
-tables t,
-restaurant r
-WHERE
-t.enabled = TRUE AND
-t.restaurant_id  = r.id
+/app/configure
 
-SELECT
-t.table_guid,
-t.title,
-t.number,
-t.capacity,
-r.restaurant_guid
-FROM
-tables t,
-restaurant r
-WHERE
-t.enabled = TRUE AND
-t.restaurant_id  = r.id
+/cities/restaurants/{id}
+/cities
+/cities/{id}
+
+/catalogs/sections
+/catalogs/sections/{id}
+/catalogs/labels
+/catalogs/labels/{id}
+
+
+/catalogs/products
+/catalogs/products/{id}
+/catalogs/stop-list
+/catalogs/stop-list/{id}
+/catalogs/corners
+/catalogs/corners/{id}
+
+/search
+
+/geo/coords
+/geo/address
+/geo/address-check
+
+/auth/register
+/auth/check-sms
+/auth/logout
+
+/profile (GET)
+/profile (PUT)
+/profile/address
+/profile/address/{id}
+
+
+/orders (GET)
+/orders/check
+/orders/check-promocode
+
+/orders/payment-callback
+/orders/payment-callback
+
+/orders (POST)
+/orders/{id}
+
+/orders/check-payment/{id}
+/orders/check-payment-mobile/{id}
+
+
+
+
+Витя Уха, блин с лососем
+Адиль Креветки острые
+Арман пицаа
+
+1660/2 = 830
