@@ -248,7 +248,6 @@ This command does not push text to `kill-ring'."
     (interactive)	
     (indent-region (point-min) (point-max))
 	(delete-trailing-whitespace)
-    (delete-blank-lines)
 	(when (eq major-mode 'sql-mode)
 		(format-sql-buffer))
 	(when (eq major-mode 'go-mode)
