@@ -250,10 +250,17 @@ This command does not push text to `kill-ring'."
     (next-line))
 
 (defun fmt ()
-    (interactive)	
-    (indent-region (point-min) (point-max))
+    (interactive)
+
 	(delete-trailing-whitespace)
-	(when (eq major-mode 'sql-mode)
+
+	(when
+		(and
+		   (not (eq major-mode 'yaml-mode))
+		   (not (eq major-mode 'sql-mode)))
+		(indent-region (point-min) (point-max)))
+
+ 	(when (eq major-mode 'sql-mode)
 		(format-sql-buffer)))
 
 (defun rpl()
@@ -276,10 +283,10 @@ This command does not push text to `kill-ring'."
 	(while (not (eq tabsCount 0))
 			(setq str (concat str "	"))
 			(setq tabsCount (- tabsCount 1)))
-	
+
 	(if (not (eq str ""))
 		(string-insert-rectangle (point) (mark )str))
-	
+
 	)
 
 (defun new-vue-component ()
