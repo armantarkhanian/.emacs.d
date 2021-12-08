@@ -20,6 +20,9 @@
 	:ensure t
 	:after json-mode)
 
+(use-package format-all
+	:ensure t)
+
 (use-package yaml-mode
 	:ensure t)
 
@@ -560,6 +563,8 @@
 (add-hook 'go-mode-hook #'flycheck-mode)
 
 (add-hook 'before-save-hook #'fmt)
+
+(add-hook 'sql-mode-hook #'format-all-buffer)
 
 (use-package
     multi-web-mode
