@@ -249,11 +249,7 @@ This command does not push text to `kill-ring'."
     (indent-region (point-min) (point-max))
 	(delete-trailing-whitespace)
 	(when (eq major-mode 'sql-mode)
-		(format-sql-buffer))
-	(when (eq major-mode 'go-mode)
-		(progn (
-				(lsp-format-buffer)
-				(lsp-organize-imports)))))
+		(format-sql-buffer)))
 
 (defun rpl()
     (interactive)

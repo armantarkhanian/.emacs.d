@@ -353,6 +353,8 @@
     ;;:defer
     :hook (sql-mode . sqlup-mode))
 
+(setq-default sql-use-indent-support t)
+
 ;; (use-package
 ;;     eglot
 ;;     :ensure t)
@@ -542,13 +544,17 @@
     :config
     (setq lsp-go-hover-kind "FullDocumentation")
     (setq lsp-go-use-gofumpt t)
-    ;; (setq lsp-go-analyses '(
+    ;;(setq lsp-go-analyses '(
     ;;                         ("nilness" . t)
     ;;                         ("unusedparams" . t)
     ;;                         ("assign" . t)
     ;;                         ("unusedwrite" . t)))
-    )
+	)
+(defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'lsp)
 (add-hook 'go-mode-hook #'flycheck-mode)
 
