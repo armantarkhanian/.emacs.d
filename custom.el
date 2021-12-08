@@ -10,7 +10,6 @@
 (defun custom/format-json (point mark)
 	(interactive "r")
 	(setq query (buffer-substring point mark))
-	(insert query)
 	(setq queryCommand (concat "echo '" query "' | jq --tab"))
 	(setq queryCommand (concat queryCommand "\n"))
 	(setq output1 (shell-command-to-string queryCommand))
