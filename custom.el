@@ -6,6 +6,9 @@
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 	(insert output1))
 
+(defun custom/insert-tab ()
+	(interactive)
+	(insert "	"))
 
 (defun custom/format-json (point mark)
 	(interactive "r")
