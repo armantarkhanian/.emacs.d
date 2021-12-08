@@ -250,7 +250,11 @@ This command does not push text to `kill-ring'."
 	(delete-trailing-whitespace)
     (delete-blank-lines)
 	(when (eq major-mode 'sql-mode)
-		(format-sql-buffer)))
+		(format-sql-buffer))
+	(when (eq major-mode 'go-mode)
+		(progn (
+				(lsp-format-buffer)
+				(lsp-organize-imports)))))
 
 (defun rpl()
     (interactive)

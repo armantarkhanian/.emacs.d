@@ -20,9 +20,6 @@
 	:ensure t
 	:after json-mode)
 
-(use-package format-all
-	:ensure t)
-
 (use-package yaml-mode
 	:ensure t)
 
@@ -356,8 +353,6 @@
     ;;:defer
     :hook (sql-mode . sqlup-mode))
 
-(setq-default sql-use-indent-support t)
-
 ;; (use-package
 ;;     eglot
 ;;     :ensure t)
@@ -554,11 +549,6 @@
     ;;                         ("unusedwrite" . t)))
     )
 
-(defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'lsp)
 (add-hook 'go-mode-hook #'flycheck-mode)
 
