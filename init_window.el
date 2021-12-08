@@ -564,8 +564,6 @@
 
 (add-hook 'before-save-hook #'fmt)
 
-(add-hook 'sql-mode-hook #'format-all-buffer)
-
 (use-package
     multi-web-mode
     :ensure t
