@@ -19,7 +19,18 @@
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 	(insert output1))
 
-(defun format-sql-buffer ()
+(defun custom/format-json-buffer ()
+	(interactive)
+	(setq savePoint (point))
+	(setq query (buffer-substring (point-min) (point-max)))
+	(setq queryCommand (concat "echo '" query "' | jq --tab"))
+	(setq queryCommand (concat queryCommand "\n"))
+	(setq output1 (shell-command-to-string queryCommand))
+	(delete-region (point-min) (point-max))
+	(insert output1)
+	(goto-char savePoint))
+
+(defun custom/format-sql-buffer ()
 	(interactive)
 	(setq savePoint (point))
 	(setq query (buffer-substring (point-min) (point-max)))
@@ -30,11 +41,16 @@
 	(goto-char savePoint)
 )
 
-(defun beautify-json ()
-    (interactive)
-    (let ((b (if mark-active (min (point) (mark)) (point-min)))
-          (e (if mark-active (max (point) (mark)) (point-max))))
-        (shell-command-on-region b e "python3 -mjson.tool" (current-buffer) t)))
+;; (count-sub "			\"userID\": \"Новинки\"," "	")
+
+(defun count-sub-1 (str pat)
+ (loop with z = 0 with s = 0 while s do
+       (when (setf s (search pat str :start2 s)) ;; :start6 typo fixed
+         (incf z) (incf s (length pat)))
+       finally (return z)))
+
+(defun count-sub (str &rest patterns)
+  (reduce #'+ patterns :key (lambda (item) (count-sub-1 str item))))
 
 (defun no ()
     (interactive)
@@ -264,7 +280,12 @@ This command does not push text to `kill-ring'."
 		(indent-region (point-min) (point-max)))
 
  	(when (eq major-mode 'sql-mode)
-		(format-sql-buffer)))
+		(custom/format-sql-buffer))
+
+ 	(when (eq major-mode 'json-mode)
+		(custom/format-json-buffer))
+
+	)
 
 (defun rpl()
     (interactive)

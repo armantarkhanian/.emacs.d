@@ -346,17 +346,11 @@
 (setq lsp-sqls-connections
       '(((driver . "mysql") (dataSourceName . "emacs:#localhost$IJD874387lsdkljfij!@tcp(localhost:3306)/db"))))
 
-;; (defun my-sql-mode-hook ()
-;;     (setq indent-line-function 'common-lisp-indent-function))
-
-;; (add-hook 'sql-mode-hook 'my-sql-mode-hook)
 (use-package
     sqlup-mode
     :ensure t
     ;;:defer
     :hook (sql-mode . sqlup-mode))
-
-(setq-default sql-use-indent-support t)
 
 ;; (use-package
 ;;     eglot
