@@ -27,10 +27,6 @@
 	(goto-char savePoint)
 )
 
-(defun insertTab()
-	(interactive)
-	(insert "	"))
-
 (defun beautify-json ()
     (interactive)
     (let ((b (if mark-active (min (point) (mark)) (point-min)))
@@ -270,7 +266,7 @@ This command does not push text to `kill-ring'."
         (replace-match new))
     (goto-char currentPoint))
 
-(defun insert-tabs ()
+(defun custom/insert-tabs ()
 	(interactive)
 
 	(setq tabsCount (string-to-number (read-from-minibuffer "Tabs count: ")))
