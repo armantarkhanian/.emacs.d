@@ -20,6 +20,9 @@
 	:ensure t
 	:after json-mode)
 
+(use-package expand-region
+	:ensure t)
+
 (use-package yaml-mode
 	:ensure t)
 

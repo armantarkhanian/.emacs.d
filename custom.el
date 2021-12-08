@@ -1,11 +1,21 @@
-(defun format-sql (point mark)
+(defun custom/format-sql (point mark)
 	(interactive "r")
 	(setq query (buffer-substring point mark))
 	(setq queryCommand (concat "echo \"" query "\" | pg_format -T"))
 	(setq output1 (shell-command-to-string queryCommand))
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
-	(insert output1)
-)
+	(insert output1))
+
+
+(defun custom/format-json (point mark)
+	(interactive "r")
+	(setq query (buffer-substring point mark))
+	(insert query)
+	(setq queryCommand (concat "echo '" query "' | jq --tab"))
+	(setq queryCommand (concat queryCommand "\n"))
+	(setq output1 (shell-command-to-string queryCommand))
+	(if (region-active-p) (delete-region (region-beginning) (region-end)))
+	(insert output1))
 
 (defun format-sql-buffer ()
 	(interactive)
@@ -260,6 +270,22 @@ This command does not push text to `kill-ring'."
     (while (re-search-forward old nil t)
         (replace-match new))
     (goto-char currentPoint))
+
+(defun insert-tabs ()
+	(interactive)
+
+	(setq tabsCount (string-to-number (read-from-minibuffer "Tabs count: ")))
+
+	(setq str "")
+
+	(while (not (eq tabsCount 0))
+			(setq str (concat str "	"))
+			(setq tabsCount (- tabsCount 1)))
+	
+	(if (not (eq str ""))
+		(string-insert-rectangle (point) (mark )str))
+	
+	)
 
 (defun new-vue-component ()
     (interactive)

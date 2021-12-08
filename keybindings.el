@@ -20,6 +20,7 @@
 ;; flycheck
 (global-set-key (kbd "C-<right>") 'flycheck-next-error)
 (global-set-key (kbd "C-<left>") 'flycheck-previous-error)
+(global-set-key (kbd "C-x r t") 'string-insert-rectangle)
 
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
