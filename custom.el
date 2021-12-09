@@ -5,13 +5,14 @@
 
 	(if (and (eq major-mode 'go-mode) (nth 3 (syntax-ppss)))
 		(progn
+			(setq currentPos (point))
 			(beginning-of-line)
 			(setq lineStartPoint (point))
 			(end-of-line)
 			(setq lineEndPoint (point))
 
 			(setq tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
-
+			(goto-char currentPos)
 			(setq str "")
 			(while (not (eq tabsCount 0))
 				(setq str (concat str "	"))
@@ -23,14 +24,6 @@
 		(progn
 			(reindent-then-newline-and-indent)
 			)))
-
-(defun inside-string? ()
-	"Returns non-nil if inside string, else nil.
-This depends on major mode having setup syntax table properly."
-	(interactive)
-	(let ((result (nth 3 (syntax-ppss))))
-		(message "%s" result)
-		result))
 
 
 (defun custom/format-sql (point mark)
