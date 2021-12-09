@@ -22,6 +22,10 @@
 (global-set-key (kbd "C-<left>") 'flycheck-previous-error)
 (global-set-key (kbd "C-x r t") 'string-insert-rectangle)
 
+(global-set-key (kbd "C-x C-x C-j") 'custom/autoformat-json)
+(global-set-key (kbd "C-x C-x C-s") 'custom/autoformat-sql)
+
+
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
 ;;(global-set-key (kbd "C-M-.") 'eglot-find-implementation)

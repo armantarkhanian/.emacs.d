@@ -51,9 +51,19 @@ This depends on major mode having setup syntax table properly."
 	(insert output1)
 	(goto-char savePoint))
 
+(length "	Арман ")
+(string-trim "Arman fds")
+
+
 
 (defun custom/autoformat-sql ()
 	(interactive)
+
+	(setq starteContent (point))
+	(forward-word 2)
+	(setq endContent (point))
+
+
 	(search-backward "`")
 	(setq currentPos (point))
 	(goto-char (- (point) 1))
@@ -424,9 +434,7 @@ This command does not push text to `kill-ring'."
 		(custom/format-sql-buffer))
 
 	(when (eq major-mode 'json-mode)
-		(custom/format-json-buffer))
-
-	)
+		(custom/format-json-buffer)))
 
 (defun rpl()
 	(interactive)
