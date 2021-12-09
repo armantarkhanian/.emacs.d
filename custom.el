@@ -45,7 +45,8 @@
 
 	(delete-region start end)
 	(goto-char (- (point) 1))
-	(insert output1)
+	(insert (concat "
+" output1))
 	(delete-backward-char 1)
 	(goto-char currentPos)
 	(end-of-line)
@@ -59,6 +60,10 @@
 		(setq tabsCount (- tabsCount 1))
 		)
 	(string-insert-rectangle start end str)
+	(goto-char (- (point) 1))
+	(delete-backward-char 1)
+	(search-backward "`")
+	(end-of-line)
 	)
 
 (defun custom/format-json (point mark)
@@ -112,6 +117,9 @@
 		(setq tabsCount (- tabsCount 1))
 		)
 	(string-insert-rectangle start end str)
+	(goto-char (- (point) 1))
+	(search-backward "`")
+	(end-of-line)
 	)
 
 (defun custom/count-tabs-in-line ()
