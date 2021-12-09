@@ -58,12 +58,7 @@ This depends on major mode having setup syntax table properly."
 
 (defun custom/autoformat-sql ()
 	(interactive)
-
-	(setq starteContent (point))
-	(forward-word 2)
-	(setq endContent (point))
-
-
+	(insert "emacsautoformatmode")
 	(search-backward "`")
 	(setq currentPos (point))
 	(goto-char (- (point) 1))
@@ -109,6 +104,7 @@ This depends on major mode having setup syntax table properly."
 	(delete-backward-char 1)
 	(search-backward "`")
 	(end-of-line)
+	(replace-string "emacsautoformatmode" "")
 	)
 
 (defun custom/format-json (point mark)
