@@ -107,8 +107,12 @@ This depends on major mode having setup syntax table properly."
 	(search-backward "`")
 	(end-of-line)
 	(replace-string "-- emacsautoformatmode" "")
+	(setq deleteStart (point))
 	(beginning-of-line)
-	(delete-backward-char 1)
+	(backward-char 1)
+	(setq deleteEnd (point))
+	(delete-region deleteStart deleteEnd)
+	(next-line)
 	)
 
 (defun custom/format-json (point mark)
