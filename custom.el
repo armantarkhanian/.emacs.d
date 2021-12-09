@@ -36,7 +36,7 @@ This depends on major mode having setup syntax table properly."
 (defun custom/format-sql (point mark)
 	(interactive "r")
 	(setq query (buffer-substring point mark))
-	(setq queryCommand (concat "echo \"" query "\" | pg_format -T --keep-newline"))
+	(setq queryCommand (concat "echo \"" query "\" | pg_format -T -g"))
 	(setq output1 (shell-command-to-string queryCommand))
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 	(insert output1))
@@ -45,7 +45,7 @@ This depends on major mode having setup syntax table properly."
 	(interactive)
 	(setq savePoint (point))
 	(setq query (buffer-substring (point-min) (point-max)))
-	(setq queryCommand (concat "echo \"" query "\" | pg_format -T --keep-newline"))
+	(setq queryCommand (concat "echo \"" query "\" | pg_format -T -g"))
 	(setq output1 (shell-command-to-string queryCommand))
 	(delete-region (point-min) (point-max))
 	(insert output1)
@@ -84,7 +84,7 @@ This depends on major mode having setup syntax table properly."
 	(setq end (- (point) 1))
 
 	(setq query (buffer-substring start end))
-	(setq queryCommand (concat "echo \"" query "\" | pg_format -T --keep-newline"))
+	(setq queryCommand (concat "echo \"" query "\" | pg_format -T -g"))
 	(setq queryCommand (concat queryCommand "\n"))
 	(setq output1 (shell-command-to-string queryCommand))
 
