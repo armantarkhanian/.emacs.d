@@ -29,7 +29,7 @@
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
 (global-set-key (kbd "C->") 'mark-next-like-this)
-(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "RET") 'custom/newline-and-indent)
 
 ;; ibuffer
 (global-set-key (kbd "C-<tab>") 'ibuffer)

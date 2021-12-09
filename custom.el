@@ -1,3 +1,36 @@
+(defun custom/newline-and-indent ()
+	(interactive)
+
+ 	(if (and (eq major-mode 'go-mode) (nth 3 (syntax-ppss)))
+		(progn
+			(beginning-of-line)
+			(setq lineStartPoint (point))
+			(end-of-line)
+			(setq lineEndPoint (point))
+
+			(setq tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
+
+			(setq str "")
+			(while (not (eq tabsCount 0))
+				(setq str (concat str "	"))
+				(setq tabsCount (- tabsCount 1))
+				)
+			(newline)
+			(insert str)
+			)
+		(progn
+			(newline-and-indent)
+			)))
+
+(defun inside-string? ()
+	"Returns non-nil if inside string, else nil.
+This depends on major mode having setup syntax table properly."
+	(interactive)
+	(let ((result (nth 3 (syntax-ppss))))
+		(message "%s" result)
+		result))
+
+
 (defun custom/format-sql (point mark)
 	(interactive "r")
 	(setq query (buffer-substring point mark))
@@ -27,14 +60,14 @@
 	(setq lineStartPoint (point))
 	(end-of-line)
 	(setq lineEndPoint (point))
-	
+
 	(setq tabsCount (+ (count-sub (buffer-substring lineStartPoint lineEndPoint) "	") 1))
 
 	(beginning-of-line)
 
 	(search-forward "`")
 	(setq start (point))
-	
+
 	(search-forward "`")
 	(setq end (- (point) 1))
 
@@ -85,14 +118,14 @@
 	(setq lineStartPoint (point))
 	(end-of-line)
 	(setq lineEndPoint (point))
-	
+
 	(setq tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
 
 	(beginning-of-line)
 
 	(search-forward "`")
 	(setq start (point))
-	
+
 	(search-forward "`")
 	(setq end (- (point) 1))
 
@@ -128,7 +161,7 @@
 	(setq lineStartPoint (point))
 	(end-of-line)
 	(setq lineEndPoint (point))
-	
+
 	(setq lineContent (buffer-substring lineStartPoint lineEndPoint))
 	(setq tabsInPreviousLine (count-sub lineContent "	"))
 	)
@@ -151,237 +184,237 @@
 ;; (count-sub "			\"userID\": \"Новинки\"," "	")
 
 (defun count-sub-1 (str pat)
- (loop with z = 0 with s = 0 while s do
-       (when (setf s (search pat str :start2 s)) ;; :start6 typo fixed
-         (incf z) (incf s (length pat)))
-       finally (return z)))
+	(loop with z = 0 with s = 0 while s do
+		  (when (setf s (search pat str :start2 s)) ;; :start6 typo fixed
+			  (incf z) (incf s (length pat)))
+		  finally (return z)))
 
 (defun count-sub (str &rest patterns)
-  (reduce #'+ patterns :key (lambda (item) (count-sub-1 str item))))
+	(reduce #'+ patterns :key (lambda (item) (count-sub-1 str item))))
 
 (defun no ()
-    (interactive)
-    (find-file "~/.emacs.d/notes"))
+	(interactive)
+	(find-file "~/.emacs.d/notes"))
 
 (defun custom/lsp-goto-test (&optional include-declaration &key display-action)
-    (interactive "P")
-    (custom/lsp-find-references "textDocument/references" nil :display-action display-action))
+	(interactive "P")
+	(custom/lsp-find-references "textDocument/references" nil :display-action display-action))
 
 (defun custom/lsp-find-references (method &optional extra &key display-action references?)
-    (let ((loc (lsp-request method
-                            (append (lsp--text-document-position-params) extra))))
-        (setq data loc)
-        (if (seq-empty-p loc)
-            (lsp--error "Not found for: %s" (or (thing-at-point 'symbol t) ""))
-            (progn
-                (setq items (custom/lsp-locations-to-xref-items loc))
-                (lsp-show-xrefs items display-action references?)))))
+	(let ((loc (lsp-request method
+							(append (lsp--text-document-position-params) extra))))
+		(setq data loc)
+		(if (seq-empty-p loc)
+			(lsp--error "Not found for: %s" (or (thing-at-point 'symbol t) ""))
+			(progn
+				(setq items (custom/lsp-locations-to-xref-items loc))
+				(lsp-show-xrefs items display-action references?)))))
 
 (defun custom/lsp-locations-to-xref-items (locations)
-    "Return a list of `xref-item' given LOCATIONS, which can be of
+	"Return a list of `xref-item' given LOCATIONS, which can be of
 type Location, LocationLink, Location[] or LocationLink[]."
-    (setq locations
-          (pcase locations
-              ((seq (or (Location)
-                        (LocationLink)))
-               (append locations nil))
-              ((or (Location)
-                   (LocationLink))
-               (list locations))))
+	(setq locations
+		  (pcase locations
+			  ((seq (or (Location)
+						(LocationLink)))
+			   (append locations nil))
+			  ((or (Location)
+				   (LocationLink))
+			   (list locations))))
 
-    (cl-labels ((get-xrefs-in-file
-                    (file-locs)
-                    (-let [(filename . matches) file-locs]
-                        (if (string-suffix-p "_test.go" filename)
-                            (progn
-                                (condition-case err
-                                    (let ((visiting (find-buffer-visiting filename))
-                                          (fn (lambda (loc)
-                                                  (lsp-with-filename filename
-                                                      (lsp--xref-make-item filename
-                                                                           (lsp--location-range loc))))))
-                                        (if visiting
-                                            (with-current-buffer visiting
-                                                (seq-map fn matches))
-                                            (when (file-readable-p filename)
-                                                (with-temp-buffer
-                                                    (insert-file-contents-literally filename)
-                                                    (seq-map fn matches)))))
-                                    (error (lsp-warn "Failed to process xref entry for filename '%s': %s"
-                                                     filename (error-message-string err)))
-                                    (file-error (lsp-warn "Failed to process xref entry, file-error, '%s': %s"
-                                                          filename (error-message-string err)))))
-                            ))))
+	(cl-labels ((get-xrefs-in-file
+					(file-locs)
+					(-let [(filename . matches) file-locs]
+						(if (string-suffix-p "_test.go" filename)
+							(progn
+								(condition-case err
+									(let ((visiting (find-buffer-visiting filename))
+										  (fn (lambda (loc)
+												  (lsp-with-filename filename
+													  (lsp--xref-make-item filename
+																		   (lsp--location-range loc))))))
+										(if visiting
+											(with-current-buffer visiting
+												(seq-map fn matches))
+											(when (file-readable-p filename)
+												(with-temp-buffer
+													(insert-file-contents-literally filename)
+													(seq-map fn matches)))))
+									(error (lsp-warn "Failed to process xref entry for filename '%s': %s"
+													 filename (error-message-string err)))
+									(file-error (lsp-warn "Failed to process xref entry, file-error, '%s': %s"
+														  filename (error-message-string err)))))
+							))))
 
-        (->> locations
-             (seq-sort #'lsp--location-before-p)
-             (seq-group-by (-compose #'lsp--uri-to-path #'lsp--location-uri))
-             (seq-map #'get-xrefs-in-file)
-             (apply #'nconc))))
+		(->> locations
+			 (seq-sort #'lsp--location-before-p)
+			 (seq-group-by (-compose #'lsp--uri-to-path #'lsp--location-uri))
+			 (seq-map #'get-xrefs-in-file)
+			 (apply #'nconc))))
 
 (defun mock()
-    (interactive)
-    (shell-command "gomocker"))
+	(interactive)
+	(shell-command "gomocker"))
 
 (setq default-buffers-shown nil)
 
 (defun ibufferVisitBuffer (&optional single)
-    (interactive "P")
-    (ibuffer-visit-buffer single))
+	(interactive "P")
+	(ibuffer-visit-buffer single))
 ;;(kill-buffer "*Ibuffer*"))
 
 (defun ibuffer/toggle-default-buffers ()
-    (interactive)
-    (ibuffer-filter-disable)
-    (if default-buffers-shown
-        (ibuffer-filter-by-name "^[^\*]")
-        (ibuffer-filter-by-name ""))
+	(interactive)
+	(ibuffer-filter-disable)
+	(if default-buffers-shown
+		(ibuffer-filter-by-name "^[^\*]")
+		(ibuffer-filter-by-name ""))
 
-    (setq default-buffers-shown (not default-buffers-shown)))
+	(setq default-buffers-shown (not default-buffers-shown)))
 
 (defun share (point mark)
-    (interactive "r")
-    (webpaste--paste-text (buffer-substring point mark)))
+	(interactive "r")
+	(webpaste--paste-text (buffer-substring point mark)))
 
 (defun config-save ()
-    (interactive)
-    (shell-command "/bin/bash ~/.emacs.d/push"))
+	(interactive)
+	(shell-command "/bin/bash ~/.emacs.d/push"))
 
 (defun find-file-as-root ()
-    (interactive)
-    (setq fileName (read-file-name "Find file: "))
+	(interactive)
+	(setq fileName (read-file-name "Find file: "))
 
-    (setq fullFileName (expand-file-name fileName))
-    (setq rootFile (concat "/su::" fullFileName))
-    (find-file rootFile))
+	(setq fullFileName (expand-file-name fileName))
+	(setq rootFile (concat "/su::" fullFileName))
+	(find-file rootFile))
 
 (defun calc-region (point mark)
-    (interactive "r")
-    (setq result (calc-eval (buffer-substring point mark)))
-    (insert (concat " = " result)))
+	(interactive "r")
+	(setq result (calc-eval (buffer-substring point mark)))
+	(insert (concat " = " result)))
 
 (defun switchNextBuffer()
-    (interactive)
-    (switch-to-next-buffer)
-    (setq name (buffer-name))
-    (if (equal "*" (substring name 0 1))
-        (switchNextBuffer)))
+	(interactive)
+	(switch-to-next-buffer)
+	(setq name (buffer-name))
+	(if (equal "*" (substring name 0 1))
+		(switchNextBuffer)))
 
 (defun md()
-    (interactive)
-    (if (equal (buffer-name) "README.html")
-        (saveREADME)))
+	(interactive)
+	(if (equal (buffer-name) "README.html")
+		(saveREADME)))
 
 (defun saveREADME()
-    (setq s (buffer-substring (point-min) (point-max)))
-    (setq s1 (html-to-markdown-string s))
-    (write-region s1 nil "./README.md"))
+	(setq s (buffer-substring (point-min) (point-max)))
+	(setq s1 (html-to-markdown-string s))
+	(write-region s1 nil "./README.md"))
 
 (defun backups()
-    (interactive)
-    (find-file "~/.emacs.d/backups"))
+	(interactive)
+	(find-file "~/.emacs.d/backups"))
 
 (defun gotoUp ()
-    (interactive)
-    (goto-char (point-max)))
+	(interactive)
+	(goto-char (point-max)))
 
 (defun gotoDown ()
-    (interactive)
-    (goto-char (point-min)))
+	(interactive)
+	(goto-char (point-min)))
 
 (defun run ()
-    (interactive)
-    (compile (concat "go run " (buffer-file-name))))
+	(interactive)
+	(compile (concat "go run " (buffer-file-name))))
 
 (defun tidy ()
-    (interactive)
-    (compile "go mod tidy"))
+	(interactive)
+	(compile "go mod tidy"))
 
 (defun build ()
-    (interactive)
-    (compile "go build"))
+	(interactive)
+	(compile "go build"))
 
 (defun install ()
-    (interactive)
-    (compile "go install"))
+	(interactive)
+	(compile "go install"))
 
 (defun conf()
-    (interactive)
-    (if (display-graphic-p)
-        (find-file "~/.emacs.d/init_window.el")
-        (find-file "~/.emacs.d/init_nw.el")))
+	(interactive)
+	(if (display-graphic-p)
+		(find-file "~/.emacs.d/init_window.el")
+		(find-file "~/.emacs.d/init_nw.el")))
 
 (defun hotkeys()
-    (interactive)
-    (find-file "~/.emacs.d/keybindings.el"))
+	(interactive)
+	(find-file "~/.emacs.d/keybindings.el"))
 
 (defun custom()
-    (interactive)
-    (find-file "~/.emacs.d/custom.el"))
+	(interactive)
+	(find-file "~/.emacs.d/custom.el"))
 
 (defun ful ()
-    (interactive)
-    (toggle-frame-fullscreen))
+	(interactive)
+	(toggle-frame-fullscreen))
 
 (defun backward-delete-word (arg)
-    (interactive "p")
-    (delete-region (point)
-                   (progn (backward-word arg)
-                          (point))))
+	(interactive "p")
+	(delete-region (point)
+				   (progn (backward-word arg)
+						  (point))))
 
 (defun forward-delete-word (arg)
-    (interactive "p")
-    (delete-region (point)
-                   (progn (forward-word arg)
-                          (point))))
+	(interactive "p")
+	(delete-region (point)
+				   (progn (forward-word arg)
+						  (point))))
 
 (defun custom-kill-line ()
-    (interactive)
-    (delete-region (point)
-                   (line-end-position)))
+	(interactive)
+	(delete-region (point)
+				   (line-end-position)))
 (defun my-delete-line ()
-    "Delete text from current position to end of line char.
+	"Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
-    (interactive)
-    (delete-region (point)
-                   (progn (end-of-line)
-                          (point))))
+	(interactive)
+	(delete-region (point)
+				   (progn (end-of-line)
+						  (point))))
 
 (defun upBlock()
-    (interactive)
-    (re-search-backward "[}{]" nil t 1))
+	(interactive)
+	(re-search-backward "[}{]" nil t 1))
 
 (defun downBlock()
-    (interactive)
-    (re-search-forward "[{}]" nil t 1))
+	(interactive)
+	(re-search-forward "[{}]" nil t 1))
 (defun backwardParagraph()
-    (interactive)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line)
-    (previous-line))
+	(interactive)
+	(previous-line)
+	(previous-line)
+	(previous-line)
+	(previous-line)
+	(previous-line)
+	(previous-line)
+	(previous-line))
 
 
 (defun forwardParagraph()
-    (interactive)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line)
-    (next-line))
+	(interactive)
+	(next-line)
+	(next-line)
+	(next-line)
+	(next-line)
+	(next-line)
+	(next-line)
+	(next-line))
 
 (defun fmt ()
-    (interactive)
+	(interactive)
 
 	(when
 		(and
-		   (not (eq major-mode 'yaml-mode))
-		   (not (eq major-mode 'sql-mode)))
+		 (not (eq major-mode 'yaml-mode))
+		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
 
@@ -394,14 +427,14 @@ This command does not push text to `kill-ring'."
 	)
 
 (defun rpl()
-    (interactive)
-    (setq currentPoint (point))
-    (goto-char (point-min))
-    (setq old (read-from-minibuffer "Old string: "))
-    (setq new (read-from-minibuffer "New string: "))
-    (while (re-search-forward old nil t)
-        (replace-match new))
-    (goto-char currentPoint))
+	(interactive)
+	(setq currentPoint (point))
+	(goto-char (point-min))
+	(setq old (read-from-minibuffer "Old string: "))
+	(setq new (read-from-minibuffer "New string: "))
+	(while (re-search-forward old nil t)
+		(replace-match new))
+	(goto-char currentPoint))
 
 (defun custom/insert-tabs ()
 	(interactive)
@@ -411,8 +444,8 @@ This command does not push text to `kill-ring'."
 	(setq str "")
 
 	(while (not (eq tabsCount 0))
-			(setq str (concat str "	"))
-			(setq tabsCount (- tabsCount 1)))
+		(setq str (concat str "	"))
+		(setq tabsCount (- tabsCount 1)))
 
 	(if (not (eq str ""))
 		(string-insert-rectangle (point) (mark )str))
@@ -420,18 +453,18 @@ This command does not push text to `kill-ring'."
 	)
 
 (defun new-vue-component ()
-    (interactive)
-    (setq projectFolder (read-directory-name "Enter path to /components directory: "))
-    (setq projectFolder (string-remove-suffix "/" projectFolder))
-    (setq componentName (read-from-minibuffer "New component name: "))
-    (setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
-    (make-directory dir)
-    (setq templateFile (concat dir "/" componentName ".vue"))
-    (setq scriptFileContent (concat "export default {
+	(interactive)
+	(setq projectFolder (read-directory-name "Enter path to /components directory: "))
+	(setq projectFolder (string-remove-suffix "/" projectFolder))
+	(setq componentName (read-from-minibuffer "New component name: "))
+	(setq dir (expand-file-name (concat (file-name-as-directory projectFolder) componentName)))
+	(make-directory dir)
+	(setq templateFile (concat dir "/" componentName ".vue"))
+	(setq scriptFileContent (concat "export default {
     name: '" componentName "'
 }
 "))
-    (setq templateFileContent (concat "<template>
+	(setq templateFileContent (concat "<template>
     <div>
         " componentName " component" "
     </div>
@@ -449,5 +482,5 @@ This command does not push text to `kill-ring'."
 }
 </style>
 "))
-    (write-region templateFileContent nil templateFile)
-    (find-file templateFile))
+	(write-region templateFileContent nil templateFile)
+	(find-file templateFile))
