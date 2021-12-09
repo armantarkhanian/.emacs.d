@@ -498,7 +498,7 @@
 
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
-(defvaralias 'c-basic-offset '4)
+(defvaralias 'c-basic-offset 'tab-width)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
 (setq lisp-indent-function  'common-lisp-indent-function)

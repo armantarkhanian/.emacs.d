@@ -1,7 +1,9 @@
 (defun custom/newline-and-indent ()
 	(interactive)
 
- 	(if (and (eq major-mode 'go-mode) (nth 3 (syntax-ppss)))
+	(if (region-active-p) (delete-region (region-beginning) (region-end)))
+
+	(if (and (eq major-mode 'go-mode) (nth 3 (syntax-ppss)))
 		(progn
 			(beginning-of-line)
 			(setq lineStartPoint (point))
@@ -19,7 +21,7 @@
 			(insert str)
 			)
 		(progn
-			(newline-and-indent)
+			(reindent-then-newline-and-indent)
 			)))
 
 (defun inside-string? ()
@@ -418,10 +420,10 @@ This command does not push text to `kill-ring'."
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
 
- 	(when (eq major-mode 'sql-mode)
+	(when (eq major-mode 'sql-mode)
 		(custom/format-sql-buffer))
 
- 	(when (eq major-mode 'json-mode)
+	(when (eq major-mode 'json-mode)
 		(custom/format-json-buffer))
 
 	)
