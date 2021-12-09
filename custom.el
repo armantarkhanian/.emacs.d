@@ -118,6 +118,7 @@ This depends on major mode having setup syntax table properly."
 
 (defun custom/autoformat-json ()
 	(interactive)
+	(insert "emacsautoformatmode")
 	(search-backward "`")
 	(setq currentPos (point))
 	(goto-char (- (point) 1))
@@ -161,6 +162,7 @@ This depends on major mode having setup syntax table properly."
 	(goto-char (- (point) 1))
 	(search-backward "`")
 	(end-of-line)
+	(replace-string "emacsautoformatmode" "")
 	)
 
 (defun custom/count-tabs-in-line ()
