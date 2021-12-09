@@ -49,7 +49,7 @@
 	(open-line 1)
 	(insert "-- emacsautoformatmode")
 	(search-backward "`")
-	(indent-according-to-mode)
+	(fmt)
 	(setq-local currentPos (point))
 	(goto-char (- (point) 1))
 
@@ -114,13 +114,11 @@
 
 (defun custom/autoformat-json ()
 	(interactive)
-
 	(beginning-of-line)
 	(open-line 1)
 	(insert "\"emacsautoformatmode\": \"\",")
 	(search-backward "`")
-	(indent-according-to-mode)
-
+	(fmt)
 	(setq-local currentPos (point))
 	(goto-char (- (point) 1))
 
