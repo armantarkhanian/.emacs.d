@@ -1,14 +1,20 @@
 (defun custom/format-sql (point mark)
 	(interactive "r")
 	(setq query (buffer-substring point mark))
-	(setq queryCommand (concat "echo \"" query "\" | pg_format -T"))
+	(setq queryCommand (concat "echo \"" query "\" | pg_format -T --keep-newline"))
 	(setq output1 (shell-command-to-string queryCommand))
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 	(insert output1))
 
-(defun custom/insert-tab ()
+(defun custom/format-sql-buffer ()
 	(interactive)
-	(insert "	"))
+	(setq savePoint (point))
+	(setq query (buffer-substring (point-min) (point-max)))
+	(setq queryCommand (concat "echo \"" query "\" | pg_format -T --keep-newline"))
+	(setq output1 (shell-command-to-string queryCommand))
+	(delete-region (point-min) (point-max))
+	(insert output1)
+	(goto-char savePoint))
 
 (defun custom/format-json (point mark)
 	(interactive "r")
@@ -18,6 +24,63 @@
 	(setq output1 (shell-command-to-string queryCommand))
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 	(insert output1))
+
+(defun custom/autoformat-json ()
+	(interactive)
+	(search-backward "`")
+	(setq currentPos (point))
+	(goto-char (- (point) 1))
+
+	(beginning-of-line)
+	(setq lineStartPoint (point))
+	(end-of-line)
+	(setq lineEndPoint (point))
+	
+	(setq tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
+
+	(beginning-of-line)
+
+	(search-forward "`")
+	(setq start (point))
+
+;;	(activate-mark)
+	
+	(search-forward "`")
+	(setq end (- (point) 1))
+
+	(setq query (buffer-substring start end))
+	(setq queryCommand (concat "echo '" query "' | jq --tab"))
+	(setq queryCommand (concat queryCommand "\n"))
+	(setq output1 (shell-command-to-string queryCommand))
+
+	(delete-region start end)
+	(goto-char (- (point) 1))
+	(insert output1)
+	(delete-backward-char 1)
+	(goto-char currentPos)
+	(end-of-line)
+	(goto-char (+ (point) 1))
+	(setq start (point))
+	(search-forward "`")
+	(setq end (point))
+	(setq str "")
+	(while (not (eq tabsCount 0))
+		(setq str (concat str "	"))
+		(setq tabsCount (- tabsCount 1))
+		)
+	(string-insert-rectangle start end str)
+	)
+
+(defun custom/count-tabs-in-line ()
+	(interactive)
+	(beginning-of-line)
+	(setq lineStartPoint (point))
+	(end-of-line)
+	(setq lineEndPoint (point))
+	
+	(setq lineContent (buffer-substring lineStartPoint lineEndPoint))
+	(setq tabsInPreviousLine (count-sub lineContent "	"))
+	)
 
 (defun custom/format-json-buffer ()
 	(interactive)
@@ -30,16 +93,9 @@
 	(insert output1)
 	(goto-char savePoint))
 
-(defun custom/format-sql-buffer ()
+(defun custom/insert-tab ()
 	(interactive)
-	(setq savePoint (point))
-	(setq query (buffer-substring (point-min) (point-max)))
-	(setq queryCommand (concat "echo \"" query "\" | pg_format -T"))
-	(setq output1 (shell-command-to-string queryCommand))
-	(delete-region (point-min) (point-max))
-	(insert output1)
-	(goto-char savePoint)
-)
+	(insert "	"))
 
 ;; (count-sub "			\"userID\": \"Новинки\"," "	")
 
@@ -271,13 +327,12 @@ This command does not push text to `kill-ring'."
 (defun fmt ()
     (interactive)
 
-	(delete-trailing-whitespace)
-
 	(when
 		(and
 		   (not (eq major-mode 'yaml-mode))
 		   (not (eq major-mode 'sql-mode)))
-		(indent-region (point-min) (point-max)))
+		(indent-region (point-min) (point-max))
+		(delete-trailing-whitespace))
 
  	(when (eq major-mode 'sql-mode)
 		(custom/format-sql-buffer))

@@ -344,13 +344,9 @@
 
 
 (setq lsp-sqls-connections
-      '(((driver . "mysql") (dataSourceName . "emacs:#localhost$IJD874387lsdkljfij!@tcp(localhost:3306)/db"))))
-
-(use-package
-    sqlup-mode
-    :ensure t
-    ;;:defer
-    :hook (sql-mode . sqlup-mode))
+    '(
+      ((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5433 user=root password=password dbname=postgres sslmode=disable TimeZone='Europe/Moscow'"))
+	  ))
 
 ;; (use-package
 ;;     eglot
@@ -456,7 +452,6 @@
 (setq show-paren-style 'parenthesis)
 (electric-pair-mode    1)
 (electric-indent-mode  1)
-;;artaktarkhayan1@gmail.comm
 (delete-selection-mode t)
 (tooltip-mode      -1)
 (menu-bar-mode     -1)
@@ -482,10 +477,10 @@
                                   ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
-(add-hook 'yaml-mode-hook (lambda ()
-                              (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+;;(add-hook 'yaml-mode-hook (lambda ()
+;;                              (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (add-hook 'dired-mode-hook (lambda()
                                (define-key dired-mode-map "b" 'dired-up-directory)
@@ -495,7 +490,6 @@
 
 (setq-default indicate-buffer-boundaries 'left)
 (set-face-attribute 'default nil :font "Monospace 11")
-;;(set-face-attribute 'default nil :font "Hack 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -516,14 +510,11 @@
 
 (use-package
     flycheck
-    :ensure t
-    ;;:defer
-    )
+    :ensure t)
 
 (use-package
     company
     :ensure t
-    ;;:defer
     :init
 
     (setq company-idle-delay t)
@@ -572,8 +563,15 @@
     :ensure t
     ;;:defer
     :mode "\\.html\\'"
-    :mode "\\.json\\'"
     :mode "\\.js\\'")
+
+(use-package
+    json-mode
+    :ensure t
+    ;;:defer"
+    :mode "\\.json\\'")
+
+(add-hook 'json-mode-hook #'flycheck-mode)
 
 (use-package
     protobuf-mode

@@ -47,6 +47,8 @@
 
 (global-set-key (kbd "C--") 'hs-hide-block)
 (global-set-key (kbd "C-=") 'hs-show-block)
+(global-set-key (kbd "M--") 'er/contract-region)
+(global-set-key (kbd "M-=") 'er/expand-region)
 (global-set-key (kbd "<f6>") 'imenu)
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "C-k") 'custom-kill-line)
