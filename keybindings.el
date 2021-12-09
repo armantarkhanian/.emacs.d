@@ -25,7 +25,6 @@
 ;;(global-set-key (kbd "C-x C-x C-j") 'custom/autoformat-json)
 ;;(global-set-key (kbd "C-x C-x C-s") 'custom/autoformat-sql)
 
-
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
 ;;(global-set-key (kbd "C-M-.") 'eglot-find-implementation)
