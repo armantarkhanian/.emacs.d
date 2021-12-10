@@ -105,7 +105,7 @@
 			(replace-string "\"emacsautoformatmode\": \"\"," "")
 			(kill-line)
 			(goto-char wholeStart)
-			(insert output)
+			(message output)
 			)
 		(progn
 			(delete-region start end)
@@ -187,7 +187,7 @@
 			(replace-string "\"emacsautoformatmode\": \"\"," "")
 			(kill-line)
 			(goto-char wholeStart)
-			(insert output)
+			(message output)
 			)
 		(progn
 			(delete-region start end)
