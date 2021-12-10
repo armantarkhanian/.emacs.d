@@ -36,6 +36,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#171F24" "#777778"))
  '(linum-format 'dynamic)
  '(lsp-eldoc-enable-hover nil)
+ '(max-mini-window-height 0)
  '(neo-mode-line-type 'none)
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")

@@ -28,26 +28,22 @@
 
 
 (defun cmdfd ()
-	(setq currentBuffer (current-buffer))
-	(setq exitCode (shell-command "cat /home/arman/go/src/test/main.go"))
-	(setq output (custom/buffer-content "*Shell Command Output*"))
-	(kill-buffer "*Shell Command Output*")
-	(setq result '())
-	(add-to-list 'result output)
-	(add-to-list 'result exitCode))
+	(interactive)
+	(with-current-buffer "*Shell Command Output*"
+		(progn
+
+			))
+	(insert output)
+	)
 
 (defun custom/buffer-content (buffer-name)
 	(with-current-buffer buffer-name (buffer-string)))
 
+
 (defun custom/shell-command (command)
-	(setq currentBuffer (current-buffer))
-	(setq exitCode (shell-command command))
-	(setq output (custom/buffer-content "*Shell Command Output*"))
-	(kill-buffer "*Shell Command Output*")
-	(delete-other-windows)
-	(setq result '())
-	(add-to-list 'result output)
-	(add-to-list 'result exitCode))
+	(with-current-buffer "new"
+		(delete-region (point-min) (point-max))
+		(list (shell-command command (current-buffer)) (buffer-string))))
 
 (defun custom/format-sql (point mark)
 	(interactive "r")
