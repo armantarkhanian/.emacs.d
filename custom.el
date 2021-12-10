@@ -176,7 +176,7 @@
 			(replace-string "\"emacsautoformatmode\": \"\"," "")
 			(kill-line)
 			(goto-char wholeStart)
-			(message output)
+			(message-box output)
 			)
 		(progn
 			(delete-region start end)
