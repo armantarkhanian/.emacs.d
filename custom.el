@@ -41,9 +41,12 @@
 
 
 (defun custom/shell-command (command)
-	(with-current-buffer "new"
-		(delete-region (point-min) (point-max))
-		(list (shell-command command (current-buffer)) (buffer-string))))
+	(with-temp-buffer
+		(setq exitCode (call-process "/bin/bash" nil (current-buffer) nil "-c" command))
+		(setq result '())
+		(add-to-list 'result (buffer-string))
+		(add-to-list 'result exitCode)))
+
 
 (defun custom/format-sql (point mark)
 	(interactive "r")
@@ -172,7 +175,7 @@
 			(replace-string "\"emacsautoformatmode\": \"\"," "")
 			(kill-line)
 			(goto-char wholeStart)
-			(message-box output)
+			(insert output)
 			)
 		(progn
 			(delete-region start end)
