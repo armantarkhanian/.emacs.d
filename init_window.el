@@ -17,7 +17,7 @@
 ;;(setq lsp-idle-delay 0.500)
 
 ;; (use-package smart-shift
-;; 	:ensure t)
+;;  	:ensure t)
 
 (use-package jq-format
 	:ensure t
@@ -105,9 +105,9 @@
 (use-package
     key-chord
     :ensure t
-    ;;:defer
     :config
-    ;;(key-chord-define-global "fj" 'ace-jump-char-mode)
+	;; (key-chord-define-global "<<" 'smart-shift-left)
+	;; (key-chord-define-global ">>" 'smart-shift-right)
     )
 
 (key-chord-mode 1)
