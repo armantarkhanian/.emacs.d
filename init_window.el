@@ -16,6 +16,9 @@
 (setq lsp-enable-file-watchers nil)
 ;;(setq lsp-idle-delay 0.500)
 
+;; (use-package smart-shift
+;; 	:ensure t)
+
 (use-package jq-format
 	:ensure t
 	:after json-mode)
@@ -217,13 +220,17 @@
     ;;:defer
     :commands selected-minor-mode
     :bind (:map selected-keymap
+				;; ("M-p" . smart-shift-up)
+				;; ("M-n" . smart-shift-down)
+				;; ("M-f" . smart-shift-right)
+				;; ("M-b" . smart-shift-left)
                 ("r" . calc-region)
                 ("q" . selected-off)
                 ("c" . webpaste-paste-region)
-                ("u" . upcase-region)
-                ("d" . downcase-region)
-                ("w" . count-words-region)
-                ("m" . apply-macro-to-region-lines)))
+				("u" . upcase-region)
+				("d" . downcase-region)
+				("w" . count-words-region)
+				("m" . apply-macro-to-region-lines)))
 
 (selected-global-mode 1)
 
