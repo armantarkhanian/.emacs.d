@@ -51,7 +51,7 @@
 
 Витя Уха, блин с лососем
 Адиль Креветки острые
-Арман пицаа
+Арман пица
 
 1660/2 = 830
 
@@ -59,16 +59,3 @@ http://localhost:8000/catalogs/labels
 http://localhost:8000/catalogs/labels
 
 git commit -m "изменил поведение: если записи в базе нет, вернуть успешный ответ с пустым массивом, а не ошибку"
-
-echo 'BEGIN; \
-\
-\
-\
-SELECT \
-\
-\
-\
-last_order_id fdfkjdfkjd \
-FROM \
-users \
-COMMIT;' | pg_format -T -g -k
