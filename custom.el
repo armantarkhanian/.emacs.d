@@ -12,6 +12,7 @@
 			(setq-local lineEndPoint (point))
 
 			(setq-local tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
+
 			(goto-char currentPos)
 			(setq-local str "")
 			(while (not (eq tabsCount 0))
