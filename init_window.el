@@ -16,8 +16,8 @@
 (setq lsp-enable-file-watchers nil)
 ;;(setq lsp-idle-delay 0.500)
 
-;; (use-package smart-shift
-;;  	:ensure t)
+(use-package smart-shift
+ 	:ensure t)
 
 (use-package jq-format
 	:ensure t
