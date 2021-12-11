@@ -105,7 +105,7 @@
 			(replace-string "\"emacsautoformatmode\": \"\"," "")
 			(kill-line)
 			(goto-char wholeStart)
-			(message output)
+			(message output1)
 			)
 		(progn
 			(delete-region start end)
@@ -136,7 +136,7 @@
 			(setq-local deleteEnd (point))
 			(delete-region deleteStart deleteEnd)
 			(next-line)
-			)))
+			(message ""))))
 
 (defun custom/format-json (point mark)
 	(interactive "r")
