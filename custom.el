@@ -1,5 +1,3 @@
-
-
 (defun custom/indent-region (start end &optional column)
 	(interactive "r\nP")
 	(if (not (eq major-mode 'yaml-mode))
@@ -33,15 +31,6 @@
 			(if (eq major-mode 'yaml-mode)
 				(newline-and-indent)
 				(reindent-then-newline-and-indent)))))
-
-(defun cmdfd ()
-	(interactive)
-	(with-current-buffer "*Shell Command Output*"
-		(progn
-
-			))
-	(insert output)
-	)
 
 (defun custom/buffer-content (buffer-name)
 	(with-current-buffer buffer-name (buffer-string)))
