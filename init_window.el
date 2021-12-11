@@ -27,7 +27,16 @@
 	:ensure t)
 
 (use-package yaml-mode
-	:ensure t)
+	:ensure t
+	:config
+	(setq-default yaml-indent-offset 4))
+
+(defun lsp-yaml-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t))
+
+(add-hook 'yaml-mode-hook #'lsp-yaml-install-save-hooks)
+(add-hook 'yaml-mode-hook #'lsp)
+(add-hook 'yaml-mode-hook #'flycheck-mode)
 
 (unless
     (require 'use-package nil t)
@@ -214,6 +223,10 @@
     ;;:defer
     )
 
+(defun fuck()
+	(interactive)
+	(message "fuck"))
+
 (use-package
     selected
     :ensure t
@@ -224,9 +237,10 @@
 				;; ("M-n" . smart-shift-down)
 				;; ("M-f" . smart-shift-right)
 				;; ("M-b" . smart-shift-left)
+                ("TAB" . custom/indent-region)
                 ("r" . calc-region)
                 ("q" . selected-off)
-                ("c" . webpaste-paste-region)
+				("c" . webpaste-paste-region)
 				("u" . upcase-region)
 				("d" . downcase-region)
 				("w" . count-words-region)
@@ -371,6 +385,7 @@
     :ensure t
     :commands (lsp lsp-deferred)
     :hook (sql-mode . lsp-deferred)
+    :hook (yaml-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)

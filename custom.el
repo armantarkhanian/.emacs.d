@@ -1,3 +1,10 @@
+
+
+(defun custom/indent-region (start end &optional column)
+	(interactive "r\nP")
+	(if (not (eq major-mode 'yaml-mode))
+		(indent-region start end column)))
+
 (defun custom/newline-and-indent ()
 	(interactive)
 
@@ -23,10 +30,9 @@
 			(insert str)
 			)
 		(progn
-			(reindent-then-newline-and-indent)
-			)))
-
-
+			(if (eq major-mode 'yaml-mode)
+				(newline-and-indent)
+				(reindent-then-newline-and-indent)))))
 
 (defun cmdfd ()
 	(interactive)
