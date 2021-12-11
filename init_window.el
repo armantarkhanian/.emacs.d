@@ -246,9 +246,15 @@
 
 (use-package
     highlight-indent-guides
-    :ensure t
-    ;;:defer
-    )
+    :ensure t)
+
+;; (defun my-highlighter (level responsive display)
+;; 	(if (> 1 level)
+;;         nil
+;;         (highlight-indent-guides--highlighter-default level responsive display)))
+;; (setq highlight-indent-guides-highlighter-function 'my-highlighter)
+;; (setq-default highlight-indent-guides-method 'character)
+;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (use-package
     ace-jump-mode
@@ -288,15 +294,6 @@
 				("m" . apply-macro-to-region-lines)))
 
 (selected-global-mode 1)
-
-;;(defun my-highlighter (level responsive display)
-;;    (if (> 1 level)
-;;        nil
-;;        (highlight-indent-guides--highlighter-default level responsive display)))
-
-;;(setq highlight-indent-guides-highlighter-function 'my-highlighter)
-
-;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (use-package
     yasnippet-snippets
