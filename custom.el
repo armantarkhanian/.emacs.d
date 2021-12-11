@@ -162,8 +162,8 @@
 	(setq lineContent (string-trim lineContent))
 
 	(setq jumpString "emacsautoformatmode")
-	(setq replaceJumpString (concat "emacsautoformatmode" "\""))
-	(search-backward "\"")
+	(setq replaceJumpString (concat  "\"" "emacsautoformatmode"))
+	(search-forward "\"")
 	(insert jumpString)
 
 	(search-backward "`")
@@ -199,6 +199,21 @@
 			(goto-char lineStartPoint)
 			(replace-string replaceJumpString "\"")
 			(goto-char wholeStart)
+
+			(search-backward "`")
+			(search-forward "{")
+
+			(setq ss (split-string output1 "line " t " "))
+			(pop ss)
+			(setq ss1 (pop ss))
+			(setq ss2 (split-string ss1 ", column " t " "))
+			(setq line (string-to-number (pop ss2)))
+			(setq line (- line 1))
+			(setq line (+ (line-number-at-pos) line))
+			(setq column (string-to-number (pop ss2)))
+			(goto-char (point-min))
+			(forward-line (1- line))
+			(forward-char column)
 			(message output1)
 			)
 		(progn
@@ -220,7 +235,6 @@
 			(string-insert-rectangle start end str)
 			(goto-char (- (point) 1))
 			(search-backward "`")
-			(end-of-line)
 			(replace-string replaceJumpString "\"")
 			(message ""))))
 

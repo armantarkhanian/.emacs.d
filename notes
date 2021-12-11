@@ -59,3 +59,5 @@ http://localhost:8000/catalogs/labels
 http://localhost:8000/catalogs/labels
 
 git commit -m "изменил поведение: если записи в базе нет, вернуть успешный ответ с пустым массивом, а не ошибку"
+
+echo '{"result": 1,"data": [{"section_guid": "00000000-0000-0000-0001-000000000003","city_guid": "00000000-0000-0000-0000-000000000001","parent_guid": nu ll,"title": "Пицца","alias": "pitstsa","friends": {"userID": "13"},"entry": "","content": "","sort": 0,"images": null,"seo_title": "","seo_text": "","seo_desc": "","seo_keyw": "","expiration": null,"is_visible": true}],"message": "","errors": null,"hash": "9da9b9057cf20ad8e867ee7b547e1c2e84c4f11b"}' | jq --tab

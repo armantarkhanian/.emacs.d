@@ -17,10 +17,10 @@
 (global-set-key (kbd "C-M-<return>") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-M-<backspace>") 'mc/unmark-next-like-this)
 
-(global-set-key (kbd "<left>") 'smart-shift-left)
-(global-set-key (kbd "<up>") 'smart-shift-up)
-(global-set-key (kbd "<down>") 'smart-shift-down)
-(global-set-key (kbd "<right>") 'smart-shift-right)
+(global-set-key (kbd "M-<left>") 'smart-shift-left)
+(global-set-key (kbd "M-<up>") 'smart-shift-up)
+(global-set-key (kbd "M-<down>") 'smart-shift-down)
+(global-set-key (kbd "M-<right>") 'smart-shift-right)
 
 ;; flycheck
 (global-set-key (kbd "C-<right>") 'flycheck-next-error)
