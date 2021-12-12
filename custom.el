@@ -203,7 +203,7 @@
 			(setq ss1 (pop ss))
 			(setq ss2 (split-string ss1 ", column " t " "))
 			(setq line (string-to-number (pop ss2)))
-			(setq line (- line 1))
+			(setq line (- line 2))
 			(setq line (+ (line-number-at-pos) line))
 			(setq column (string-to-number (pop ss2)))
 			(goto-char (point-min))
@@ -232,6 +232,9 @@
 			(search-backward "`")
 			(replace-string replaceJumpString "\"")
 			(message ""))))
+
+
+(flycheck-display-error-messages (flycheck-list-errors))
 
 (defun custom/count-tabs-in-line ()
 	(interactive)
