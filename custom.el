@@ -30,7 +30,9 @@
 		(progn
 			(if (eq major-mode 'yaml-mode)
 				(newline-and-indent)
-				(reindent-then-newline-and-indent)))))
+				(progn
+					(indent-according-to-mode)
+					(newline-and-indent))))))
 
 (defun custom/buffer-content (buffer-name)
 	(with-current-buffer buffer-name (buffer-string)))
@@ -232,9 +234,6 @@
 			(search-backward "`")
 			(replace-string replaceJumpString "\"")
 			(message ""))))
-
-
-(flycheck-display-error-messages (flycheck-list-errors))
 
 (defun custom/count-tabs-in-line ()
 	(interactive)

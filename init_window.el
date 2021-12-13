@@ -46,10 +46,9 @@
     (require 'use-package)
     (setq use-package-always-ensure t))
 
-(set-frame-size (selected-frame) 110 32)
+(set-frame-size (selected-frame) 120 33)
 
-(setq warning-minimum-level
-      :emergency)
+(setq warning-minimum-level :emergency)
 
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/remaps.el")
