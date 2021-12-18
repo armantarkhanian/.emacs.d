@@ -38,10 +38,6 @@ This depends on major mode having setup syntax table properly."
 					)
 				(progn
 					(newline-and-indent)
-					(forward-line 1)
-					(indent-according-to-mode)
-					(previous-line)
-					(indent-according-to-mode)
 					))
 
 			)
