@@ -2,37 +2,54 @@
 	(interactive "r\nP")
 	(if (not (eq major-mode 'yaml-mode))
 		(indent-region start end column)))
+(defun inside-string? ()
+	"Returns non-nil if inside string, else nil.
+This depends on major mode having setup syntax table properly."
+	(interactive)
+	(let ((result (nth 3 (syntax-ppss))))
+		(message "%s" result)
+		result))
 
 (defun custom/newline-and-indent ()
 	(interactive)
 
 	(if (region-active-p) (delete-region (region-beginning) (region-end)))
 
-	(if (and (eq major-mode 'go-mode) (nth 3 (syntax-ppss)))
+	(if  (eq major-mode 'go-mode)
 		(progn
-			(setq-local currentPos (point))
-			(beginning-of-line)
-			(setq-local lineStartPoint (point))
-			(end-of-line)
-			(setq-local lineEndPoint (point))
+			(if (inside-string?)
+				(progn
+					(setq-local currentPos (point))
+					(beginning-of-line)
+					(setq-local lineStartPoint (point))
+					(end-of-line)
+					(setq-local lineEndPoint (point))
 
-			(setq-local tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
+					(setq-local tabsCount (count-sub (buffer-substring lineStartPoint lineEndPoint) "	"))
 
-			(goto-char currentPos)
-			(setq-local str "")
-			(while (not (eq tabsCount 0))
-				(setq-local str (concat str "	"))
-				(setq-local tabsCount (- tabsCount 1))
-				)
-			(newline)
-			(insert str)
+					(goto-char currentPos)
+					(setq-local str "")
+					(while (not (eq tabsCount 0))
+						(setq-local str (concat str "	"))
+						(setq-local tabsCount (- tabsCount 1))
+						)
+					(newline)
+					(insert str)
+					)
+				(progn
+					(newline-and-indent)
+					(forward-line 1)
+					(indent-according-to-mode)
+					(previous-line)
+					(indent-according-to-mode)
+					))
+
 			)
 		(progn
 			(if (eq major-mode 'yaml-mode)
 				(newline-and-indent)
-				(progn
-					(indent-according-to-mode)
-					(newline-and-indent))))))
+				(reindent-then-newline-and-indent))
+			)))
 
 (defun custom/buffer-content (buffer-name)
 	(with-current-buffer buffer-name (buffer-string)))
@@ -498,8 +515,8 @@ This command does not push text to `kill-ring'."
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
 
-	(when (eq major-mode 'sql-mode)
-		(custom/format-sql-buffer))
+	;; (when (eq major-mode 'sql-mode)
+	;; 	(custom/format-sql-buffer))
 
 	(when (eq major-mode 'json-mode)
 		(custom/format-json-buffer)))

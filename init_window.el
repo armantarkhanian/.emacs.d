@@ -8,6 +8,15 @@
 
 (package-initialize)
 
+(set-frame-size (selected-frame) 120 33)
+
+;; doom-badger
+;; doom-monokai-spectrum
+;; doom-ir-black
+;;
+;; doom-dark+ is good enought
+;;
+
 ;; spead-up lsp-mode
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024 50)) ;; 50mb
@@ -16,6 +25,8 @@
 (setq lsp-enable-file-watchers nil)
 
 ;;(setq lsp-idle-delay 0.500)
+
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 (use-package smart-shift
  	:ensure t)
@@ -46,8 +57,6 @@
     (require 'use-package)
     (setq use-package-always-ensure t))
 
-(set-frame-size (selected-frame) 120 33)
-
 (setq warning-minimum-level :emergency)
 
 (load "~/.emacs.d/custom.el")
@@ -67,9 +76,7 @@
 
 (use-package
     magit
-    :ensure t
-    :config
-    (setq magit-ediff-dwim-show-on-hunks t))
+    :ensure t)
 
 (use-package
     vdiff
