@@ -1,70 +1,21 @@
-echo '
-./provider/provider-iiko.go
-./provider/testing-iiko.go
-./app/apiserver/server/testing.go
-./app/apiserver/server/server.go
-./app/apiserver/helpers/helpers.go
-./app/apiserver/helpers/errors.go
-./app/apiserver/helpers/response.go
-./app/apiserver/apiserver.go
-./app/apiserver/controllers/catalog/catalog.go
-./app/apiserver/controllers/catalog/label.go
-./app/apiserver/controllers/catalog/stop-list.go
-./app/apiserver/controllers/catalog/component.go
-./app/apiserver/controllers/catalog/section.go
-./app/apiserver/controllers/catalog/product.go
-./app/apiserver/controllers/advertising/combo.go
-./app/apiserver/controllers/advertising/firstslider.go
-./app/apiserver/controllers/advertising/secondslider.go
-./app/apiserver/controllers/advertising/advertising.go
-./app/apiserver/controllers/offer/offer.go
-./app/apiserver/controllers/geo/geo.go
-./app/apiserver/controllers/geo/address-to-coords.go
-./app/apiserver/controllers/geo/coords-to-address.go
-./app/apiserver/controllers/geo/address-check.go
-./app/apiserver/controllers/router.go
-./app/apiserver/controllers/search/search.go
-./app/apiserver/controllers/payment/payment.go
-./app/apiserver/controllers/news/news.go
-./app/apiserver/controllers/profile/address.go
-./app/apiserver/controllers/profile/profile.go
-./app/apiserver/controllers/app/configure.go
-./app/apiserver/controllers/app/app.go
-./app/apiserver/controllers/responsewriter.go
-./app/apiserver/controllers/admin/icon.go
-./app/apiserver/controllers/admin/image.go
-./app/apiserver/controllers/admin/admin.go
-./app/apiserver/controllers/auth/auth.go
-./app/apiserver/controllers/order/order.go
-./app/apiserver/controllers/order/payment.go
-./app/apiserver/controllers/support/claim.go
-./app/apiserver/controllers/city/restaurant.go
-./app/apiserver/controllers/city/city.go
-./app/events/events.go
-./app/events/handler/handler.go
-./pkg/notification/notification.go
-./pkg/notification-pushes/pushes.go
-./pkg/config/config.go
-./pkg/config/yaml.go
-./pkg/config/store.go
-./pkg/config/types.go
-./pkg/smsc/client.go
-./pkg/smsc/message.go
-./pkg/smsc/opts.go
-./pkg/alfabank/alfabank.go
-./pkg/alfabank/type.go
-./pkg/geocoder/yandex/geocoder.go
-./pkg/geocoder/yandex/types.go
-./pkg/geocoder/http_geocoder.go
-./pkg/geocoder/geocoder.go
-./pkg/mail-smtp/smtp.go' | xargs wc -l
+Пицца с цыплёнком ранч 24 см 0.550 кг - 420
+1403 ккал 62 белки 78 жиры 113 углеводы
 
-find -name "*_test.go" | xargs wc -l
-find -wholename "*sync/*.go" | xargs wc -l
+Спагетти карбонара 0.380 кг - 390
+1028 ккал 30 белки 69 жиры 71 углеводы
 
+Плов с бараниной 0.500 кг - 350
+1061 ккал 29 белки 59 жиры 118 углеводы
 
+Итого: 630 рублей из офиса
+1403+1028+1061 = 3492 ккал
+62+30+29 =        121 белка
+78+69+59 =        206 жира
+113+71+118 =      302 углеводов
 
-EatStreet Всего 20 039 строчек
-EatStreet   Код  8 189
-EatStreet  Sync  1 983
-EatStreet Тесты  9 867
+(121*4)+(206*9)+(302*4) = 3546 ккал
+630*20 = 12600 рублей в месяц
+
+1930/2 = 965
+
+шеф-повар

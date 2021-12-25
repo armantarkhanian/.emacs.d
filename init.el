@@ -68,7 +68,8 @@
 	(cons 320 "#997071")
 	(cons 340 "#515151")
 	(cons 360 "#515151")))
- '(vc-annotate-very-old-color nil))
+ '(vc-annotate-very-old-color nil)
+ '(vue-html-tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

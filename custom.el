@@ -39,7 +39,6 @@ This depends on major mode having setup syntax table properly."
 				(progn
 					(newline-and-indent)
 					))
-
 			)
 		(progn
 			(if (eq major-mode 'yaml-mode)

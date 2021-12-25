@@ -1,10 +1,10 @@
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
-             '("gnu" . "http://elpa.gnu.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -361,7 +361,8 @@
     ;;:defer
     )
 
-(load-theme 'vscode-dark-plus t)
+;;(load-theme 'vscode-dark-plus t)
+(load-theme 'doom-badger t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -387,6 +388,13 @@
 (use-package
     lsp-mode
     :ensure t
+
+	:custom
+	(lsp-vetur-format-default-formatter-css "none")
+	(lsp-vetur-format-default-formatter-html "none")
+	(lsp-vetur-format-default-formatter-js "none")
+	(lsp-vetur-validation-template nil)
+
     :commands (lsp lsp-deferred)
     :hook (sql-mode . lsp-deferred)
     :hook (yaml-mode . lsp-deferred)
@@ -515,7 +523,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace 11")
+(set-face-attribute 'default nil :font "Monospace Bold 11")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -574,22 +582,24 @@
 
 (add-hook 'before-save-hook #'fmt)
 
-(use-package
-    multi-web-mode
-    :ensure t
-    ;;:defer
-    :config (setq mweb-default-major-mode 'web-mode)
-    (setq mweb-tags '((css-mode "<style.*>" "</style>")))
-    (setq mweb-filename-extensions '("vue")))
+;; (use-package
+;;     multi-web-mode
+;;     :ensure t
+;;     ;;:defer
+;;     :config (setq mweb-default-major-mode 'web-mode)
+;;     (setq mweb-tags '((css-mode "<style.*>" "</style>")))
+;;     (setq mweb-filename-extensions '("vue")))
 
-(multi-web-global-mode 1)
+;; (multi-web-global-mode 1)
 
 (use-package
     web-mode
     :ensure t
-    ;;:defer
+    :mode "\\.vue\\'"
     :mode "\\.html\\'"
-    :mode "\\.js\\'")
+    :mode "\\.js\\'"
+	:config
+	(add-hook 'vue-mode-hook #'lsp))
 
 (use-package
     json-mode
@@ -604,6 +614,13 @@
     :ensure t
     ;;:defer
     )
+
+(defconst my-protobuf-style
+  '((indent-tabs-mode . nil)
+	(c-basic-offset . 2)))
+
+(add-hook 'protobuf-mode-hook
+		  (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 (font-lock-add-keywords
  'go-mode
