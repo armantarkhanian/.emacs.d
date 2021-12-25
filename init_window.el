@@ -625,41 +625,41 @@
 (font-lock-add-keywords
  'go-mode
  '(("\\<\\(\\|int\\|string\\|bool\\|byte\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|true\\|uint\\|uint8\\|uintptr\\)\\>"
-    . font-lock-type-face)))
+	. font-lock-type-face)))
 
 (font-lock-add-keywords
  'sql-mode
  '(("\\<\\(\\|int\\|string\\|\\|TINYINT\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|datetime\\|bigint\\|\\|uintptr\\)\\>"
-    . font-lock-type-face)))
+	. font-lock-type-face)))
 
 (font-lock-add-keywords
  'sql-mode
  '(("\\<\\(\\|\\|string\\|UNSIGNED\\|\\|if\\|complex64\\|use\\|uint16\\|false\\|float32\\|float64\\|\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|\\|\\|AUTO_INCREMENT\\|uintptr\\)\\>"
-    . font-lock-keyword-face)))
+	. font-lock-keyword-face)))
 
 (defun reverse-input-method (input-method)
-    "Build the reverse mapping of single letters from INPUT-METHOD."
-    (interactive (list (read-input-method-name "Use input method (default current): ")))
-    (if (and input-method
-             (symbolp input-method))
-        (setq input-method (symbol-name input-method)))
-    (let ((current current-input-method)
-          (modifiers '(nil (control)
-                       (meta)
-                       (control meta))))
-        (when input-method (activate-input-method input-method))
-        (when (and current-input-method
-                   quail-keyboard-layout)
-            (dolist (map (cdr (quail-map)))
-                (let* ((to (car map))
-                       (from (quail-get-translation (cadr map)
-                                                    (char-to-string to) 1)))
-                    (when (and (characterp from)
-                               (characterp to))
-                        (dolist (mod modifiers)
-                            (define-key local-function-key-map (vector (append mod (list from)))
-                                (vector (append mod (list to)))))))))
-        (when input-method (activate-input-method current))))
+	"Build the reverse mapping of single letters from INPUT-METHOD."
+	(interactive (list (read-input-method-name "Use input method (default current): ")))
+	(if (and input-method
+			 (symbolp input-method))
+		(setq input-method (symbol-name input-method)))
+	(let ((current current-input-method)
+		  (modifiers '(nil (control)
+					   (meta)
+					   (control meta))))
+		(when input-method (activate-input-method input-method))
+		(when (and current-input-method
+				   quail-keyboard-layout)
+			(dolist (map (cdr (quail-map)))
+				(let* ((to (car map))
+					   (from (quail-get-translation (cadr map)
+													(char-to-string to) 1)))
+					(when (and (characterp from)
+							   (characterp to))
+						(dolist (mod modifiers)
+							(define-key local-function-key-map (vector (append mod (list from)))
+								(vector (append mod (list to)))))))))
+		(when input-method (activate-input-method current))))
 
 (reverse-input-method 'russian-computer)
 
@@ -693,24 +693,24 @@
  '(vc-annotate-background "#191919")
  '(vc-annotate-color-map
    (list
-    (cons 20 "#468800")
-    (cons 40 "#7caf39")
-    (cons 60 "#b2d672")
-    (cons 80 "#E9FDAC")
-    (cons 100 "#efd98e")
-    (cons 120 "#f5b671")
-    (cons 140 "#FC9354")
-    (cons 160 "#e98e78")
-    (cons 180 "#d78a9c")
-    (cons 200 "#C586C0")
-    (cons 220 "#d8789f")
-    (cons 240 "#eb6b7e")
-    (cons 260 "#FF5E5E")
-    (cons 280 "#dd6464")
-    (cons 300 "#bb6a6b")
-    (cons 320 "#997071")
-    (cons 340 "#515151")
-    (cons 360 "#515151")))
+	(cons 20 "#468800")
+	(cons 40 "#7caf39")
+	(cons 60 "#b2d672")
+	(cons 80 "#E9FDAC")
+	(cons 100 "#efd98e")
+	(cons 120 "#f5b671")
+	(cons 140 "#FC9354")
+	(cons 160 "#e98e78")
+	(cons 180 "#d78a9c")
+	(cons 200 "#C586C0")
+	(cons 220 "#d8789f")
+	(cons 240 "#eb6b7e")
+	(cons 260 "#FF5E5E")
+	(cons 280 "#dd6464")
+	(cons 300 "#bb6a6b")
+	(cons 320 "#997071")
+	(cons 340 "#515151")
+	(cons 360 "#515151")))
  '(vc-annotate-very-old-color nil))
 
 ;;(custom-set-faces

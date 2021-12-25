@@ -37,7 +37,11 @@ This depends on major mode having setup syntax table properly."
 					(insert str)
 					)
 				(progn
-					(newline-and-indent)
+					(open-line 2)
+					(next-line 2)
+					(indent-according-to-mode)
+					(previous-line 1)
+					(indent-according-to-mode)
 					))
 			)
 		(progn

@@ -39,8 +39,9 @@
 (global-set-key (kbd "C->") 'mark-next-like-this)
 
 ;;(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
-;; (global-set-key (kbd "RET") 'custom/newline-and-indent)
-(global-set-key (kbd "RET") 'newline-and-indent)
+;;(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "RET") 'custom/newline-and-indent)
+
 
 ;; ibuffer
 (global-set-key (kbd "C-<tab>") 'ibuffer)
