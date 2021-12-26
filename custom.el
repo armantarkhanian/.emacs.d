@@ -1,3 +1,22 @@
+(defun comp ()
+	(interactive)
+	(if  (eq major-mode 'protobuf-mode)
+		(progn
+			(setq dir (file-name-directory (buffer-file-name)))
+			(setq protoc (concat "protoc --go-grpc_out=. --go_out=. --go-vtproto_out=. --go-vtproto_opt=features=marshal+unmarshal+size -I " dir " *.proto"))
+
+			(setq result (custom/shell-command protoc))
+			(setq exitCode (pop result))
+			(setq output (pop result))
+
+			(if (not (eq exitCode 0))
+				(message output)
+				(message "Compiled successfully."))
+			)
+		(message "Not protobuf-mode")
+		)
+	)
+
 (defun custom/indent-region (start end &optional column)
 	(interactive "r\nP")
 	(if (not (eq major-mode 'yaml-mode))
