@@ -76,7 +76,9 @@
 
 (use-package
     magit
-    :ensure t)
+    :ensure t
+	:config
+	(setq magit-ediff-dwim-show-on-hunks t))
 
 (use-package
     vdiff

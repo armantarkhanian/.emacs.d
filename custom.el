@@ -68,8 +68,13 @@ This depends on major mode having setup syntax table properly."
 							(progn
 								(setq lineCount 2))
 							(progn
-								(forward-char)
-								(setq start (+ start 1))
+								(if (eq (char-after) 32)
+									(progn
+										(forward-char)
+										(setq start (+ start 1)))
+									(progn
+										(setq start end)
+										))
 								))
 						)
 					(goto-char saveStart)
@@ -567,7 +572,11 @@ This command does not push text to `kill-ring'."
 	;; 	(custom/format-sql-buffer))
 
 	(when (eq major-mode 'json-mode)
-		(custom/format-json-buffer)))
+		(custom/format-json-buffer))
+
+	;; (when (eq major-mode 'protobuf-mode)
+	;; 	(comp))
+	)
 
 (defun rpl()
 	(interactive)
