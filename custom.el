@@ -47,7 +47,11 @@ This depends on major mode having setup syntax table properly."
 		(progn
 			(if (eq major-mode 'yaml-mode)
 				(newline-and-indent)
-				(reindent-then-newline-and-indent))
+				(progn
+					(indent-according-to-mode)
+					(newline-and-indent)
+					)
+				)
 			)))
 
 (defun custom/buffer-content (buffer-name)
