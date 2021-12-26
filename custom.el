@@ -21,6 +21,7 @@
 	(interactive "r\nP")
 	(if (not (eq major-mode 'yaml-mode))
 		(indent-region start end column)))
+
 (defun inside-string? ()
 	"Returns non-nil if inside string, else nil.
 This depends on major mode having setup syntax table properly."
@@ -56,13 +57,38 @@ This depends on major mode having setup syntax table properly."
 					(insert str)
 					)
 				(progn
-					(open-line 2)
-					(next-line 2)
-					(indent-according-to-mode)
-					(previous-line 1)
-					(indent-according-to-mode)
-					))
-			)
+					(setq saveStart (point))
+					(setq start (point))
+					(end-of-line)
+					(setq end (point))
+					(goto-char start)
+					(setq lineCount 1)
+					(while (and (not (eq start end)) (not (eq lineCount 2)))
+						(if (or (eq (char-after) 41) (eq (char-after) 125))
+							(progn
+								(setq lineCount 2))
+							(progn
+								(forward-char)
+								(setq start (+ start 1))
+								))
+						)
+					(goto-char saveStart)
+
+					(if (eq lineCount 1)
+						(progn
+							(indent-according-to-mode)
+							(newline-and-indent)
+							)
+						(progn
+							(open-line 2)
+							(next-line 2)
+							(indent-according-to-mode)
+							(previous-line 1)
+							(indent-according-to-mode)
+							)
+						)
+					)
+				))
 		(progn
 			(if (eq major-mode 'yaml-mode)
 				(newline-and-indent)
