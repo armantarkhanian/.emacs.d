@@ -28,6 +28,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
+;; (use-package company-tabnine :ensure t)
+
+;; (use-package apheleia :ensure t)
+;; (apheleia-global-mode 1)
+;; (apheleia-global-mode nil)
+
+
+
+
 (use-package smart-shift
  	:ensure t)
 
@@ -59,6 +68,8 @@
 
 (setq warning-minimum-level :emergency)
 
+(load "~/.emacs.d/too-long-lines-mode.el")
+(too-long-lines-mode 1)
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/remaps.el")
 (load "~/.emacs.d/keybindings.el")
@@ -208,9 +219,7 @@
 (use-package
     yasnippet
     :ensure t
-    ;;:defer
-    :commands yas-minor-mode
-    :hook (go-mode . yas-minor-mode))
+    :commands yas-minor-mode)
 
 (use-package
     highlight-indent-guides
@@ -560,7 +569,10 @@
     :hook (after-init . global-company-mode)
     :bind (:map prog-mode-map
                 ("C-i" . company-indent-or-complete-common)
-                ("C-M-i" . counsel-company)))
+                ("C-M-i" . counsel-company))
+	:config
+	;; (add-to-list 'company-backends #'company-tabnine)
+	)
 
 (use-package
     go-mode

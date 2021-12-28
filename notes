@@ -1,21 +1,46 @@
-Пицца с цыплёнком ранч 24 см 0.550 кг - 420
-1403 ккал 62 белки 78 жиры 113 углеводы
+(defun clear()
+(interactive)
+(replace-string "Nullable" "")
+(replace-string "
+required" "")
+(replace-string "
+string <uuid>" " UUID")
+(replace-string "
+string" " string")
+(replace-string "
+number <double>" " float64")
+(replace-string "
+integer <int64>" " int64")
+(replace-string "
+boolean" " bool")
 
-Спагетти карбонара 0.380 кг - 390
-1028 ккал 30 белки 69 жиры 71 углеводы
+)
+(clear)
 
-Плов с бараниной 0.500 кг - 350
-1061 ккал 29 белки 59 жиры 118 углеводы
+// Tips type ID.
+// Can be obtained by /api/1/tips_types operation. [required]
+id UUID `json:"id"`
 
-Итого: 630 рублей из офиса
-1403+1028+1061 = 3492 ккал
-62+30+29 =        121 белка
-78+69+59 =        206 жира
-113+71+118 =      302 углеводов
+// Tips type name. [required]
+name string `json:"name"`
 
-(121*4)+(206*9)+(302*4) = 3546 ккал
-630*20 = 12600 рублей в месяц
+// Supported organizations IDs. [required]
+// Can be obtained by /api/1/organizations operation.
+organizationIds []UUID `json:"organizationIds"
 
-1930/2 = 965
 
-шеф-повар
+
+
+orderServiceTypes
+required
+Array of strings (iikoTransport.PublicApi.Contracts.OrderTypes.OrderServiceType)
+Items Enum: "Common" "DeliveryByCourier" "DeliveryPickUp"
+Supported order service types.
+
+paymentTypesIds
+required
+Array of strings <uuid>
+Supported payment types IDs.
+
+"./assets/images"
+"/../upload/files"

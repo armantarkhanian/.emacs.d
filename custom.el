@@ -1,3 +1,5 @@
+(setq )
+
 (defun comp ()
 	(interactive)
 	(if  (eq major-mode 'protobuf-mode)
@@ -571,8 +573,8 @@ This command does not push text to `kill-ring'."
 	;; (when (eq major-mode 'sql-mode)
 	;; 	(custom/format-sql-buffer))
 
-	(when (eq major-mode 'json-mode)
-		(custom/format-json-buffer))
+	;; (when (eq major-mode 'json-mode)
+	;; 	(custom/format-json-buffer))
 
 	;; (when (eq major-mode 'protobuf-mode)
 	;; 	(comp))
