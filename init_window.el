@@ -17,6 +17,7 @@
 ;; doom-dark+ is good enought
 ;;
 
+
 ;; spead-up lsp-mode
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024 50)) ;; 50mb
@@ -29,6 +30,14 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 ;; (use-package company-tabnine :ensure t)
+
+(use-package magit-delta
+	:ensure t
+	:hook (magit-mode . magit-delta-mode))
+
+;; (use-package vlf :ensure t)
+
+;; (vlf-mode 1)
 
 ;; (use-package apheleia :ensure t)
 ;; (apheleia-global-mode 1)
@@ -90,6 +99,15 @@
     :ensure t
 	:config
 	(setq magit-ediff-dwim-show-on-hunks t))
+
+(add-hook 'ediff-load-hook
+          (lambda ()
+              (set-face-foreground
+               ediff-current-diff-face-B "blue")
+              (set-face-background
+               ediff-current-diff-face-B "red")
+              (make-face-italic
+               ediff-current-diff-face-B)))
 
 (use-package
     vdiff
@@ -217,11 +235,6 @@
                 (setq webpaste-provider-priority '("dpaste.org" "ix.io"))))
 
 (use-package
-    yasnippet
-    :ensure t
-    :commands yas-minor-mode)
-
-(use-package
     highlight-indent-guides
     :ensure t)
 
@@ -271,12 +284,6 @@
 				("m" . apply-macro-to-region-lines)))
 
 (selected-global-mode 1)
-
-(use-package
-    yasnippet-snippets
-    :ensure t
-    ;;:defer
-    )
 
 (unless (package-installed-p 'all-the-icons)
     (use-package
@@ -557,6 +564,23 @@
     flycheck
     :ensure t)
 
+(use-package yasnippet
+	:ensure t
+	:config
+	(validate-setq
+	 yas-verbosity 1
+	 yas-wrap-around-region t)
+
+	(with-eval-after-load 'yasnippet
+		(validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+
+	(yas-reload-all))
+
+(yas-global-mode)
+
+(use-package yasnippet-snippets
+	:ensure t)
+
 (use-package
     company
     :ensure t
@@ -569,10 +593,7 @@
     :hook (after-init . global-company-mode)
     :bind (:map prog-mode-map
                 ("C-i" . company-indent-or-complete-common)
-                ("C-M-i" . counsel-company))
-	:config
-	;; (add-to-list 'company-backends #'company-tabnine)
-	)
+                ("C-M-i" . counsel-company)))
 
 (use-package
     go-mode

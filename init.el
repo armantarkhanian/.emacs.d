@@ -42,7 +42,7 @@
  '(nil nil t)
  '(objed-cursor-color "#FF5E5E")
  '(package-selected-packages
-   '(apheleia company-tabnine sublimity minimap hide-mode-line git-lens gitlab harvest org-jira ejira fold-dwim smart-shift friendly-shell-command friendly-shell json-mode jq-format mu awesome-tab eglot ibuffer-projectile ibuffer-project all-the-icons-ibuffer diffview vdiff-magit vdiff no-littering edit-indirect helm graphql-mode dap-mode go-dlv indent-tools sql-sqlline sqlup-mode sql-smie format-sql reformatter sql-indent sqlformat html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
+   '(magit-delta vlf apheleia company-tabnine sublimity minimap hide-mode-line git-lens gitlab harvest org-jira ejira fold-dwim smart-shift friendly-shell-command friendly-shell json-mode jq-format mu awesome-tab eglot ibuffer-projectile ibuffer-project all-the-icons-ibuffer diffview vdiff-magit vdiff no-littering edit-indirect helm graphql-mode dap-mode go-dlv indent-tools sql-sqlline sqlup-mode sql-smie format-sql reformatter sql-indent sqlformat html-to-markdown typescript-mode dockerfile-mode key-chord ace-window rainbow-mode elisp-format vscdark-theme yasnippet-snippets yaml-mode wttrin webpaste web-mode vue-mode vscode-dark-plus-theme vs-light-theme use-package tao-theme tango-plus-theme tabbar spacemacs-theme smartparens selected restclient protobuf-mode projectile nord-theme neotree mwim multiple-cursors multi-web-mode mark-multiple magit lsp-ui lsp-python-ms light-soap-theme json-reformat jetbrains-darcula-theme intellij-theme ibuffer-sidebar highlight-indentation highlight-indent-guides goto-line-preview google-translate google go-mode github-theme github-modern-theme git format-all flycheck-golangci-lint flatui-theme expand-region espresso-theme epc dumb-jump doom-themes doom-modeline dashboard company centaur-tabs bm block-nav avy atom-one-dark-theme all-the-icons-dired afternoon-theme ace-jump-mode))
  '(pdf-view-midnight-colors (cons "#d4d4d4" "#191919"))
  '(resize-mini-windows nil)
  '(rustic-ansi-faces
@@ -75,6 +75,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(diff-added ((t (:inherit hl-line :extend t :foreground "green"))))
+ '(diff-removed ((t (:extend t :foreground "red"))))
+ '(ediff-current-diff-A ((t (:extend t :foreground "green"))))
+ '(magit-diff-added ((t (:extend t :foreground "green"))))
+ '(magit-diff-added-highlight ((t (:extend t :foreground "green" :weight bold))))
+ '(magit-diff-removed ((t (:extend t :foreground "red"))))
+ '(magit-diff-removed-highlight ((t (:extend t :foreground "red" :weight bold)))))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

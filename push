@@ -1,7 +1,6 @@
 #!/bin/bash
 (cd ~/.emacs.d/;
  git add push;
-
  git add too-long-lines-mode.el;
  git add init.el;
  git add init_nw.el;

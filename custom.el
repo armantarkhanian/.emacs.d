@@ -1,5 +1,3 @@
-(setq )
-
 (defun comp ()
 	(interactive)
 	(if  (eq major-mode 'protobuf-mode)
