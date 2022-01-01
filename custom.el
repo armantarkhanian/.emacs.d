@@ -95,7 +95,8 @@ This depends on major mode having setup syntax table properly."
 					)
 				))
 		(progn
-			(if (eq major-mode 'yaml-mode)
+			(if (or (eq major-mode 'yaml-mode)
+					(eq major-mode 'python-mode))
 				(newline-and-indent)
 				(progn
 					(indent-according-to-mode)
@@ -563,6 +564,7 @@ This command does not push text to `kill-ring'."
 
 	(when
 		(and
+		 (not (eq major-mode 'python-mode))
 		 (not (eq major-mode 'yaml-mode))
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max))
@@ -570,9 +572,8 @@ This command does not push text to `kill-ring'."
 
 	;; (when (eq major-mode 'sql-mode)
 	;; 	(custom/format-sql-buffer))
-
-	;; (when (eq major-mode 'json-mode)
-	;; 	(custom/format-json-buffer))
+	(when (equal (file-name-extension (buffer-file-name)) "json")
+		(custom/format-json-buffer))
 
 	;; (when (eq major-mode 'protobuf-mode)
 	;; 	(comp))

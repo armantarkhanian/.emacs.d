@@ -633,16 +633,9 @@
     :mode "\\.vue\\'"
     :mode "\\.html\\'"
     :mode "\\.js\\'"
+    :mode "\\.json\\'"
 	:config
 	(add-hook 'vue-mode-hook #'lsp))
-
-(use-package
-    json-mode
-    :ensure t
-    ;;:defer"
-    :mode "\\.json\\'")
-
-(add-hook 'json-mode-hook #'flycheck-mode)
 
 (use-package
     protobuf-mode
