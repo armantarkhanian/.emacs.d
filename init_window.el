@@ -21,6 +21,9 @@
 ;; spead-up lsp-mode
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024 50)) ;; 50mb
+(setq company-idle-delay 0.0)
+(setq company-minimum-prefix-length 1)
+(setq create-lockfiles nil)
 (setq lsp-log-io nil)
 (setq lsp-file-watch-threshold 2000)
 (setq lsp-enable-file-watchers nil)
@@ -635,10 +638,12 @@
     :mode "\\.js\\'"
     :mode "\\.json\\'"
     :mode "\\.jsx\\'"
+    :mode "\\.ts\\'"
+    :mode "\\.tsx\\'"
 	:config
 	(add-hook 'vue-mode-hook #'lsp)
 	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-
+	(setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
 	)
 
 (use-package
