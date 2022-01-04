@@ -634,8 +634,12 @@
     :mode "\\.html\\'"
     :mode "\\.js\\'"
     :mode "\\.json\\'"
+    :mode "\\.jsx\\'"
 	:config
-	(add-hook 'vue-mode-hook #'lsp))
+	(add-hook 'vue-mode-hook #'lsp)
+	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+
+	)
 
 (use-package
     protobuf-mode

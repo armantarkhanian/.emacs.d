@@ -30,6 +30,45 @@ This depends on major mode having setup syntax table properly."
 		(message "%s" result)
 		result))
 
+(defun newLine()
+	(setq saveStart (point))
+	(setq start (point))
+	(end-of-line)
+	(setq end (point))
+	(goto-char start)
+	(setq lineCount 1)
+
+	(while (and (not (eq start end)) (not (eq lineCount 2)))
+		(if (or (eq (char-after) 41) (eq (char-after) 125) (eq (char-after) 93))
+			(progn
+				(setq lineCount 2))
+			(progn
+				(if (eq (char-after) 32)
+					(progn
+						(forward-char)
+						(setq start (+ start 1)))
+					(progn
+						(setq start end)
+						))
+				))
+		)
+	(goto-char saveStart)
+
+	(if (eq lineCount 1)
+		(progn
+			(indent-according-to-mode)
+			(newline-and-indent)
+			)
+		(progn
+			(open-line 2)
+			(next-line 2)
+			(indent-according-to-mode)
+			(previous-line 1)
+			(indent-according-to-mode)
+			)
+		)
+	)
+
 (defun custom/newline-and-indent ()
 	(interactive)
 
@@ -57,50 +96,15 @@ This depends on major mode having setup syntax table properly."
 					(insert str)
 					)
 				(progn
-					(setq saveStart (point))
-					(setq start (point))
-					(end-of-line)
-					(setq end (point))
-					(goto-char start)
-					(setq lineCount 1)
-					(while (and (not (eq start end)) (not (eq lineCount 2)))
-						(if (or (eq (char-after) 41) (eq (char-after) 125))
-							(progn
-								(setq lineCount 2))
-							(progn
-								(if (eq (char-after) 32)
-									(progn
-										(forward-char)
-										(setq start (+ start 1)))
-									(progn
-										(setq start end)
-										))
-								))
-						)
-					(goto-char saveStart)
-
-					(if (eq lineCount 1)
-						(progn
-							(indent-according-to-mode)
-							(newline-and-indent)
-							)
-						(progn
-							(open-line 2)
-							(next-line 2)
-							(indent-according-to-mode)
-							(previous-line 1)
-							(indent-according-to-mode)
-							)
-						)
-					)
-				))
+					(newLine)
+					)))
 		(progn
 			(if (or (eq major-mode 'yaml-mode)
 					(eq major-mode 'python-mode))
 				(newline-and-indent)
 				(progn
 					(indent-according-to-mode)
-					(newline-and-indent)
+					(newLine)
 					)
 				)
 			)))
