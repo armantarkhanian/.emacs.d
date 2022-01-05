@@ -642,7 +642,7 @@
 	(setq web-mode-code-indent-offset 2)
 	(setq web-mode-attr-indent-offset 2)
 	(setq web-mode-style-padding 0)
-	(setq web-mode-script-padding 1)
+	(setq web-mode-script-padding 0)
 	(setq web-mode-script-padding 0)
 	(setq web-mode-block-padding 0)
 	(define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
