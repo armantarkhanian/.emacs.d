@@ -59,8 +59,6 @@
 
 (global-set-key (kbd "C--") 'hs-hide-block)
 (global-set-key (kbd "C-=") 'hs-show-block)
-(define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
-(define-key web-mode-map (kbd "C-=") 'web-mode-fold-or-unfold)
 
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)

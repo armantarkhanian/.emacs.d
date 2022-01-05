@@ -82,9 +82,6 @@
 
 (load "~/.emacs.d/too-long-lines-mode.el")
 (too-long-lines-mode 1)
-(load "~/.emacs.d/custom.el")
-(load "~/.emacs.d/remaps.el")
-(load "~/.emacs.d/keybindings.el")
 
 (use-package
     mu
@@ -164,9 +161,7 @@
 
 (use-package
     typescript-mode
-    :ensure t
-    ;;:defer
-    )
+    :ensure t)
 
 (use-package
     restclient
@@ -620,15 +615,6 @@
 
 (add-hook 'before-save-hook #'fmt)
 
-;; (use-package
-;;     multi-web-mode
-;;     :ensure t
-;;     ;;:defer
-;;     :config (setq mweb-default-major-mode 'web-mode)
-;;     (setq mweb-tags '((css-mode "<style.*>" "</style>")))
-;;     (setq mweb-filename-extensions '("vue")))
-
-;; (multi-web-global-mode 1)
 
 (use-package
     web-mode
@@ -640,11 +626,30 @@
     :mode "\\.jsx\\'"
     :mode "\\.ts\\'"
     :mode "\\.tsx\\'"
-	:config
-	(add-hook 'vue-mode-hook #'lsp)
-	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-	(setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
+    :config
+    (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+    (setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
+    (setq web-mode-enable-auto-pairing t)
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-current-element-highlight nil)
 	)
+
+
+(defun my-web-mode-hook ()
+	"Hooks for Web mode."
+	(setq web-mode-markup-indent-offset 2)
+	(setq web-mode-css-indent-offset 2)
+	(setq web-mode-code-indent-offset 2)
+	(setq web-mode-attr-indent-offset 2)
+	(setq web-mode-style-padding 0)
+	(setq web-mode-script-padding 1)
+	(setq web-mode-script-padding 0)
+	(setq web-mode-block-padding 0)
+	(define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
+	(define-key web-mode-map (kbd "C-=") 'web-mode-fold-or-unfold)
+	)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 
 (use-package
     protobuf-mode
