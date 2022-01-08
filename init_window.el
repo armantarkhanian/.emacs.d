@@ -66,7 +66,7 @@
 (use-package yaml-mode
 	:ensure t
 	:config
-	(setq-default yaml-indent-offset 4))
+	(setq-default yaml-indent-offset 2))
 
 (defun lsp-yaml-install-save-hooks ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t))
