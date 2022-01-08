@@ -9,11 +9,7 @@
                   (ibuffer-filter-by-name "^[^\*]"))
               (ibuffer-update)))
 
-(if (display-graphic-p)
-    (load "~/.emacs.d/init_window.el")
-    (load "~/.emacs.d/init_window.el")
-    ;;(load "~/.emacs.d/init_nw.el"))
-    )
+(load "~/.emacs.d/init_window.el")
 
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/remaps.el")
@@ -79,6 +75,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#171717" :foreground "#F6F3E8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(diff-added ((t (:inherit hl-line :extend t :foreground "green"))))
  '(diff-removed ((t (:extend t :foreground "red"))))
  '(ediff-current-diff-A ((t (:extend t :foreground "green"))))

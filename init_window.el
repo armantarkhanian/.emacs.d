@@ -17,6 +17,10 @@
 ;; doom-dark+ is good enought
 ;;
 
+(global-so-long-mode 1)
+(toggle-truncate-lines 1)
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
 
 ;; spead-up lsp-mode
 (setq gc-cons-threshold 100000000)
@@ -80,8 +84,8 @@
 
 (setq warning-minimum-level :emergency)
 
-(load "~/.emacs.d/too-long-lines-mode.el")
-(too-long-lines-mode 1)
+;;(load "~/.emacs.d/too-long-lines-mode.el")
+;;(too-long-lines-mode 1)
 
 (use-package
     mu
