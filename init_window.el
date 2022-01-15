@@ -8,8 +8,6 @@
 
 (package-initialize)
 
-(set-frame-size (selected-frame) 120 33)
-
 ;; doom-badger
 ;; doom-monokai-spectrum
 ;; doom-ir-black
@@ -382,8 +380,8 @@
     )
 
 ;;(load-theme 'vscode-dark-plus t)
-(load-theme 'doom-badger t)
-
+;; (load-theme 'doom-badger t)
+(load-theme 'intellij t)
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled

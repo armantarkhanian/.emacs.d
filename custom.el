@@ -137,7 +137,8 @@ This depends on major mode having setup syntax table properly."
 	(setq-local output1 (shell-command-to-string queryCommand))
 	(delete-region (point-min) (point-max))
 	(insert output1)
-	(goto-char savePoint))
+	(goto-char savePoint)
+	(recenter-top-bottom))
 
 (defun custom/autoformat-sql ()
 	(interactive)
@@ -479,6 +480,10 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(goto-char (point-min)))
 
 (defun run ()
+	(interactive)
+	(compile "go run ."))
+
+(defun run-file ()
 	(interactive)
 	(compile (concat "go run " (buffer-file-name))))
 
