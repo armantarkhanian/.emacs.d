@@ -380,8 +380,8 @@
     )
 
 ;;(load-theme 'vscode-dark-plus t)
-;; (load-theme 'doom-badger t)
-(load-theme 'intellij t)
+(load-theme 'doom-badger t)
+
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -425,36 +425,37 @@
     (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package
-    lsp-ui
-    :ensure t
-    :commands lsp-ui-mode
-    :config
-    ;; (setq lsp-ui-doc-alignment 'window)
-    ;;(setq lsp-ui-doc-border "#dfdfdf")
-    ;; (setq lsp-ui-doc-header nil)
-    ;; (setq lsp-ui-doc-max-height 30)
-    ;; (setq lsp-ui-doc-max-width 70)
-    ;; (setq lsp-ui-doc-position 'top)
-    ;; (setq lsp-ui-doc-use-webkit nil)
-    ;;(set-face-attribute 'lsp-ui-doc-background nil
-    ;;:background "#f9f9f9")
-    )
+	lsp-ui
+	:ensure t
+	:commands lsp-ui-mode
+	:config
+	;; (setq lsp-ui-doc-alignment 'window)
+	;;(setq lsp-ui-doc-border "#dfdfdf")
+	;; (setq lsp-ui-doc-header nil)
+	;; (setq lsp-ui-doc-max-height 30)
+	;; (setq lsp-ui-doc-max-width 70)
+	;; (setq lsp-ui-doc-position 'top)
+	;; (setq lsp-ui-doc-use-webkit nil)
+	;;(set-face-attribute 'lsp-ui-doc-background nil
+	;;:background "#f9f9f9")
+	)
 
 (use-package
-    elisp-format
-    :ensure t)
+	elisp-format
+	:ensure t)
 
 (use-package
-    rainbow-mode
-    :ensure t)
+	rainbow-mode
+	:ensure t)
 
 (rainbow-mode 1)
 
 ;; (use-package
-;;    flycheck-golangci-lint
-;;    :ensure t
-;; ;;:defer
-;;)
+;; 	flycheck-golangci-lint
+;; 	:ensure t
+;; 	:hook (go-mode . flycheck-golangci-lint-setup)
+;; 	:config
+;; 	(setq flycheck-golangci-lint-fast t))
 
 ;;(set-face-attribute 'region nil :background "#ccc" :foreground "#ffffFF")
 
@@ -526,7 +527,7 @@
 (fringe-mode '(0 . 0))
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)
-                                  ((control) . nil)))
+								  ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
 ;;(add-hook 'yaml-mode-hook (lambda ()
@@ -535,8 +536,8 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (add-hook 'dired-mode-hook (lambda()
-                               (define-key dired-mode-map "b" 'dired-up-directory)
-                               (dired-hide-details-mode)))
+							   (define-key dired-mode-map "b" 'dired-up-directory)
+							   (dired-hide-details-mode)))
 
 (setq-default indicate-empty-lines nil)
 
@@ -561,15 +562,15 @@
 (setq x-select-enable-clipboard t)
 
 (use-package
-    flycheck
-    :ensure t
+	flycheck
+	:ensure t
 	:diminish flycheck-mode
 	:config
 	(global-flycheck-mode)
 	;; disable jshint since we prefer eslint checking
 	(setq-default flycheck-disabled-checkers
-                  (append flycheck-disabled-checkers
-                          '(javascript-jshint)))
+				  (append flycheck-disabled-checkers
+						  '(javascript-jshint)))
 
 	(setq flycheck-checkers '(javascript-eslint))
 	;; use eslint with web-mode for jsx files
@@ -578,8 +579,8 @@
 	(flycheck-add-mode 'javascript-eslint 'js-mode)
 	;; disable json-jsonlist checking for json files
 	(setq-default flycheck-disabled-checkers
-                  (append flycheck-disabled-checkers
-                          '(json-jsonlist)))
+				  (append flycheck-disabled-checkers
+						  '(json-jsonlist)))
 	)
 
 (use-package yasnippet
@@ -600,34 +601,29 @@
 	:ensure t)
 
 (use-package
-    company
-    :ensure t
-    :init
+	company
+	:ensure t
+	:init
 
-    (setq company-idle-delay t)
-    (setq company-tooltip-align-annotations t)
-    (setq company-dabbrev-char-regexp "[A-z:-]")
+	(setq company-idle-delay t)
+	(setq company-tooltip-align-annotations t)
+	(setq company-dabbrev-char-regexp "[A-z:-]")
 
-    :hook (after-init . global-company-mode)
-    :bind (:map prog-mode-map
-                ("C-i" . company-indent-or-complete-common)
-                ("C-M-i" . counsel-company)))
+	:hook (after-init . global-company-mode)
+	:bind (:map prog-mode-map
+				("C-i" . company-indent-or-complete-common)
+				("C-M-i" . counsel-company)))
 
 (use-package
-    go-mode
-    :ensure t
-    :config
-    (setq lsp-go-hover-kind "FullDocumentation")
-    (setq lsp-go-use-gofumpt t)
-    ;;(setq lsp-go-analyses '(
-    ;;                         ("nilness" . t)
-    ;;                         ("unusedparams" . t)
-    ;;                         ("assign" . t)
-    ;;                         ("unusedwrite" . t)))
-	)
+	go-mode
+	:ensure t
+	:config
+	(setq lsp-go-hover-kind "FullDocumentation")
+	(setq lsp-go-use-gofumpt t))
+
 (defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+	(add-hook 'before-save-hook #'lsp-format-buffer t t)
+	(add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'lsp)
@@ -637,21 +633,21 @@
 
 
 (use-package
-    web-mode
-    :ensure t
-    :mode "\\.vue\\'"
-    :mode "\\.html\\'"
-    :mode "\\.js\\'"
-    :mode "\\.json\\'"
-    :mode "\\.jsx\\'"
-    :mode "\\.ts\\'"
-    :mode "\\.tsx\\'"
-    :config
-    (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-    (setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
-    (setq web-mode-enable-auto-pairing t)
-    (setq web-mode-enable-auto-closing t)
-    (setq web-mode-enable-current-element-highlight nil)
+	web-mode
+	:ensure t
+	:mode "\\.vue\\'"
+	:mode "\\.html\\'"
+	:mode "\\.js\\'"
+	:mode "\\.json\\'"
+	:mode "\\.jsx\\'"
+	:mode "\\.ts\\'"
+	:mode "\\.tsx\\'"
+	:config
+	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+	(setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
+	(setq web-mode-enable-auto-pairing t)
+	(setq web-mode-enable-auto-closing t)
+	(setq web-mode-enable-current-element-highlight nil)
 	)
 
 
@@ -672,10 +668,10 @@
 
 
 (use-package
-    protobuf-mode
-    :ensure t
-    ;;:defer
-    )
+	protobuf-mode
+	:ensure t
+	;;:defer
+	)
 
 (defconst my-protobuf-style
   '((indent-tabs-mode . nil)

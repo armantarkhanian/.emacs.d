@@ -9,6 +9,11 @@
                   (ibuffer-filter-by-name "^[^\*]"))
               (ibuffer-update)))
 
+(defun sl/display-header ()
+    (setq header-line-format (buffer-name)))
+
+(add-hook 'buffer-list-update-hook 'sl/display-header)
+
 (load "~/.emacs.d/init_window.el")
 
 (load "~/.emacs.d/custom.el")
@@ -76,7 +81,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#171717" :foreground "#F6F3E8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 113 :width normal :foundry "PfEd" :family "Monospace")))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#171717" :foreground "#F6F3E8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 113 :width normal :foundry "PfEd" :family "Monospace"))))
+ '(header-line ((t (:inherit mode-line)))))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

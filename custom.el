@@ -457,6 +457,13 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(if (equal "*" (substring name 0 1))
 		(switchNextBuffer)))
 
+(defun switchPrevBuffer()
+	(interactive)
+	(switch-to-prev-buffer)
+	(setq name (buffer-name))
+	(if (equal "*" (substring name 0 1))
+		(switchPrevBuffer)))
+
 (defun md()
 	(interactive)
 	(if (equal (buffer-name) "README.html")
