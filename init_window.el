@@ -15,7 +15,6 @@
 ;; doom-dark+ is good enought
 ;;
 
-(global-tab-line-mode 1)
 (global-so-long-mode 1)
 (toggle-truncate-lines 1)
 (setq-default bidi-paragraph-direction 'left-to-right)
@@ -407,29 +406,23 @@
 (use-package
     lsp-mode
     :ensure t
-
-	:custom
-	(lsp-vetur-format-default-formatter-css "none")
-	(lsp-vetur-format-default-formatter-html "none")
-	(lsp-vetur-format-default-formatter-js "none")
-	(lsp-vetur-validation-template nil)
-
     :commands (lsp lsp-deferred)
     :hook (sql-mode . lsp-deferred)
     :hook (yaml-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
-    :hook (go-mode . lsp-deferred)
+    ;;:hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
-    :config (setq lsp-prefer-flymake nil)
-    (setq lsp-flycheck-enable t)
+    :config
+	(setq lsp-prefer-flymake :none)
+    (setq lsp-flycheck-enable nil)
     (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package
 	lsp-ui
 	:ensure t
 	:commands lsp-ui-mode
-	:config
+	;; :config
 	;; (setq lsp-ui-doc-alignment 'window)
 	;;(setq lsp-ui-doc-border "#dfdfdf")
 	;; (setq lsp-ui-doc-header nil)
@@ -451,13 +444,6 @@
 
 (rainbow-mode 1)
 
-;; (use-package
-;; 	flycheck-golangci-lint
-;; 	:ensure t
-;; 	:hook (go-mode . flycheck-golangci-lint-setup)
-;; 	:config
-;; 	(setq flycheck-golangci-lint-fast t))
-
 ;;(set-face-attribute 'region nil :background "#ccc" :foreground "#ffffFF")
 
 ;; (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
@@ -478,21 +464,21 @@
 (setq ingibit-startup-message t)
 (setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
 
-;; (defvar --backup-directory "~/.emacs.d/backups")
+(defvar --backup-directory "~/.emacs.d/backups")
 
-;; (if (not (file-exists-p --backup-directory))
-;;     (make-directory --backup-directory t))
-;; (setq backup-directory-alist `(("." . ,--backup-directory)))
-;; (setq make-backup-files t ; backup of a file the first time it is saved.
-;;       backup-by-copying t ; don't clobber symlinks
-;;       version-control t   ; version numbers for backup files
-;;       delete-old-versions t      ; delete excess backup files silently
-;;       delete-by-moving-to-trash t kept-old-versions 6 ; oldest versions to keep when a new numbered backup is made (default: 2)
-;;       kept-new-versions 9 ; newest versions to keep when a new numbered backup is made (default: 2)
-;;       auto-save-default t ; auto-save every buffer that visits a file
-;;       auto-save-timeout 20 ; number of seconds idle time before auto-save (default: 30)
-;;       auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
-;;       )
+(if (not (file-exists-p --backup-directory))
+    (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+(setq make-backup-files t ; backup of a file the first time it is saved.
+      backup-by-copying t ; don't clobber symlinks
+      version-control t   ; version numbers for backup files
+      delete-old-versions t      ; delete excess backup files silently
+      delete-by-moving-to-trash t kept-old-versions 6 ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 9 ; newest versions to keep when a new numbered backup is made (default: 2)
+      auto-save-default t ; auto-save every buffer that visits a file
+      auto-save-timeout 20 ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
+      )
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
@@ -618,9 +604,18 @@
 (use-package
 	go-mode
 	:ensure t
+	:hook (flycheck-add-next-checker 'lsp-ui 'golangci-lint)
 	:config
 	(setq lsp-go-hover-kind "FullDocumentation")
 	(setq lsp-go-use-gofumpt t))
+
+(use-package
+	flycheck-golangci-lint
+	:ensure t
+	:hook (go-mode . flycheck-golangci-lint-setup)
+	:config
+	(setq flycheck-golangci-lint-enable-all t))
+
 
 (defun lsp-go-install-save-hooks ()
 	(add-hook 'before-save-hook #'lsp-format-buffer t t)

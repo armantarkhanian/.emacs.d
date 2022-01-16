@@ -72,4 +72,3 @@
 (global-set-key (kbd "C-r") 'replace-string)
 
 (global-set-key (kbd "C-<tab>") 'ibuffer)
-(global-set-key (kbd "C-<backspace>") 'backward-delete-word)
