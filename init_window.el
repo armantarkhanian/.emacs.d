@@ -646,3 +646,30 @@
  'sql-mode
  '(("\\<\\(\\|\\|string\\|UNSIGNED\\|\\|if\\|complex64\\|use\\|uint16\\|false\\|float32\\|float64\\|\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|\\|\\|AUTO_INCREMENT\\|uintptr\\)\\>"
 	. font-lock-keyword-face)))
+
+(defun reverse-input-method (input-method)
+	"Build the reverse mapping of single letters from INPUT-METHOD."
+	(interactive
+	 (list (read-input-method-name "Use input method (default current): ")))
+	(if (and input-method (symbolp input-method))
+		(setq input-method (symbol-name input-method)))
+	(let ((current current-input-method)
+		  (modifiers '(nil (control) (meta) (control meta))))
+		(when input-method
+			(activate-input-method input-method))
+		(when (and current-input-method quail-keyboard-layout)
+			(dolist (map (cdr (quail-map)))
+				(let* ((to (car map))
+					   (from (quail-get-translation
+							  (cadr map) (char-to-string to) 1)))
+					(when (and (characterp from) (characterp to))
+						(dolist (mod modifiers)
+							(define-key local-function-key-map
+								(vector (append mod (list from)))
+								(vector (append mod (list to)))))))))
+		(when input-method
+			(activate-input-method current))))
+
+(reverse-input-method 'russian-computer)
+
+(set-frame-size (selected-frame) 100 30)
