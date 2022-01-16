@@ -392,17 +392,6 @@
 		((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5433 user=root password=password dbname=postgres sslmode=disable TimeZone='Europe/Moscow'"))
 		))
 
-;; (use-package
-;;     eglot
-;;     :ensure t)
-
-;; (defun eglot-go-install-save-hooks ()
-;;     (add-hook 'before-save-hook #'eglot-format-buffer t t)
-;;     (add-hook 'before-save-hook #'eglot-code-action-organize-imports t t))
-
-;; (add-hook 'go-mode-hook #'eglot-go-install-save-hooks)
-;; (add-hook 'go-mode-hook 'eglot-ensure)
-
 (use-package
     lsp-mode
     :ensure t
@@ -410,7 +399,7 @@
     :hook (sql-mode . lsp-deferred)
     :hook (yaml-mode . lsp-deferred)
     :hook (dockerfile-mode . lsp-deferred)
-    ;;:hook (go-mode . lsp-deferred)
+    :hook (go-mode . lsp-deferred)
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
     :config
@@ -445,8 +434,6 @@
 (rainbow-mode 1)
 
 ;;(set-face-attribute 'region nil :background "#ccc" :foreground "#ffffFF")
-
-;; (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (show-paren-mode 1)
 ;;(set-face-background 'show-paren-match "#dfdfdf")
@@ -602,21 +589,17 @@
 				("C-M-i" . counsel-company)))
 
 (use-package
-	go-mode
-	:ensure t
-	:hook (flycheck-add-next-checker 'lsp-ui 'golangci-lint)
-	:config
-	(setq lsp-go-hover-kind "FullDocumentation")
-	(setq lsp-go-use-gofumpt t)
-	(flycheck-select-checker 'golangci-lint))
-
-(use-package
 	flycheck-golangci-lint
 	:ensure t
-	:hook (go-mode . flycheck-golangci-lint-setup)
 	:config
 	(setq flycheck-golangci-lint-enable-all t))
 
+(use-package
+	go-mode
+	:ensure t
+	:config
+	(setq lsp-go-hover-kind "FullDocumentation")
+	(setq lsp-go-use-gofumpt t))
 
 (defun lsp-go-install-save-hooks ()
 	(add-hook 'before-save-hook #'lsp-format-buffer t t)
@@ -625,8 +608,13 @@
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (add-hook 'go-mode-hook #'lsp)
 (add-hook 'go-mode-hook #'flycheck-mode)
-
 (add-hook 'before-save-hook #'fmt)
+
+(add-hook 'go-mode-hook (lambda ()
+							(flycheck-golangci-lint-setup)
+							(flycheck-add-next-checker 'lsp-ui 'golangci-lint)
+							(flycheck-select-checker 'golangci-lint)
+							))
 
 
 (use-package
