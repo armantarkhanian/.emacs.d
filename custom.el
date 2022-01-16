@@ -341,9 +341,9 @@ This depends on major mode having setup syntax table properly."
 ;; (count-sub "			\"userID\": \"Новинки\"," "	")
 
 (defun count-sub-1 (str pat)
-	(loop with z = 0 with s = 0 while s do
+	(cl-loop with z = 0 with s = 0 while s do
 		  (when (setf s (search pat str :start2 s)) ;; :start6 typo fixed
-			  (incf z) (incf s (length pat)))
+			  (cl-incf z) (cl-incf s (length pat)))
 		  finally (return z)))
 
 (defun count-sub (str &rest patterns)

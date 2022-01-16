@@ -42,11 +42,27 @@
 ;;(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "RET") 'custom/newline-and-indent)
 
+(defun generateHeadline ()
+	(setq buffers (mapconcat (function buffer-name) (buffer-list) "aeyouv"))
 
-;; ibuffer
-(global-set-key (kbd "C-h") 'ibuffer)
+	(setq ss (split-string buffers "aeyouv" t " "))
 
-(define-key ibuffer-mode-map (kbd "C-h") 'ibuffer-visit-buffer)
+	(setq str "")
+	(dolist (buffer-name ss)
+		(if (not (string-match-p (regexp-quote "*") buffer-name))
+			(progn
+				(setq str (concat str ";" buffer-name))
+				)))
+	(setq str (string-trim str " " " "))
+	(setq str (string-trim str ";" ";"))
+	(setq str (string-replace ";" " | " str)))
+
+(setq header-line-format (generateHeadline))
+
+(insert (mapconcat (function buffer-name) (buffer-list) " "))
+
+
+(global-set-key (kbd "C-<tab>") 'ibuffer)
 (define-key ibuffer-mode-map (kbd "C-<return>") 'ibuffer-visit-buffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 
@@ -59,8 +75,6 @@
 (global-set-key (kbd "C--") 'hs-hide-block)
 (global-set-key (kbd "C-=") 'hs-show-block)
 
-(define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
-(define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 (global-set-key (kbd "M--") 'er/contract-region)
 (global-set-key (kbd "M-=") 'er/expand-region)
 (global-set-key (kbd "<f6>") 'imenu)
@@ -71,4 +85,29 @@
 (global-set-key (kbd "M-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-r") 'replace-string)
 
-(global-set-key (kbd "C-<tab>") 'ibuffer)
+(defun reverse-input-method (input-method)
+	"Build the reverse mapping of single letters from INPUT-METHOD."
+	(interactive
+	 (list (read-input-method-name "Use input method (default current): ")))
+	(if (and input-method (symbolp input-method))
+		(setq input-method (symbol-name input-method)))
+	(let ((current current-input-method)
+		  (modifiers '(nil (control) (meta) (control meta))))
+		(when input-method
+			(activate-input-method input-method))
+		(when (and current-input-method quail-keyboard-layout)
+			(dolist (map (cdr (quail-map)))
+				(let* ((to (car map))
+					   (from (quail-get-translation
+							  (cadr map) (char-to-string to) 1)))
+					(when (and (characterp from) (characterp to))
+						(dolist (mod modifiers)
+							(define-key local-function-key-map
+								(vector (append mod (list from)))
+								(vector (append mod (list to)))))))))
+		(when input-method
+			(activate-input-method current))))
+
+(reverse-input-method 'russian-computer)
+
+(set-frame-size (selected-frame) 100 30)
