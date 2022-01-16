@@ -605,14 +605,13 @@
 	(add-hook 'before-save-hook #'lsp-format-buffer t t)
 	(add-hook 'before-save-hook #'lsp-organize-imports t t))
 
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-(add-hook 'go-mode-hook #'lsp)
-(add-hook 'go-mode-hook #'flycheck-mode)
 (add-hook 'before-save-hook #'fmt)
 
 (add-hook 'go-mode-hook (lambda ()
+							(lsp)
+							(lsp-go-install-save-hooks)
+							(flycheck-mode)
 							(flycheck-golangci-lint-setup)
-							(flycheck-add-next-checker 'lsp-ui 'golangci-lint)
 							(flycheck-select-checker 'golangci-lint)
 							))
 
