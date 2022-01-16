@@ -607,7 +607,8 @@
 	:hook (flycheck-add-next-checker 'lsp-ui 'golangci-lint)
 	:config
 	(setq lsp-go-hover-kind "FullDocumentation")
-	(setq lsp-go-use-gofumpt t))
+	(setq lsp-go-use-gofumpt t)
+	(flycheck-select-checker 'golangci-lint))
 
 (use-package
 	flycheck-golangci-lint
