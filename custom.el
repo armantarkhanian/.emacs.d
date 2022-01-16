@@ -388,8 +388,8 @@ type Location, LocationLink, Location[] or LocationLink[]."
 									(let ((visiting (find-buffer-visiting filename))
 										  (fn (lambda (loc)
 												  (lsp-with-filename filename
-													  (lsp--xref-make-item filename
-																		   (lsp--location-range loc))))))
+																	 (lsp--xref-make-item filename
+																						  (lsp--location-range loc))))))
 										(if visiting
 											(with-current-buffer visiting
 												(seq-map fn matches))
@@ -455,14 +455,16 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(switch-to-next-buffer)
 	(setq name (buffer-name))
 	(if (equal "*" (substring name 0 1))
-		(switchNextBuffer)))
+		(switchNextBuffer))
+	(setq header-line-format (generateHeadline)))
 
 (defun switchPrevBuffer()
 	(interactive)
 	(switch-to-prev-buffer)
 	(setq name (buffer-name))
 	(if (equal "*" (substring name 0 1))
-		(switchPrevBuffer)))
+		(switchPrevBuffer))
+	(setq header-line-format (generateHeadline)))
 
 (defun md()
 	(interactive)

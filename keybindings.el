@@ -61,10 +61,8 @@
 	(setq str (string-trim str ";" ";"))
 	(setq str (string-replace ";" " | " str)))
 
-(setq header-line-format (generateHeadline))
 
-(global-set-key (kbd "C-<tab>") 'switchPrevBuffer)
-;;(global-set-key (kbd "C-<backspace>") 'switchPrevBuffer)
+(global-set-key (kbd "C-<tab>") 'ibuffer)
 (define-key ibuffer-mode-map (kbd "C-<return>") 'ibuffer-visit-buffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 

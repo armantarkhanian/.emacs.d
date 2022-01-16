@@ -8,12 +8,6 @@
 
 (package-initialize)
 
-(add-hook 'buffer-list-update-hook (lambda ()
-									   (if (not (active-minibuffer-window))
-										   (setq header-line-format (generateHeadline))
-										   )))
-
-
 (require 'subr-x)
 (require 'ibuffer)
 (setq-default ibuffer-use-header-line nil)
