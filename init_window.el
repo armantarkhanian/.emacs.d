@@ -15,6 +15,7 @@
 ;; doom-dark+ is good enought
 ;;
 
+(global-tab-line-mode 1)
 (global-so-long-mode 1)
 (toggle-truncate-lines 1)
 (setq-default bidi-paragraph-direction 'left-to-right)

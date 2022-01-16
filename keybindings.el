@@ -44,7 +44,6 @@
 
 
 ;; ibuffer
-(global-set-key (kbd "C-<tab>") 'switchNextBuffer)
 (global-set-key (kbd "C-h") 'ibuffer)
 
 (define-key ibuffer-mode-map (kbd "C-h") 'ibuffer-visit-buffer)
@@ -72,4 +71,5 @@
 (global-set-key (kbd "M-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-r") 'replace-string)
 
-(global-set-key (kbd "C-<backspace>") 'switchPrevBuffer)
+(global-set-key (kbd "C-<tab>") 'ibuffer)
+(global-set-key (kbd "C-<backspace>") 'backward-delete-word)

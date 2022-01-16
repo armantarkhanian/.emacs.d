@@ -9,10 +9,15 @@
                   (ibuffer-filter-by-name "^[^\*]"))
               (ibuffer-update)))
 
-(defun sl/display-header ()
-    (setq header-line-format (buffer-name)))
+;; (defun sl/display-header ()
+;;     (setq header-line-format (buffer-name)))
 
-(add-hook 'buffer-list-update-hook 'sl/display-header)
+;; (add-hook 'buffer-list-update-hook 'sl/display-header)
+
+;; (setq ido-enable-flex-matching t)
+;; (setq ido-everywhere t)
+;; (setq ido-use-filename-at-point 'guess)
+;; (ido-mode 1)
 
 (load "~/.emacs.d/init_window.el")
 
