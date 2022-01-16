@@ -9,8 +9,10 @@
 (package-initialize)
 
 (add-hook 'buffer-list-update-hook (lambda ()
-									   (setq header-line-format (generateHeadline))
-									   ))
+									   (if (not (active-minibuffer-window))
+										   (setq header-line-format (generateHeadline))
+										   )))
+
 
 (require 'subr-x)
 (require 'ibuffer)
@@ -18,10 +20,10 @@
 (setq-default ibuffer-default-sorting-mode 'alphabetic)
 
 (add-hook 'ibuffer-hook
-          (lambda ()
-              (if (not default-buffers-shown)
-                  (ibuffer-filter-by-name "^[^\*]"))
-              (ibuffer-update)))
+		  (lambda ()
+			  (if (not default-buffers-shown)
+				  (ibuffer-filter-by-name "^[^\*]"))
+			  (ibuffer-update)))
 
 (load-file "~/.emacs.d/init_window.el")
 (load-file "~/.emacs.d/custom.el")

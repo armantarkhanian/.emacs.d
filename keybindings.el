@@ -51,6 +51,10 @@
 	(dolist (buffer-name ss)
 		(if (not (string-match-p (regexp-quote "*") buffer-name))
 			(progn
+				(if (equal buffer-name (buffer-name))
+					(put-text-property 0 (length buffer-name) 'face 'font-lock-warning-face
+									   buffer-name))
+
 				(setq str (concat str ";" buffer-name))
 				)))
 	(setq str (string-trim str " " " "))
@@ -59,10 +63,8 @@
 
 (setq header-line-format (generateHeadline))
 
-(insert (mapconcat (function buffer-name) (buffer-list) " "))
-
-
-(global-set-key (kbd "C-<tab>") 'ibuffer)
+(global-set-key (kbd "C-<tab>") 'switchPrevBuffer)
+;;(global-set-key (kbd "C-<backspace>") 'switchPrevBuffer)
 (define-key ibuffer-mode-map (kbd "C-<return>") 'ibuffer-visit-buffer)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
 
