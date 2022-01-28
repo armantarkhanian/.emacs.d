@@ -22,26 +22,11 @@
 (setq lsp-file-watch-threshold 2000)
 (setq lsp-enable-file-watchers nil)
 
-;;(setq lsp-idle-delay 0.500)
-
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
-
-;; (use-package company-tabnine :ensure t)
 
 (use-package magit-delta
 	:ensure t
 	:hook (magit-mode . magit-delta-mode))
-
-;; (use-package vlf :ensure t)
-
-;; (vlf-mode 1)
-
-;; (use-package apheleia :ensure t)
-;; (apheleia-global-mode 1)
-;; (apheleia-global-mode nil)
-
-
-
 
 (use-package smart-shift
  	:ensure t)
@@ -106,13 +91,11 @@
 (use-package
     graphql-mode
     :ensure t
-    ;;:defer
     :mode "\\.graphqls\\'")
 
 (use-package
     html-to-markdown
     :ensure t
-    ;;:defer
     )
 
 (add-hook 'before-save-hook #'md)
@@ -120,7 +103,6 @@
 (use-package
     markdown-mode
     :ensure t
-    ;;:defer
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
@@ -144,31 +126,26 @@
 (use-package
     restclient
     :ensure t
-    ;;:defer
     )
 
 (use-package
     dockerfile-mode
     :ensure t
-    ;;:defer
     )
 
 (use-package
     mark-multiple
     :ensure t
-    ;;:defer
     )
 
 (use-package
     multiple-cursors
     :ensure t
-    ;;:defer
     )
 
 (use-package
     bm
     :ensure t
-    ;;:defer
     :init
 
     (setq bm-restore-repository-on-load t)
@@ -205,7 +182,6 @@
 (use-package
     webpaste
     :ensure t
-    ;;:defer
     :bind (("C-c C-p C-r" . webpaste-paste-region))
     :config (progn
                 (setq webpaste-provider-priority '("dpaste.org" "ix.io"))))
@@ -225,7 +201,6 @@
 (use-package
     ace-jump-mode
     :ensure t
-    ;;:defer
     )
 
 
@@ -233,7 +208,6 @@
 (use-package
     ace-window
     :ensure t
-    ;;:defer
     )
 
 (defun fuck()
@@ -243,7 +217,6 @@
 (use-package
     selected
     :ensure t
-    ;;:defer
     :commands selected-minor-mode
     :bind (:map selected-keymap
 				;; ("M-p" . smart-shift-up)
@@ -295,7 +268,7 @@
 
     ;; A list of ways to display buffer lines with `all-the-icons'.
     ;; See `ibuffer-formats' for details.
-    all-the-icons-ibuffer-formats
+    ;; all-the-icons-ibuffer-formats
 
     ;; Slow Rendering
     ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
@@ -306,13 +279,11 @@
 (use-package
     goto-line-preview
     :ensure t
-    ;;:defer
     )
 
 (use-package
     doom-modeline
     :ensure t
-    ;;:defer
     :init (doom-modeline-mode 1))
 
 (setq doom-modeline-minor-modes nil)
@@ -337,7 +308,6 @@
 (use-package
     doom-themes
     :ensure t
-    ;;:defer
     :config
     ;; Global settings (defaults)
     (setq doom-themes-enable-bold t    ;; if nil, bold is universally disabled
@@ -352,7 +322,6 @@
 (use-package
     vscode-dark-plus-theme
     :ensure t
-    ;;:defer
     )
 
 ;;(load-theme 'vscode-dark-plus t)
@@ -671,5 +640,3 @@
 			(activate-input-method current))))
 
 (reverse-input-method 'russian-computer)
-
-(set-frame-size (selected-frame) 100 30)
