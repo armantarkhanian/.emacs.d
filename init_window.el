@@ -28,6 +28,9 @@
 	:ensure t
 	:hook (magit-mode . magit-delta-mode))
 
+(use-package jenkinsfile-mode
+	:ensure t)
+
 (use-package smart-shift
  	:ensure t)
 
@@ -461,7 +464,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace Bold 11")
+(set-face-attribute 'default nil :font "Monospace Bold 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -576,7 +579,7 @@
 
 (defun my-web-mode-hook ()
 	"Hooks for Web mode."
-	(setq web-mode-markup-indent-offset 2)
+	(setq web-mode-markup-indent-offset 4)
 	(setq web-mode-css-indent-offset 2)
 	(setq web-mode-code-indent-offset 2)
 	(setq web-mode-attr-indent-offset 2)
