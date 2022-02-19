@@ -32,11 +32,10 @@
 
 ;; lsp
 (global-set-key (kbd "C-M-.") 'lsp-goto-implementation)
-;;(global-set-key (kbd "C-M-.") 'eglot-find-implementation)
 (global-set-key (kbd "C-M-/") 'custom/lsp-goto-test)
 (global-set-key (kbd "C-j") 'lsp-execute-code-action)
 (global-set-key (kbd "C-M-j") 'ace-jump-char-mode)
-(global-set-key (kbd "C-m") 'ace-jump-char-mode)
+(global-set-key (kbd "C-r") 'ace-jump-char-mode)
 (global-set-key (kbd "C->") 'mark-next-like-this)
 
 ;;(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
