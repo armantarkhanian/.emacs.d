@@ -24,11 +24,20 @@
 
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
+(use-package dakrone-theme
+	:ensure t)
+
 (use-package magit-delta
 	:ensure t
 	:hook (magit-mode . magit-delta-mode))
 
 (use-package jenkinsfile-mode
+	:ensure t)
+
+(use-package jenkins
+	:ensure t)
+
+(use-package jenkins-watch
 	:ensure t)
 
 (use-package smart-shift
@@ -328,7 +337,9 @@
     )
 
 ;;(load-theme 'vscode-dark-plus t)
-(load-theme 'doom-badger t)
+;;(load-theme 'dakrone t)
+;;(load-theme 'doom-badger t)
+(load-theme 'intellij t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -359,16 +370,16 @@
 	lsp-ui
 	:ensure t
 	:commands lsp-ui-mode
-	;; :config
-	;; (setq lsp-ui-doc-alignment 'window)
-	;;(setq lsp-ui-doc-border "#dfdfdf")
-	;; (setq lsp-ui-doc-header nil)
-	;; (setq lsp-ui-doc-max-height 30)
-	;; (setq lsp-ui-doc-max-width 70)
-	;; (setq lsp-ui-doc-position 'top)
-	;; (setq lsp-ui-doc-use-webkit nil)
-	;;(set-face-attribute 'lsp-ui-doc-background nil
-	;;:background "#f9f9f9")
+	:config
+	(setq lsp-ui-doc-alignment 'window)
+	(setq lsp-ui-doc-border "#ccc")
+	(setq lsp-ui-doc-header nil)
+	(setq lsp-ui-doc-max-height 35)
+	(setq lsp-ui-doc-max-width 80)
+	(setq lsp-ui-doc-position 'top)
+	(setq lsp-ui-doc-use-webkit nil)
+	(set-face-attribute 'lsp-ui-doc-background nil
+	  					:background "#eeeeee")
 	)
 
 (use-package
@@ -464,7 +475,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace Bold 12")
+(set-face-attribute 'default nil :font "Monospace 11")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
