@@ -338,8 +338,8 @@
 
 ;;(load-theme 'vscode-dark-plus t)
 ;;(load-theme 'dakrone t)
-;;(load-theme 'doom-badger t)
-(load-theme 'intellij t)
+(load-theme 'doom-badger t)
+;;(load-theme 'intellij t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -372,14 +372,13 @@
 	:commands lsp-ui-mode
 	:config
 	(setq lsp-ui-doc-alignment 'window)
-	(setq lsp-ui-doc-border "#ccc")
+	;; (setq lsp-ui-doc-border "#ccc")
 	(setq lsp-ui-doc-header nil)
 	(setq lsp-ui-doc-max-height 35)
 	(setq lsp-ui-doc-max-width 80)
 	(setq lsp-ui-doc-position 'top)
 	(setq lsp-ui-doc-use-webkit nil)
-	(set-face-attribute 'lsp-ui-doc-background nil
-	  					:background "#eeeeee")
+	;; (set-face-attribute 'lsp-ui-doc-background nil :background "#eeeeee")
 	)
 
 (use-package
