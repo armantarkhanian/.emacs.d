@@ -364,7 +364,11 @@
     :config
 	(setq lsp-prefer-flymake :none)
     (setq lsp-flycheck-enable nil)
-    (setq lsp-headerline-breadcrumb-enable nil))
+    (setq lsp-headerline-breadcrumb-enable nil)
+
+	(setq lsp-go-analyses '((shadow . t)))
+
+	)
 
 (use-package
 	lsp-ui
@@ -474,7 +478,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace 11")
+(set-face-attribute 'default nil :font "Monospace Bold 11")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -548,10 +552,7 @@
 
 (use-package
 	go-mode
-	:ensure t
-	:config
-	(setq lsp-go-hover-kind "FullDocumentation")
-	(setq lsp-go-use-gofumpt t))
+	:ensure t)
 
 (defun lsp-go-install-save-hooks ()
 	(add-hook 'before-save-hook #'lsp-format-buffer t t)
