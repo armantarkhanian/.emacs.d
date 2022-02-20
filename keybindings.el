@@ -23,8 +23,8 @@
 (global-set-key (kbd "M-<right>") 'smart-shift-right)
 
 ;; flycheck
-(global-set-key (kbd "C-<right>") 'flycheck-next-error)
-(global-set-key (kbd "C-<left>") 'flycheck-previous-error)
+(global-set-key (kbd "C-S-n") 'flycheck-next-error)
+(global-set-key (kbd "C-S-p") 'flycheck-previous-error)
 (global-set-key (kbd "C-x r t") 'string-insert-rectangle)
 
 (global-set-key (kbd "C-x s") 'custom/autoformat-sql)
