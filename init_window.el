@@ -364,11 +364,7 @@
     :config
 	(setq lsp-prefer-flymake :none)
     (setq lsp-flycheck-enable nil)
-    (setq lsp-headerline-breadcrumb-enable nil)
-
-	(setq lsp-go-analyses '((shadow . t)))
-
-	)
+    (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package
 	lsp-ui
@@ -552,7 +548,19 @@
 
 (use-package
 	go-mode
-	:ensure t)
+	:ensure t
+	:config
+
+	(setq lsp-go-use-gofumpt t)
+
+	(setq lsp-go-analyses '(
+							(shadow . t)
+							(fieldalignment . t)
+							(nilness . t)
+							(unusedparams . t)
+							(unusedwrite . t)
+							))
+	)
 
 (defun lsp-go-install-save-hooks ()
 	(add-hook 'before-save-hook #'lsp-format-buffer t t)
