@@ -549,17 +549,22 @@
 (use-package
 	go-mode
 	:ensure t
+	:custom
+	(lsp-go-use-gofumpt t)
+
+	(lsp-go-analyses '(
+					   (shadow . t)
+					   (fieldalignment . t)
+					   (nilness . t)
+					   (unusedparams . t)
+					   (unusedwrite . t)
+					   ))
 	:config
-
-	(setq lsp-go-use-gofumpt t)
-
-	(setq lsp-go-analyses '(
-							(shadow . t)
-							(fieldalignment . t)
-							(nilness . t)
-							(unusedparams . t)
-							(unusedwrite . t)
-							))
+	(lsp-register-custom-settings
+	 '(
+	   ("gopls.allExperiments" t)
+	   ("gopls.gofumpt" t)
+	   ))
 	)
 
 (defun lsp-go-install-save-hooks ()
