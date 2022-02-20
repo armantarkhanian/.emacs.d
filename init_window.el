@@ -25,35 +25,35 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 (use-package dakrone-theme
-	:ensure t)
+    :ensure t)
 
 (use-package magit-delta
-	:ensure t
-	:hook (magit-mode . magit-delta-mode))
+    :ensure t
+    :hook (magit-mode . magit-delta-mode))
 
 (use-package jenkinsfile-mode
-	:ensure t)
+    :ensure t)
 
 (use-package jenkins
-	:ensure t)
+    :ensure t)
 
 (use-package jenkins-watch
-	:ensure t)
+    :ensure t)
 
 (use-package smart-shift
- 	:ensure t)
+    :ensure t)
 
 (use-package jq-format
-	:ensure t
-	:after json-mode)
+    :ensure t
+    :after json-mode)
 
 (use-package expand-region
-	:ensure t)
+    :ensure t)
 
 (use-package yaml-mode
-	:ensure t
-	:config
-	(setq-default yaml-indent-offset 2))
+    :ensure t
+    :config
+    (setq-default yaml-indent-offset 2))
 
 (defun lsp-yaml-install-save-hooks ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t))
@@ -72,8 +72,8 @@
 (use-package
     magit
     :ensure t
-	:config
-	(setq magit-ediff-dwim-show-on-hunks t))
+    :config
+    (setq magit-ediff-dwim-show-on-hunks t))
 
 (add-hook 'ediff-load-hook
           (lambda ()
@@ -125,8 +125,8 @@
     key-chord
     :ensure t
     :config
-	;; (key-chord-define-global "<<" 'smart-shift-left)
-	;; (key-chord-define-global ">>" 'smart-shift-right)
+    ;; (key-chord-define-global "<<" 'smart-shift-left)
+    ;; (key-chord-define-global ">>" 'smart-shift-right)
     )
 
 (key-chord-mode 1)
@@ -163,6 +163,7 @@
     (setq bm-restore-repository-on-load t)
 
     :config
+    (setq bm-highlight-style 'bm-highlight-only-line)
 
     (setq bm-cycle-all-buffers t)
 
@@ -203,7 +204,7 @@
     :ensure t)
 
 ;; (defun my-highlighter (level responsive display)
-;; 	(if (> 1 level)
+;;     (if (> 1 level)
 ;;         nil
 ;;         (highlight-indent-guides--highlighter-default level responsive display)))
 ;; (setq highlight-indent-guides-highlighter-function 'my-highlighter)
@@ -223,26 +224,26 @@
     )
 
 (defun fuck()
-	(interactive)
-	(message "fuck"))
+    (interactive)
+    (message "fuck"))
 
 (use-package
     selected
     :ensure t
     :commands selected-minor-mode
     :bind (:map selected-keymap
-				;; ("M-p" . smart-shift-up)
-				;; ("M-n" . smart-shift-down)
-				;; ("M-f" . smart-shift-right)
-				;; ("M-b" . smart-shift-left)
+                ;; ("M-p" . smart-shift-up)
+                ;; ("M-n" . smart-shift-down)
+                ;; ("M-f" . smart-shift-right)
+                ;; ("M-b" . smart-shift-left)
                 ("TAB" . custom/indent-region)
                 ("r" . calc-region)
                 ("q" . selected-off)
-				("c" . webpaste-paste-region)
-				("u" . upcase-region)
-				("d" . downcase-region)
-				("w" . count-words-region)
-				("m" . apply-macro-to-region-lines)))
+                ("c" . webpaste-paste-region)
+                ("u" . upcase-region)
+                ("d" . downcase-region)
+                ("w" . count-words-region)
+                ("m" . apply-macro-to-region-lines)))
 
 (selected-global-mode 1)
 
@@ -348,8 +349,8 @@
 
 (setq lsp-sqls-connections
       '(
-		((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5433 user=root password=password dbname=postgres sslmode=disable TimeZone='Europe/Moscow'"))
-		))
+        ((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5433 user=root password=password dbname=postgres sslmode=disable TimeZone='Europe/Moscow'"))
+        ))
 
 (use-package
     lsp-mode
@@ -362,32 +363,32 @@
     :hook (python-mode . lsp-deferred)
     :hook (dart-mode . lsp)
     :config
-	(setq lsp-prefer-flymake :none)
+    (setq lsp-prefer-flymake :none)
     (setq lsp-flycheck-enable nil)
     (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package
-	lsp-ui
-	:ensure t
-	:commands lsp-ui-mode
-	:config
-	(setq lsp-ui-doc-alignment 'window)
-	;; (setq lsp-ui-doc-border "#ccc")
-	(setq lsp-ui-doc-header nil)
-	(setq lsp-ui-doc-max-height 35)
-	(setq lsp-ui-doc-max-width 80)
-	(setq lsp-ui-doc-position 'top)
-	(setq lsp-ui-doc-use-webkit nil)
-	;; (set-face-attribute 'lsp-ui-doc-background nil :background "#eeeeee")
-	)
+    lsp-ui
+    :ensure t
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-doc-alignment 'window)
+    ;; (setq lsp-ui-doc-border "#ccc")
+    (setq lsp-ui-doc-header nil)
+    (setq lsp-ui-doc-max-height 35)
+    (setq lsp-ui-doc-max-width 80)
+    (setq lsp-ui-doc-position 'top)
+    (setq lsp-ui-doc-use-webkit nil)
+    ;; (set-face-attribute 'lsp-ui-doc-background nil :background "#eeeeee")
+    )
 
 (use-package
-	elisp-format
-	:ensure t)
+    elisp-format
+    :ensure t)
 
 (use-package
-	rainbow-mode
-	:ensure t)
+    rainbow-mode
+    :ensure t)
 
 (rainbow-mode 1)
 
@@ -459,7 +460,7 @@
 (fringe-mode '(0 . 0))
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)
-								  ((control) . nil)))
+                                  ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
 ;;(add-hook 'yaml-mode-hook (lambda ()
@@ -468,8 +469,8 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (add-hook 'dired-mode-hook (lambda()
-							   (define-key dired-mode-map "b" 'dired-up-directory)
-							   (dired-hide-details-mode)))
+                               (define-key dired-mode-map "b" 'dired-up-directory)
+                               (dired-hide-details-mode)))
 
 (setq-default indicate-empty-lines nil)
 
@@ -494,170 +495,170 @@
 (setq x-select-enable-clipboard t)
 
 (use-package
-	flycheck
-	:ensure t
-	:diminish flycheck-mode
-	:config
-	(global-flycheck-mode)
-	;; disable jshint since we prefer eslint checking
-	(setq-default flycheck-disabled-checkers
-				  (append flycheck-disabled-checkers
-						  '(javascript-jshint)))
+    flycheck
+    :ensure t
+    :diminish flycheck-mode
+    :config
+    (global-flycheck-mode)
+    ;; disable jshint since we prefer eslint checking
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint)))
 
-	(setq flycheck-checkers '(javascript-eslint))
-	;; use eslint with web-mode for jsx files
-	(flycheck-add-mode 'javascript-eslint 'web-mode)
-	(flycheck-add-mode 'javascript-eslint 'js2-mode)
-	(flycheck-add-mode 'javascript-eslint 'js-mode)
-	;; disable json-jsonlist checking for json files
-	(setq-default flycheck-disabled-checkers
-				  (append flycheck-disabled-checkers
-						  '(json-jsonlist)))
-	)
+    (setq flycheck-checkers '(javascript-eslint))
+    ;; use eslint with web-mode for jsx files
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+    (flycheck-add-mode 'javascript-eslint 'js2-mode)
+    (flycheck-add-mode 'javascript-eslint 'js-mode)
+    ;; disable json-jsonlist checking for json files
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(json-jsonlist)))
+    )
 
 (use-package yasnippet
-	:ensure t
-	:config
-	(with-eval-after-load 'yasnippet
-		(validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+    :ensure t
+    :config
+    (with-eval-after-load 'yasnippet
+        (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
 
-	(yas-reload-all))
+    (yas-reload-all))
 
 (yas-global-mode)
 
 (use-package yasnippet-snippets
-	:ensure t)
+    :ensure t)
 
 (use-package
-	company
-	:ensure t
-	:init
+    company
+    :ensure t
+    :init
 
-	(setq company-idle-delay t)
-	(setq company-tooltip-align-annotations t)
-	(setq company-dabbrev-char-regexp "[A-z:-]")
+    (setq company-idle-delay t)
+    (setq company-tooltip-align-annotations t)
+    (setq company-dabbrev-char-regexp "[A-z:-]")
 
-	:hook (after-init . global-company-mode)
-	:bind (:map prog-mode-map
-				("C-i" . company-indent-or-complete-common)
-				("C-M-i" . counsel-company)))
-
-(use-package
-	flycheck-golangci-lint
-	:ensure t)
+    :hook (after-init . global-company-mode)
+    :bind (:map prog-mode-map
+                ("C-i" . company-indent-or-complete-common)
+                ("C-M-i" . counsel-company)))
 
 (use-package
-	go-mode
-	:ensure t
-	:custom
-	(lsp-go-use-gofumpt t)
+    flycheck-golangci-lint
+    :ensure t)
 
-	(lsp-go-analyses '(
-					   (shadow . t)
-					   (fieldalignment . t)
-					   (nilness . t)
-					   (unusedparams . t)
-					   (unusedwrite . t)
-					   ))
-	)
+(use-package
+    go-mode
+    :ensure t
+    :custom
+    (lsp-go-use-gofumpt t)
+
+    (lsp-go-analyses '(
+                       (shadow . t)
+                       (fieldalignment . t)
+                       (nilness . t)
+                       (unusedparams . t)
+                       (unusedwrite . t)
+                       ))
+    )
 
 (defun lsp-go-install-save-hooks ()
-	(add-hook 'before-save-hook #'lsp-format-buffer t t)
-	(add-hook 'before-save-hook #'lsp-organize-imports t t))
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (add-hook 'before-save-hook #'fmt)
 
 (add-hook 'go-mode-hook (lambda ()
-							(lsp)
-							(lsp-go-install-save-hooks)
-							(flycheck-mode)
-							(flycheck-golangci-lint-setup)
-							(flycheck-select-checker 'golangci-lint)
-							))
+                            (lsp)
+                            (lsp-go-install-save-hooks)
+                            (flycheck-mode)
+                            (flycheck-golangci-lint-setup)
+                            (flycheck-select-checker 'golangci-lint)
+                            ))
 
 
 (use-package
-	web-mode
-	:ensure t
-	:mode "\\.vue\\'"
-	:mode "\\.html\\'"
-	:mode "\\.js\\'"
-	:mode "\\.json\\'"
-	:mode "\\.jsx\\'"
-	:mode "\\.ts\\'"
-	:mode "\\.tsx\\'"
-	:config
-	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-	(setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
-	(setq web-mode-enable-auto-pairing t)
-	(setq web-mode-enable-auto-closing t)
-	(setq web-mode-enable-current-element-highlight nil)
-	)
+    web-mode
+    :ensure t
+    :mode "\\.vue\\'"
+    :mode "\\.html\\'"
+    :mode "\\.js\\'"
+    :mode "\\.json\\'"
+    :mode "\\.jsx\\'"
+    :mode "\\.ts\\'"
+    :mode "\\.tsx\\'"
+    :config
+    (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+    (setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
+    (setq web-mode-enable-auto-pairing t)
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-current-element-highlight nil)
+    )
 
 
 (defun my-web-mode-hook ()
-	"Hooks for Web mode."
-	(setq web-mode-markup-indent-offset 4)
-	(setq web-mode-css-indent-offset 2)
-	(setq web-mode-code-indent-offset 2)
-	(setq web-mode-attr-indent-offset 2)
-	(setq web-mode-style-padding 0)
-	(setq web-mode-script-padding 0)
-	(setq web-mode-script-padding 0)
-	(setq web-mode-block-padding 0)
-	(define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
-	(define-key web-mode-map (kbd "C-=") 'web-mode-fold-or-unfold)
-	)
+    "Hooks for Web mode."
+    (setq web-mode-markup-indent-offset 4)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-attr-indent-offset 2)
+    (setq web-mode-style-padding 0)
+    (setq web-mode-script-padding 0)
+    (setq web-mode-script-padding 0)
+    (setq web-mode-block-padding 0)
+    (define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
+    (define-key web-mode-map (kbd "C-=") 'web-mode-fold-or-unfold)
+    )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 
 (use-package
-	protobuf-mode
-	:ensure t)
+    protobuf-mode
+    :ensure t)
 
 (defconst my-protobuf-style
   '((indent-tabs-mode . nil)
-	(c-basic-offset . 2)))
+    (c-basic-offset . 2)))
 
 (add-hook 'protobuf-mode-hook
-		  (lambda () (c-add-style "my-style" my-protobuf-style t)))
+          (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 (font-lock-add-keywords
  'go-mode
  '(("\\<\\(\\|int\\|string\\|bool\\|byte\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|true\\|uint\\|uint8\\|uintptr\\)\\>"
-	. font-lock-type-face)))
+    . font-lock-type-face)))
 
 (font-lock-add-keywords
  'sql-mode
  '(("\\<\\(\\|int\\|string\\|\\|TINYINT\\|complex\\|complex64\\|complex128\\|uint16\\|false\\|float32\\|float64\\|int\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|datetime\\|bigint\\|\\|uintptr\\)\\>"
-	. font-lock-type-face)))
+    . font-lock-type-face)))
 
 (font-lock-add-keywords
  'sql-mode
  '(("\\<\\(\\|\\|string\\|UNSIGNED\\|\\|if\\|complex64\\|use\\|uint16\\|false\\|float32\\|float64\\|\\|int8\\|int16\\|uint32\\|int32\\|int64\\|iota\\|uint64\\|\\|\\|AUTO_INCREMENT\\|uintptr\\)\\>"
-	. font-lock-keyword-face)))
+    . font-lock-keyword-face)))
 
 (defun reverse-input-method (input-method)
-	"Build the reverse mapping of single letters from INPUT-METHOD."
-	(interactive
-	 (list (read-input-method-name "Use input method (default current): ")))
-	(if (and input-method (symbolp input-method))
-		(setq input-method (symbol-name input-method)))
-	(let ((current current-input-method)
-		  (modifiers '(nil (control) (meta) (control meta))))
-		(when input-method
-			(activate-input-method input-method))
-		(when (and current-input-method quail-keyboard-layout)
-			(dolist (map (cdr (quail-map)))
-				(let* ((to (car map))
-					   (from (quail-get-translation
-							  (cadr map) (char-to-string to) 1)))
-					(when (and (characterp from) (characterp to))
-						(dolist (mod modifiers)
-							(define-key local-function-key-map
-								(vector (append mod (list from)))
-								(vector (append mod (list to)))))))))
-		(when input-method
-			(activate-input-method current))))
+    "Build the reverse mapping of single letters from INPUT-METHOD."
+    (interactive
+     (list (read-input-method-name "Use input method (default current): ")))
+    (if (and input-method (symbolp input-method))
+        (setq input-method (symbol-name input-method)))
+    (let ((current current-input-method)
+          (modifiers '(nil (control) (meta) (control meta))))
+        (when input-method
+            (activate-input-method input-method))
+        (when (and current-input-method quail-keyboard-layout)
+            (dolist (map (cdr (quail-map)))
+                (let* ((to (car map))
+                       (from (quail-get-translation
+                              (cadr map) (char-to-string to) 1)))
+                    (when (and (characterp from) (characterp to))
+                        (dolist (mod modifiers)
+                            (define-key local-function-key-map
+                                (vector (append mod (list from)))
+                                (vector (append mod (list to)))))))))
+        (when input-method
+            (activate-input-method current))))
 
 (reverse-input-method 'russian-computer)

@@ -38,4 +38,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bm-face ((t (:background "DarkOrange1" :foreground "Black"))))
+ '(bm-persistent-face ((t (:background "DarkOrange1" :foreground "White"))))
  '(cursor ((t (:box (:line-width (2 . 2) :color "#ccc" :style released-button))))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
