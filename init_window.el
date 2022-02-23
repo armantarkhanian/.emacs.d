@@ -24,6 +24,23 @@
 
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
+(use-package blamer
+	:ensure t
+	:bind (("s-i" . blamer-show-commit-info))
+	:defer 20
+	:custom
+	(blamer-idle-time 0.3)
+	(blamer-min-offset 70)
+	:custom-face
+	(blamer-face ((t :foreground "#7a88cf"
+                     :background nil
+                     :italic t)))
+	:config
+	(global-blamer-mode 0))
+
+(use-package ujelly-theme
+    :ensure t)
+
 (use-package dakrone-theme
     :ensure t)
 
@@ -475,7 +492,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace Bold 11")
+(set-face-attribute 'default nil :font "Ubuntu Mono 12")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
