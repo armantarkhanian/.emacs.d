@@ -373,12 +373,12 @@
     lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
-    :hook (sql-mode . lsp-deferred)
-    :hook (yaml-mode . lsp-deferred)
-    :hook (dockerfile-mode . lsp-deferred)
+    ;;:hook (sql-mode . lsp-deferred)
+    ;;:hook (yaml-mode . lsp-deferred)
+    ;;:hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
-    :hook (python-mode . lsp-deferred)
-    :hook (dart-mode . lsp)
+    ;;:hook (python-mode . lsp-deferred)
+    ;;:hook (dart-mode . lsp)
     :config
     (setq lsp-prefer-flymake :none)
     (setq lsp-flycheck-enable nil)
@@ -492,7 +492,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Ubuntu Mono 12")
+(set-face-attribute 'default nil :font "Monospace Bold 11")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)

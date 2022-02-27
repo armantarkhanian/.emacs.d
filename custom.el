@@ -388,8 +388,8 @@ type Location, LocationLink, Location[] or LocationLink[]."
 									(let ((visiting (find-buffer-visiting filename))
 										  (fn (lambda (loc)
 												  (lsp-with-filename filename
-													  (lsp--xref-make-item filename
-																		   (lsp--location-range loc))))))
+																	 (lsp--xref-make-item filename
+																						  (lsp--location-range loc))))))
 										(if visiting
 											(with-current-buffer visiting
 												(seq-map fn matches))
@@ -587,6 +587,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'makefile-gmake-mode))
 		 (not (eq major-mode 'yaml-mode))
 		 (not (eq major-mode 'go-mode))
+		 (not (eq major-mode 'fundamental-mode))
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
