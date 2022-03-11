@@ -1,3 +1,10 @@
+(define-obsolete-function-alias 'smerge-keep-mine 'smerge-keep-upper "")
+(define-obsolete-function-alias 'smerge-keep-their 'smerge-keep-lower "")
+
+(define-obsolete-function-alias 'mine 'smerge-keep-upper "")
+(define-obsolete-function-alias 'their 'smerge-keep-lower "")
+
+
 (defun comp ()
 	(interactive)
 	(if  (eq major-mode 'protobuf-mode)
@@ -388,8 +395,8 @@ type Location, LocationLink, Location[] or LocationLink[]."
 									(let ((visiting (find-buffer-visiting filename))
 										  (fn (lambda (loc)
 												  (lsp-with-filename filename
-																	 (lsp--xref-make-item filename
-																						  (lsp--location-range loc))))))
+													  (lsp--xref-make-item filename
+																		   (lsp--location-range loc))))))
 										(if visiting
 											(with-current-buffer visiting
 												(seq-map fn matches))
@@ -592,8 +599,8 @@ This command does not push text to `kill-ring'."
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
 
-	(when (eq major-mode 'sql-mode)
-		(custom/format-sql-buffer))
+	;; (when (eq major-mode 'sql-mode)
+	;; 	(custom/format-sql-buffer))
 
 	(when (equal (file-name-extension (buffer-file-name)) "json")
 		(custom/format-json-buffer))
