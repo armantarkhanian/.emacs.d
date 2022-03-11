@@ -572,7 +572,7 @@
 
     (lsp-go-analyses '(
                        (shadow . t)
-                       (fieldalignment . t)
+                       ;; (fieldalignment . t)
                        (nilness . t)
                        (unusedparams . t)
                        (unusedwrite . t)
