@@ -99,17 +99,17 @@
 								   "--24-bit-color" "always"
 								   "--color-only"
 								   "--diff-highlight"
+								   "--relative-paths"
+								   "--width" "145"
 								   ;; new args
-								   "--diff-so-fancy"
-								   "--minus-style" "normal #49000d"
-								   "--minus-emph-style" "normal #49000d"
+								   ;;								   "--minus-style" "normal #49000d"
+								   ;;								   "--minus-emph-style" "normal #49000d"
 
-								   "--plus-style"      "normal #004019"
-								   "--plus-emph-style" "#093 #004019"
+								   ;; "--plus-style"      "#fff #28a65a"
+								   ;;								   "--plus-emph-style" "#093 #004019"
 
-								   "--zero-style" "normal auto"
+								   ;;								   "--zero-style" "normal auto"
 								   )))
-
 (use-package
     helm
     :ensure t)
