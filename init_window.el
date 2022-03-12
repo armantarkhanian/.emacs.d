@@ -44,10 +44,6 @@
 (use-package dakrone-theme
     :ensure t)
 
-(use-package magit-delta
-    :ensure t
-    :hook (magit-mode . magit-delta-mode))
-
 (use-package jenkinsfile-mode
     :ensure t)
 
@@ -88,26 +84,25 @@
 
 (use-package
     magit
-    :ensure t
-    :config
-    (setq magit-ediff-dwim-show-on-hunks t))
-
-(add-hook 'ediff-load-hook
-          (lambda ()
-              (set-face-foreground
-               ediff-current-diff-face-B "blue")
-              (set-face-background
-               ediff-current-diff-face-B "red")
-              (make-face-italic
-               ediff-current-diff-face-B)))
-
-(use-package
-    vdiff
     :ensure t)
 
-(use-package
-    vdiff-magit
-    :ensure t)
+(use-package magit-delta
+	:ensure t
+	:hook (magit-mode . magit-delta-mode)
+	:config
+	(setq magit-delta-default-dark-theme "Visual Studio Dark+")
+	(setq magit-delta-default-light-theme "Github")
+	(setq magit-delta-hide-plus-minus-markers t)
+	(setq magit-delta-delta-args '(
+								   "--max-line-distance" "0.6"
+								   "--24-bit-color" "always"
+								   "--color-only"
+								   ;; new args
+								   "--diff-so-fancy"
+								   "--minus-style" "red red"
+								   "--plus-style" "red red"
+								   "--zero-style" "red red"
+								   )))
 
 (use-package
     helm
@@ -349,20 +344,20 @@
     (setq doom-themes-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
     )
 
-(use-package
-    vscode-dark-plus-theme
-    :ensure t
-    )
+(use-package vscode-dark-plus-theme
+    :ensure t)
+
+(use-package github-theme
+	:ensure t)
 
 ;;(load-theme 'vscode-dark-plus t)
 ;;(load-theme 'dakrone t)
-(load-theme 'doom-badger t)
 ;;(load-theme 'intellij t)
+(load-theme 'doom-badger t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
 
 (setq lsp-sqls-connections
       '(
@@ -683,8 +678,8 @@
 (use-package git-gutter
 	:ensure t
 	:diminish
-	:hook ((text-mode . git-gutter-mode)
-           (prog-mode . git-gutter-mode))
+	;; :hook ((text-mode . git-gutter-mode)
+    ;; (prog-mode . git-gutter-mode))
 	:config
 	(setq git-gutter:update-interval 2)
 
