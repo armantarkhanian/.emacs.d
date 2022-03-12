@@ -86,6 +86,7 @@
     magit
     :ensure t)
 
+;; To use magit-delta install "delta" binary into $PATH from https://dandavison.github.io/delta/installation.html
 (use-package magit-delta
 	:ensure t
 	:hook (magit-mode . magit-delta-mode)
