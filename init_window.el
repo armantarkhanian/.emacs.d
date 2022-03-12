@@ -97,11 +97,16 @@
 								   "--max-line-distance" "0.6"
 								   "--24-bit-color" "always"
 								   "--color-only"
+								   "--diff-highlight"
 								   ;; new args
 								   "--diff-so-fancy"
-								   "--minus-style" "red red"
-								   "--plus-style" "red red"
-								   "--zero-style" "red red"
+								   "--minus-style" "normal #49000d"
+								   "--minus-emph-style" "normal #49000d"
+
+								   "--plus-style"      "normal #004019"
+								   "--plus-emph-style" "#093 #004019"
+
+								   "--zero-style" "normal auto"
 								   )))
 
 (use-package
