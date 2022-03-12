@@ -100,7 +100,6 @@
 								   "--color-only"
 								   "--diff-highlight"
 								   "--relative-paths"
-								   "--width" "145"
 								   ;; new args
 								   ;;								   "--minus-style" "normal #49000d"
 								   ;;								   "--minus-emph-style" "normal #49000d"
