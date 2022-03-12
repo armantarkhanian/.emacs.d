@@ -679,3 +679,19 @@
             (activate-input-method current))))
 
 (reverse-input-method 'russian-computer)
+
+(use-package git-gutter
+	:ensure t
+	:diminish
+	:hook ((text-mode . git-gutter-mode)
+           (prog-mode . git-gutter-mode))
+	:config
+	(setq git-gutter:update-interval 2)
+
+	;; These characters are used in terminal mode
+	(setq git-gutter:modified-sign "M")
+	(setq git-gutter:added-sign "+")
+	(setq git-gutter:deleted-sign "-")
+	(set-face-foreground 'git-gutter:added "LightGreen")
+	(set-face-foreground 'git-gutter:modified "LightGoldenrod")
+	(set-face-foreground 'git-gutter:deleted "LightCoral"))

@@ -39,16 +39,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blamer-face ((t :foreground "#7a88cf" :background nil :italic t)))
- '(bm-face ((t (:background "DarkOrange1" :foreground "Black"))))
- '(bm-persistent-face ((t (:background "DarkOrange1" :foreground "White"))))
  '(cursor ((t (:box (:line-width (2 . 2) :color "#ccc" :style released-button)))))
- '(diff-added ((t (:foreground "#149914" :background nil :inherit nil))))
- '(diff-removed ((t (:foreground "#991414" :background nil :inherit nil))))
- '(magit-diff-added-highlight ((t (:extend t :background "orange" :foreground "#86B187" :weight bold)))))
+ '(diff-refine-added ((t (:inherit diff-added :background "red" :inverse-video t))))
+ '(magit-diff-added ((t (:extend t :background "red" :foreground "#6b8d6c"))))
+ '(magit-diff-added-highlight ((t (:extend t :background "red" :foreground "#86B187" :weight bold)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(blamer ujelly-theme yasnippet-snippets yaml-mode webpaste web-mode vue-mode vscode-dark-plus-theme vlf vdiff-magit use-package typescript-mode sublimity sqlup-mode sql-indent solarized-theme smart-shift selected restclient rainbow-mode protobuf-mode powerline org-jira no-littering neotree multiple-cursors multi-web-mode minimap mark-multiple magit-delta lsp-ui key-chord json-mode jq-format jenkinsfile-mode jenkins-watch jenkins intellij-theme ibuffer-sidebar ibuffer-projectile ibuffer-project html-to-markdown highlight-indent-guides hide-mode-line helm harvest graphql-mode goto-line-preview go-mode gitlab git-lens git friendly-shell-command friendly-shell format-all fold-dwim flycheck-golangci-lint expand-region elisp-format eglot doom-themes doom-modeline dockerfile-mode diffview dap-mode dakrone-theme company-tabnine bm apheleia all-the-icons-ibuffer all-the-icons-dired ace-jump-mode)))
+   '(git-gutter blamer ujelly-theme yasnippet-snippets yaml-mode webpaste web-mode vue-mode vscode-dark-plus-theme vlf vdiff-magit use-package typescript-mode sublimity sqlup-mode sql-indent solarized-theme smart-shift selected restclient rainbow-mode protobuf-mode powerline org-jira no-littering neotree multiple-cursors multi-web-mode minimap mark-multiple magit-delta lsp-ui key-chord json-mode jq-format jenkinsfile-mode jenkins-watch jenkins intellij-theme ibuffer-sidebar ibuffer-projectile ibuffer-project html-to-markdown highlight-indent-guides hide-mode-line helm harvest graphql-mode goto-line-preview go-mode gitlab git-lens git friendly-shell-command friendly-shell format-all fold-dwim flycheck-golangci-lint expand-region elisp-format eglot doom-themes doom-modeline dockerfile-mode diffview dap-mode dakrone-theme company-tabnine bm apheleia all-the-icons-ibuffer all-the-icons-dired ace-jump-mode)))
