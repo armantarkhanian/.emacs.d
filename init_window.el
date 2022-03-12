@@ -36,7 +36,8 @@
                      :background nil
                      :italic t)))
 	:config
-	(global-blamer-mode 0))
+	;; Включим blamer по-умолчанию
+	(global-blamer-mode 1))
 
 (use-package ujelly-theme
     :ensure t)
