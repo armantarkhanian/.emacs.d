@@ -1,3 +1,4 @@
+;; Comment from github (to pull from magit)
 (unless
     (require 'use-package nil t)
     (package-refresh-contents)
