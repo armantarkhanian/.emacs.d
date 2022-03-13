@@ -11,8 +11,8 @@
 
 (require 'subr-x)
 (require 'ibuffer)
-(setq-default ibuffer-use-header-line nil)
-(setq-default ibuffer-default-sorting-mode 'alphabetic)
+(setq ibuffer-use-header-line nil)
+(setq ibuffer-default-sorting-mode 'alphabetic)
 
 (add-hook 'ibuffer-hook
 		  (lambda ()
@@ -39,6 +39,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blamer-face ((t :foreground "#7a88cf" :background nil :italic t)))
- '(cursor ((t (:box (:line-width (2 . 2) :color "#ccc" :style released-button))))))
-'(package-selected-packages
-  '(git-gutter blamer ujelly-theme yasnippet-snippets yaml-mode webpaste web-mode vue-mode vscode-dark-plus-theme vlf vdiff-magit use-package typescript-mode sublimity sqlup-mode sql-indent solarized-theme smart-shift selected restclient rainbow-mode protobuf-mode powerline org-jira no-littering neotree multiple-cursors multi-web-mode minimap mark-multiple magit-delta lsp-ui key-chord json-mode jq-format jenkinsfile-mode jenkins-watch jenkins intellij-theme ibuffer-sidebar ibuffer-projectile ibuffer-project html-to-markdown highlight-indent-guides hide-mode-line helm harvest graphql-mode goto-line-preview go-mode gitlab git-lens git friendly-shell-command friendly-shell format-all fold-dwim flycheck-golangci-lint expand-region elisp-format eglot doom-themes doom-modeline dockerfile-mode diffview dap-mode dakrone-theme company-tabnine bm apheleia all-the-icons-ibuffer all-the-icons-dired ace-jump-mode)))
+ '(cursor ((t (:box (:line-width (2 . 2) :color "#ccc" :style released-button)))))
+ '(magit-diff-hunk-heading ((t (:extend t :background "#493c4a"))))
+ '(magit-diff-hunk-heading-highlight ((t (:extend t :background "#BF93C3" :weight bold)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

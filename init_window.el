@@ -106,34 +106,30 @@
 								   ;; Colors
 								   "--minus-style" "syntax #4b1818" ;; #4b1818 #171717
 								   "--minus-emph-style" "syntax #6f1313"
-								   "--plus-style"      "syntax #171717" ;; #373d29 #171717
+								   "--plus-style"      "syntax #373d29" ;; #373d29 #171717
 								   "--plus-emph-style" "syntax #4b5632"
 								   ;; new comment
 								   ))
 	)
 
-;; (with-eval-after-load 'magit-delta
-;;     (set-face-attribute 'magit-diff-added-highlight nil
-;; 						:extend t
-;; 						:background "#d0ffd0")
-;;     (set-face-attribute 'magit-diff-added nil
-;; 						:extend t
-;; 						:background "#d0ffd0")
-;;     (set-face-attribute 'magit-diff-removed-highlight nil
-;; 						:extend t
-;; 						:background "#ffe0e0")
-;;     (set-face-attribute 'magit-diff-removed nil
-;; 						:extend t
-;; 						:background "#ffe0e0"))
+(with-eval-after-load 'magit-delta
+    (set-face-attribute 'magit-diff-added-highlight nil
+						:extend t)
+    (set-face-attribute 'magit-diff-added nil
+						:extend t)
+    (set-face-attribute 'magit-diff-removed-highlight nil
+						:extend t)
+    (set-face-attribute 'magit-diff-removed nil
+						:extend t))
 
-;; (add-hook 'magit-delta-mode-hook
-;;           (lambda ()
-;;               (setq face-remapping-alist
-;;                     (seq-difference face-remapping-alist
-;;                                     '((magit-diff-removed . default)
-;;                                       (magit-diff-removed-highlight . default)
-;;                                       (magit-diff-added . default)
-;;                                       (magit-diff-added-highlight . default))))))
+(add-hook 'magit-delta-mode-hook
+          (lambda ()
+              (setq face-remapping-alist
+                    (seq-difference face-remapping-alist
+                                    '((magit-diff-removed . default)
+                                      (magit-diff-removed-highlight . default)
+                                      (magit-diff-added . default)
+                                      (magit-diff-added-highlight . default))))))
 
 (use-package
     helm
@@ -560,14 +556,7 @@
     )
 
 (use-package yasnippet
-    :ensure t
-    :config
-    (with-eval-after-load 'yasnippet
-        (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
-
-    (yas-reload-all))
-
-(yas-global-mode)
+    :ensure t)
 
 (use-package yasnippet-snippets
     :ensure t)
