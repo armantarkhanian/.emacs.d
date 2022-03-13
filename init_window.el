@@ -104,25 +104,26 @@
 								   "--relative-paths"
 
 								   ;; Colors
-								   "--minus-style" "syntax #4b1818"
+								   "--minus-style" "syntax #4b1818" ;; #4b1818 #171717
 								   "--minus-emph-style" "syntax #6f1313"
-								   "--plus-style"      "syntax #373d29"
+								   "--plus-style"      "syntax #171717" ;; #373d29 #171717
 								   "--plus-emph-style" "syntax #4b5632"
+								   ;; new comment
 								   ))
 	)
 
 ;; (with-eval-after-load 'magit-delta
 ;;     (set-face-attribute 'magit-diff-added-highlight nil
-;; 						:extend 1
+;; 						:extend t
 ;; 						:background "#d0ffd0")
 ;;     (set-face-attribute 'magit-diff-added nil
-;; 						:extend 1
+;; 						:extend t
 ;; 						:background "#d0ffd0")
 ;;     (set-face-attribute 'magit-diff-removed-highlight nil
-;; 						:extend 1
+;; 						:extend t
 ;; 						:background "#ffe0e0")
 ;;     (set-face-attribute 'magit-diff-removed nil
-;; 						:extend 1
+;; 						:extend t
 ;; 						:background "#ffe0e0"))
 
 ;; (add-hook 'magit-delta-mode-hook
