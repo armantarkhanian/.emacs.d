@@ -83,8 +83,7 @@
     (setq auto-save-file-name-transforms
           `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-(use-package
-    magit
+(use-package magit
     :ensure t)
 
 ;; To use magit-delta install "delta" binary into $PATH from https://dandavison.github.io/delta/installation.html
@@ -95,21 +94,45 @@
 	(setq magit-delta-default-dark-theme "Visual Studio Dark+")
 	(setq magit-delta-default-light-theme "Github")
 	(setq magit-delta-hide-plus-minus-markers t)
+
 	(setq magit-delta-delta-args '(
 								   "--max-line-distance" "0.6"
 								   "--24-bit-color" "always"
 								   "--color-only"
-								   "--diff-highlight"
+								   ;; "--diff-highlight"
 								   "--relative-paths"
-								   ;; new args
-								   ;;								   "--minus-style" "normal #49000d"
-								   ;;								   "--minus-emph-style" "normal #49000d"
 
-								   ;; "--plus-style"      "#fff #28a65a"
-								   ;;								   "--plus-emph-style" "#093 #004019"
+								   ;; Colors
+								   "--minus-style" "syntax #4b1818"
+								   "--minus-emph-style" "syntax #6f1313"
+								   "--plus-style"      "syntax #373d29"
+								   "--plus-emph-style" "syntax #4b5632"
+								   ))
+	)
 
-								   ;;								   "--zero-style" "normal auto"
-								   )))
+;; (with-eval-after-load 'magit-delta
+;;     (set-face-attribute 'magit-diff-added-highlight nil
+;; 						:extend 1
+;; 						:background "#d0ffd0")
+;;     (set-face-attribute 'magit-diff-added nil
+;; 						:extend 1
+;; 						:background "#d0ffd0")
+;;     (set-face-attribute 'magit-diff-removed-highlight nil
+;; 						:extend 1
+;; 						:background "#ffe0e0")
+;;     (set-face-attribute 'magit-diff-removed nil
+;; 						:extend 1
+;; 						:background "#ffe0e0"))
+
+;; (add-hook 'magit-delta-mode-hook
+;;           (lambda ()
+;;               (setq face-remapping-alist
+;;                     (seq-difference face-remapping-alist
+;;                                     '((magit-diff-removed . default)
+;;                                       (magit-diff-removed-highlight . default)
+;;                                       (magit-diff-added . default)
+;;                                       (magit-diff-added-highlight . default))))))
+
 (use-package
     helm
     :ensure t)
@@ -404,11 +427,11 @@
     elisp-format
     :ensure t)
 
-(use-package
-    rainbow-mode
-    :ensure t)
+(use-package rainbow-mode
+    :ensure t
+	:config
+	(rainbow-mode 1))
 
-(rainbow-mode 1)
 
 ;;(set-face-attribute 'region nil :background "#ccc" :foreground "#ffffFF")
 
