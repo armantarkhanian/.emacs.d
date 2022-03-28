@@ -38,7 +38,8 @@
                      :italic t)))
 	:config
 	;; Включим blamer по-умолчанию
-	(global-blamer-mode 1))
+	;;(global-blamer-mode 1)
+	)
 
 (use-package ujelly-theme
     :ensure t)
@@ -622,6 +623,9 @@
     :config
     (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
     (setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
+	(setq-default indent-tabs-mode nil)
+	(setq web-mode-markup-indent-offset 2)
+	(setq web-mode-code-indent-offset 2)
     (setq web-mode-enable-auto-pairing t)
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-current-element-highlight nil)

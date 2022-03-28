@@ -602,8 +602,8 @@ This command does not push text to `kill-ring'."
 	;; (when (eq major-mode 'sql-mode)
 	;; 	(custom/format-sql-buffer))
 
-	(when (equal (file-name-extension (buffer-file-name)) "json")
-		(custom/format-json-buffer))
+	;; (when (equal (file-name-extension (buffer-file-name)) "json")
+	;; (custom/format-json-buffer))
 
 	;; (when (eq major-mode 'protobuf-mode)
 	;; 	(comp))
