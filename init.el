@@ -33,12 +33,17 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(mc/list-file "/home/arman/.emacs.d/var/mc-list.el")
+ '(mc/max-cursors 10))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blamer-face ((t :foreground "#7a88cf" :background nil :italic t)))
- '(cursor ((t (:box (:line-width (2 . 2) :color "#ccc" :style released-button)))))
- '(magit-diff-hunk-heading ((t (:extend t :background "#493c4a"))))
- '(magit-diff-hunk-heading-highlight ((t (:extend t :background "#BF93C3" :weight bold)))))
+ '(cursor ((t (:background "#8AC6F2")))))
