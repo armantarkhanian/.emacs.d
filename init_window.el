@@ -392,6 +392,17 @@
         ((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5433 user=root password=password dbname=postgres sslmode=disable TimeZone='Europe/Moscow'"))
         ))
 
+(use-package ccls
+	:ensure t
+	:hook ((c-mode c++-mode objc-mode cuda-mode) .
+           (lambda () (require 'ccls) (lsp))))
+
+(use-package
+	lsp-java
+	:ensure t)
+
+(require 'lsp-java)
+
 (use-package
     lsp-mode
     :ensure t
@@ -400,6 +411,8 @@
     ;;:hook (yaml-mode . lsp-deferred)
     ;;:hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
+    ;;:hook (c++-mode . lsp-deferred)
+    :hook (java-mode . lsp)
     ;;:hook (python-mode . lsp-deferred)
     ;;:hook (dart-mode . lsp)
     :config
@@ -579,6 +592,25 @@
 (use-package
     flycheck-golangci-lint
     :ensure t)
+
+;; (use-package lsp-javacomp
+;; 	:ensure t)
+
+;; :init
+;; (add-hook 'java-mode-hook
+;;           (lambda ()
+;; 			  ;; Load lsp-javacomp before enabling lsp, so that javacomp client
+;; 			  ;; is registed.
+;; 			  (require 'lsp-javacomp')
+;; 			  (lsp)
+;; 			  ;; Use company-lsp as the company completion backend
+;; 			  (set (make-variable-buffer-local 'company-backends) '(company-lsp))
+;; 			  ;; Optional company-mode settings
+;; 			  (set (make-variable-buffer-local 'company-idle-delay) 0.1)
+;; 			  (set (make-variable-buffer-local 'company-minimum-prefix-length) 1)))
+;; ;; Optional, make sure JavaComp is installed. See below.
+;; :config
+;; (lsp-javacomp-install-server))
 
 (use-package
     go-mode
