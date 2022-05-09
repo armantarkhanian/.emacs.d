@@ -648,15 +648,13 @@
                             ))
 
 (defun lsp-web-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+    (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (add-hook 'web-mode-hook (lambda ()
                              (lsp)
                              (lsp-web-install-save-hooks)
                              (flycheck-mode)
                              ))
-
 (use-package
     web-mode
     :ensure t
