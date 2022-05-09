@@ -564,6 +564,7 @@ This command does not push text to `kill-ring'."
 (defun downBlock()
 	(interactive)
 	(re-search-forward "[{}]" nil t 1))
+
 (defun backwardParagraph()
 	(interactive)
 	(previous-line)
@@ -593,6 +594,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'python-mode))
 		 (not (eq major-mode 'makefile-gmake-mode))
 		 (not (eq major-mode 'yaml-mode))
+		 (not (eq major-mode 'vue-mode))
 		 (not (eq major-mode 'go-mode))
 		 (not (eq major-mode 'fundamental-mode))
 		 (not (eq major-mode 'sql-mode)))

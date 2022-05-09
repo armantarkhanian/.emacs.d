@@ -411,6 +411,7 @@
     ;;:hook (yaml-mode . lsp-deferred)
     ;;:hook (dockerfile-mode . lsp-deferred)
     :hook (go-mode . lsp-deferred)
+	:hook (kotlin-mode . lsp-deferred)
     ;;:hook (c++-mode . lsp-deferred)
     :hook (java-mode . lsp)
     ;;:hook (python-mode . lsp-deferred)
@@ -613,6 +614,10 @@
 ;; (lsp-javacomp-install-server))
 
 (use-package
+    kotlin-mode
+    :ensure t)
+
+(use-package
     go-mode
     :ensure t
     :custom
@@ -624,6 +629,7 @@
                        (nilness . t)
                        (unusedparams . t)
                        (unusedwrite . t)
+                       (unindent . t)
                        ))
     )
 
@@ -641,12 +647,21 @@
                             (flycheck-select-checker 'golangci-lint)
                             ))
 
+(defun lsp-web-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(add-hook 'web-mode-hook (lambda ()
+                             (lsp)
+                             (lsp-web-install-save-hooks)
+                             (flycheck-mode)
+                             ))
 
 (use-package
     web-mode
     :ensure t
-    :mode "\\.vue\\'"
     :mode "\\.html\\'"
+    :mode "\\.vue\\'"
     :mode "\\.js\\'"
     :mode "\\.json\\'"
     :mode "\\.jsx\\'"
@@ -655,29 +670,24 @@
     :config
     (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
     (setq web-mode-content-types-alist '(("tsx" . "\\.ts[x]?\\'")))
-	(setq-default indent-tabs-mode nil)
+	(setq indent-tabs-mode nil)
 	(setq web-mode-markup-indent-offset 2)
 	(setq web-mode-code-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-attr-indent-offset 2)
     (setq web-mode-enable-auto-pairing t)
     (setq web-mode-enable-auto-closing t)
-    (setq web-mode-enable-current-element-highlight nil)
-    )
 
 
-(defun my-web-mode-hook ()
-    "Hooks for Web mode."
-    (setq web-mode-markup-indent-offset 4)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-attr-indent-offset 2)
     (setq web-mode-style-padding 0)
     (setq web-mode-script-padding 0)
     (setq web-mode-script-padding 0)
     (setq web-mode-block-padding 0)
+
     (define-key web-mode-map (kbd "C--") 'web-mode-fold-or-unfold)
     (define-key web-mode-map (kbd "C-=") 'web-mode-fold-or-unfold)
+    (setq web-mode-enable-current-element-highlight nil)
     )
-(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 
 (use-package
