@@ -1,3 +1,30 @@
+(defun next-code-buffer ()
+	(interactive)
+	(let (( bread-crumb (buffer-name) ))
+		(next-buffer)
+		(while
+			(and
+			 (string-match-p "^\*" (buffer-name))
+			 (not ( equal bread-crumb (buffer-name) )) )
+			(next-buffer))))
+
+(global-set-key [remap next-buffer] 'next-code-buffer)
+
+(defun previous-code-buffer ()
+	(interactive)
+	(let (( bread-crumb (buffer-name) ))
+		(previous-buffer)
+		(while
+			(and
+			 (string-match-p "^\*" (buffer-name))
+			 (not ( equal bread-crumb (buffer-name) )) )
+			(previous-buffer))))
+
+(global-set-key [remap previous-buffer] 'previous-code-buffer)
+
+(global-set-key (kbd "M-1") 'previous-buffer)
+(global-set-key (kbd "M-2") 'next-buffer)
+
 ;; navigation
 (global-set-key (kbd "<backtab>") 'custom/insert-tab)
 (global-set-key (kbd "S-<up>") 'windmove-up)
