@@ -1,3 +1,11 @@
+(defun custom/find-file-as-root ()
+	(interactive)
+	(setq fileName (read-file-name "Find file as root: "))
+
+	(setq fullFileName (expand-file-name fileName))
+	(setq rootFile (concat "/sudo:root@localhost:" fullFileName))
+	(find-file rootFile))
+
 (define-obsolete-function-alias 'smerge-keep-mine 'smerge-keep-upper "")
 (define-obsolete-function-alias 'smerge-keep-their 'smerge-keep-lower "")
 
