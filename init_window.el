@@ -383,7 +383,8 @@
 ;;(load-theme 'vscode-dark-plus t)
 ;;(load-theme 'dakrone t)
 ;;(load-theme 'intellij t)
-(load-theme 'doom-badger t)
+;;(load-theme 'doom-badger t)
+(load-theme 'doom-opera t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -530,7 +531,7 @@
 (setq-default indicate-empty-lines nil)
 
 (setq-default indicate-buffer-boundaries 'left)
-(set-face-attribute 'default nil :font "Monospace Bold 11")
+(set-face-attribute 'default nil :font "Monospace 11")
 (setq display-time-24hr-format t)
 (display-time-mode             t)
 (size-indication-mode          t)
@@ -649,13 +650,6 @@
 							(flycheck-golangci-lint-setup)
 							(flycheck-select-checker 'golangci-lint)
 							))
-
-(defun lsp-web-install-save-hooks ()
-	(add-hook 'after-save-hook #'eslint-fix t t))
-
-(add-hook 'web-mode-hook (lambda ()
-							 (lsp-web-install-save-hooks)
-							 ))
 
 (use-package
 	web-mode
