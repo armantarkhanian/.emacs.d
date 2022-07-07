@@ -1,3 +1,7 @@
+(defun set-default-directory ()
+	(interactive)
+	(setq default-directory (read-directory-name "Default directory: ")))
+
 (defun custom/find-file-as-root ()
 	(interactive)
 	(setq fileName (read-file-name "Find file as root: "))

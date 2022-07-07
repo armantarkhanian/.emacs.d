@@ -383,8 +383,8 @@
 ;;(load-theme 'vscode-dark-plus t)
 ;;(load-theme 'dakrone t)
 ;;(load-theme 'intellij t)
-;;(load-theme 'doom-badger t)
-(load-theme 'doom-opera t)
+(load-theme 'doom-badger t)
+;;(load-theme 'doom-opera t)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
