@@ -609,6 +609,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'vue-mode))
 		 (not (eq major-mode 'go-mode))
 		 (not (eq major-mode 'conf-mode))
+		 (not (eq major-mode 'json-mode))
 		 (not (eq major-mode 'conf-space-mode))
 		 (not (eq major-mode 'fundamental-mode))
 		 (not (eq major-mode 'sql-mode)))
