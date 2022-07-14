@@ -26,6 +26,7 @@
 ;; (global-set-key (kbd "M-2") 'next-buffer)
 
 ;; navigation
+(global-unset-key (kbd "C-v"))
 (global-set-key (kbd "<backtab>") 'custom/insert-tab)
 (global-set-key (kbd "S-<up>") 'windmove-up)
 (global-set-key (kbd "S-<down>") 'windmove-down)
