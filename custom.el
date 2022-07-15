@@ -376,6 +376,10 @@ This depends on major mode having setup syntax table properly."
 	(interactive)
 	(find-file "~/.emacs.d/rest"))
 
+(defun org ()
+	(interactive)
+	(find-file "~/.emacs.d/org"))
+
 (defun custom/lsp-goto-test (&optional include-declaration &key display-action)
 	(interactive "P")
 	(custom/lsp-find-references "textDocument/references" nil :display-action display-action))
@@ -616,6 +620,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'json-mode))
 		 (not (eq major-mode 'conf-space-mode))
 		 (not (eq major-mode 'fundamental-mode))
+		 (not (eq major-mode 'org-mode))
 		 (not (eq major-mode 'restclient-mode))
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max))
