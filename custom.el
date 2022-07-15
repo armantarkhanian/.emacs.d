@@ -372,6 +372,10 @@ This depends on major mode having setup syntax table properly."
 	(interactive)
 	(find-file "~/.emacs.d/notes"))
 
+(defun rest ()
+	(interactive)
+	(find-file "~/.emacs.d/rest"))
+
 (defun custom/lsp-goto-test (&optional include-declaration &key display-action)
 	(interactive "P")
 	(custom/lsp-find-references "textDocument/references" nil :display-action display-action))
