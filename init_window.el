@@ -8,6 +8,10 @@
 
 (setq warning-minimum-level :emergency)
 
+
+(add-to-list 'auto-mode-alist '("\\org\\'" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
 (use-package nginx-mode :ensure t)
 
 (global-so-long-mode 1)
