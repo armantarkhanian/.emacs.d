@@ -616,6 +616,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'json-mode))
 		 (not (eq major-mode 'conf-space-mode))
 		 (not (eq major-mode 'fundamental-mode))
+		 (not (eq major-mode 'restclient-mode))
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max))
 		(delete-trailing-whitespace))
