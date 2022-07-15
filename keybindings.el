@@ -27,6 +27,7 @@
 
 ;; navigation
 (global-unset-key (kbd "C-v"))
+(global-unset-key (kbd "M-o"))
 (global-set-key (kbd "<backtab>") 'custom/insert-tab)
 (global-set-key (kbd "S-<up>") 'windmove-up)
 (global-set-key (kbd "S-<down>") 'windmove-down)
@@ -39,7 +40,6 @@
 (global-set-key (kbd "C-M-p") 'backwardParagraph)
 (global-set-key (kbd "C-M-n") 'forwardParagraph)
 (global-set-key (kbd "C-x C-g") 'goto-line-preview)
-(global-set-key (kbd "M-o") 'switchNextBuffer)
 (global-set-key (kbd "C-x k") 'kill-buffer)
 (global-set-key (kbd "C-x C-k") 'kill-buffer)
 (global-set-key (kbd "C-M-<return>") 'mc/mark-next-like-this)
