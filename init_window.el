@@ -180,6 +180,10 @@
 (use-package
 	restclient
 	:ensure t
+	:mode (
+		   ("\\rest\\'" . restclient-mode)
+		   ("\\.rest\\'" . restclient-mode)
+		   )
 	)
 
 (use-package
