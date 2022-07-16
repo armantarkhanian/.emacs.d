@@ -388,6 +388,10 @@ This depends on major mode having setup syntax table properly."
 	(interactive)
 	(find-file "~/.emacs.d/notes"))
 
+(defun el ()
+	(interactive)
+	(find-file "~/.el"))
+
 (defun rest ()
 	(interactive)
 	(find-file "~/.emacs.d/rest"))
