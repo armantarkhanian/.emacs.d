@@ -502,16 +502,14 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(switch-to-next-buffer)
 	(setq name (buffer-name))
 	(if (equal "*" (substring name 0 1))
-		(switchNextBuffer))
-	(setq header-line-format (generateHeadline)))
+		(switchNextBuffer)))
 
 (defun switchPrevBuffer()
 	(interactive)
 	(switch-to-prev-buffer)
 	(setq name (buffer-name))
 	(if (equal "*" (substring name 0 1))
-		(switchPrevBuffer))
-	(setq header-line-format (generateHeadline)))
+		(switchPrevBuffer)))
 
 (defun md()
 	(interactive)
