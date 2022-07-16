@@ -1,3 +1,19 @@
+(defun point-in-comment ()
+	(let ((syn (syntax-ppss)))
+		(and (nth 8 syn)
+			 (not (nth 3 syn)))))
+
+(defun my-capitalize-all-sql-keywords ()
+	(interactive)
+	(require 'sql)
+	(save-excursion
+		(dolist (keywords sql-mode-font-lock-keywords)
+			(goto-char (point-min))
+			(while (re-search-forward (car keywords) nil t)
+				(unless (point-in-comment)
+					(goto-char (match-beginning 0))
+					(upcase-word 1))))))
+
 (defun set-default-directory ()
 	(interactive)
 	(setq default-directory (read-directory-name "Default directory: ")))
@@ -609,6 +625,8 @@ This command does not push text to `kill-ring'."
 (defun fmt ()
 	(interactive)
 
+	(delete-trailing-whitespace)
+
 	(when
 		(and
 		 (not (eq major-mode 'python-mode))
@@ -623,11 +641,12 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'org-mode))
 		 (not (eq major-mode 'restclient-mode))
 		 (not (eq major-mode 'sql-mode)))
-		(indent-region (point-min) (point-max))
-		(delete-trailing-whitespace))
+		(indent-region (point-min) (point-max)))
 
-	;; (when (eq major-mode 'sql-mode)
-	;; 	(custom/format-sql-buffer))
+	(when (eq major-mode 'sql-mode)
+		;;(custom/format-sql-buffer)
+		(my-capitalize-all-sql-keywords)
+		)
 
 	;; (when (equal (file-name-extension (buffer-file-name)) "json")
 	;; (custom/format-json-buffer))

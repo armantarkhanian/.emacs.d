@@ -432,6 +432,14 @@
 	(setq lsp-flycheck-enable nil)
 	(setq lsp-headerline-breadcrumb-enable nil))
 
+(use-package sqlformat
+	:ensure t
+	:commands (sqlformat sqlformat-buffer sqlformat-region)
+	:hook (sql-mode . sqlformat-on-save-mode)
+	:init
+	(setq sqlformat-command 'pgformatter
+          sqlformat-args '("-s2" "-g" "-u1")))
+
 (use-package
 	lsp-ui
 	:ensure t
