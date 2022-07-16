@@ -388,7 +388,7 @@ This depends on major mode having setup syntax table properly."
 	(interactive)
 	(find-file "~/.emacs.d/notes"))
 
-(defun el ()
+(defun li ()
 	(interactive)
 	(find-file "~/.el"))
 
