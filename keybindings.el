@@ -109,6 +109,7 @@
 (global-set-key (kbd "<f6>") 'imenu)
 (global-set-key (kbd "C-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "C-k") 'custom-kill-line)
+(global-set-key (kbd "C-M-k") 'custom-kill-whole-line)
 (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-d") 'forward-delete-word)
 (global-set-key (kbd "M-/") 'comment-or-uncomment-region)

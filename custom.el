@@ -597,6 +597,12 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(interactive)
 	(delete-region (point)
 				   (line-end-position)))
+
+(defun custom-kill-whole-line ()
+	(interactive)
+	(delete-region (line-beginning-position)
+				   (line-end-position)))
+
 (defun my-delete-line ()
 	"Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
