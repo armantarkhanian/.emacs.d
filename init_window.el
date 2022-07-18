@@ -397,10 +397,10 @@
 	:ensure t)
 
 ;; (load-theme 'clues t)
-;; (load-theme 'vscode-dark-plus t)
+(load-theme 'vscode-dark-plus t)
 ;; (load-theme 'dakrone t)
 ;; (load-theme 'intellij t)
-(load-theme 'doom-badger t)
+;; (load-theme 'doom-badger t)
 ;; (load-theme 'doom-opera t)
 ;; (load-theme 'afternoon t)
 
