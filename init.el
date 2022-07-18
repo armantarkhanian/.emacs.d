@@ -41,7 +41,7 @@
  '(mc/list-file "/home/arman/.emacs.d/var/mc-list.el")
  '(mc/max-cursors 20)
  '(package-selected-packages
-   '(clues-theme afternoon-theme crdt sqlformat pandoc pandoc-mode nginx-mode dired-sidebar go-dlv eslint-fix kotlin-mode ccls lsp-javacomp lsp-java yasnippet-snippets yaml-mode webpaste web-mode vue-mode vscode-dark-plus-theme vlf vdiff-magit use-package ujelly-theme typescript-mode sublimity sqlup-mode sql-indent solarized-theme smart-shift selected restclient rainbow-mode protobuf-mode powerline org-jira no-littering neotree multiple-cursors multi-web-mode minimap mark-multiple magit-delta lsp-ui key-chord json-mode jq-format jenkinsfile-mode jenkins-watch jenkins intellij-theme ibuffer-sidebar ibuffer-projectile ibuffer-project html-to-markdown highlight-indent-guides hide-mode-line helm harvest graphql-mode goto-line-preview go-mode gitlab github-theme git-lens git-gutter git friendly-shell-command friendly-shell format-all fold-dwim flycheck-golangci-lint expand-region elisp-format eglot doom-themes doom-modeline dockerfile-mode diffview dap-mode dakrone-theme company-tabnine bm blamer apheleia all-the-icons-ibuffer all-the-icons-dired ace-jump-mode))
+   '(green-is-the-new-black-theme clues-theme afternoon-theme crdt sqlformat pandoc pandoc-mode nginx-mode dired-sidebar go-dlv eslint-fix kotlin-mode ccls lsp-javacomp lsp-java yasnippet-snippets yaml-mode webpaste web-mode vue-mode vscode-dark-plus-theme vlf vdiff-magit use-package ujelly-theme typescript-mode sublimity sqlup-mode sql-indent solarized-theme smart-shift selected restclient rainbow-mode protobuf-mode powerline org-jira no-littering neotree multiple-cursors multi-web-mode minimap mark-multiple magit-delta lsp-ui key-chord json-mode jq-format jenkinsfile-mode jenkins-watch jenkins intellij-theme ibuffer-sidebar ibuffer-projectile ibuffer-project html-to-markdown highlight-indent-guides hide-mode-line helm harvest graphql-mode goto-line-preview go-mode gitlab github-theme git-lens git-gutter git friendly-shell-command friendly-shell format-all fold-dwim flycheck-golangci-lint expand-region elisp-format eglot doom-themes doom-modeline dockerfile-mode diffview dap-mode dakrone-theme company-tabnine bm blamer apheleia all-the-icons-ibuffer all-the-icons-dired ace-jump-mode))
  '(tabbar-separator '(0.5)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -49,4 +49,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blamer-face ((t :foreground "#7a88cf" :background nil :italic t)))
- '(cursor ((t (:background "#8AC6F2")))))
+ '(cursor ((t (:background "#8AC6F2"))))
+ '(mode-line ((t (:background "#333" :foreground "#fafafa" :weight normal)))))

@@ -33,6 +33,16 @@
 (define-obsolete-function-alias 'their 'smerge-keep-lower "")
 
 
+(defun tidy ()
+	(interactive)
+	(setq result (custom/shell-command "go mod tidy"))
+	(setq exitCode (pop result))
+	(setq output (pop result))
+
+	(if (not (eq exitCode 0))
+		(message output))
+	)
+
 (defun comp ()
 	(interactive)
 	(if  (eq major-mode 'protobuf-mode)

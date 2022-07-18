@@ -8,12 +8,11 @@
 
 (setq warning-minimum-level :emergency)
 
-
 (add-to-list 'auto-mode-alist '("\\org\\'" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;; (require 'uniquify)
+;; (setq uniquify-buffer-name-style 'forward)
 
 (use-package nginx-mode :ensure t)
 
