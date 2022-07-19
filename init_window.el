@@ -12,7 +12,7 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 (use-package nginx-mode :ensure t)
 
@@ -359,6 +359,12 @@
 	(setq doom-modeline-vcs-max-length 20)
 	(setq doom-modeline-workspace-name nil)
 	)
+
+(setq header-line-format '("%e"
+						   (:eval
+							(doom-modeline-format--main))))
+
+(setq mode-line-format nil)
 
 (use-package
 	all-the-icons-dired
