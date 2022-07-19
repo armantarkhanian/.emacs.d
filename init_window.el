@@ -360,11 +360,13 @@
 	(setq doom-modeline-workspace-name nil)
 	)
 
-(setq header-line-format '("%e"
-						   (:eval
-							(doom-modeline-format--main))))
+;; (setq-default header-line-format '("%e"
+;; 								   (:eval
+;; 									(doom-modeline-format--main))))
 
-(setq mode-line-format nil)
+(setq-default mode-line-format '("%e"
+								 (:eval
+								  (doom-modeline-format--main))))
 
 (use-package
 	all-the-icons-dired
