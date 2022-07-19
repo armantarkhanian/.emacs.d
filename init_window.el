@@ -11,8 +11,8 @@
 (add-to-list 'auto-mode-alist '("\\org\\'" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;; (require 'uniquify)
-;; (setq uniquify-buffer-name-style 'forward)
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
 
 (use-package nginx-mode :ensure t)
 
@@ -349,9 +349,16 @@
 (use-package
 	doom-modeline
 	:ensure t
-	:init (doom-modeline-mode 1))
-
-(setq doom-modeline-minor-modes nil)
+	:init (doom-modeline-mode 1)
+	:config
+	(setq doom-modeline-minor-modes nil)
+	(setq doom-modeline-buffer-file-name-style 'buffer-name)
+	(setq doom-modeline-enable-word-count nil)
+	(setq doom-modeline-buffer-encoding t)
+	(setq doom-modeline-indent-info nil)
+	(setq doom-modeline-vcs-max-length 20)
+	(setq doom-modeline-workspace-name nil)
+	)
 
 (use-package
 	all-the-icons-dired
@@ -442,13 +449,13 @@
 	(setq lsp-flycheck-enable nil)
 	(setq lsp-headerline-breadcrumb-enable nil))
 
-(use-package sqlformat
-	:ensure t
-	:commands (sqlformat sqlformat-buffer sqlformat-region)
-	:hook (sql-mode . sqlformat-on-save-mode)
-	:init
-	(setq sqlformat-command 'pgformatter
-          sqlformat-args '("-s2" "-g" "-u1")))
+;; (use-package sqlformat
+;; 	:ensure t
+;; 	:commands (sqlformat sqlformat-buffer sqlformat-region)
+;; 	:hook (sql-mode . sqlformat-on-save-mode)
+;; 	:init
+;; 	(setq sqlformat-command 'pgformatter
+;;           sqlformat-args '("-s2" "-g" "-u1")))
 
 (use-package
 	lsp-ui

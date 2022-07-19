@@ -661,10 +661,10 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max)))
 
-	(when (eq major-mode 'sql-mode)
-		;;(custom/format-sql-buffer)
-		(my-capitalize-all-sql-keywords)
-		)
+	;; (when (eq major-mode 'sql-mode)
+	;; 	;;(custom/format-sql-buffer)
+	;; 	(my-capitalize-all-sql-keywords)
+	;; 	)
 
 	;; (when (equal (file-name-extension (buffer-file-name)) "json")
 	;; (custom/format-json-buffer))
