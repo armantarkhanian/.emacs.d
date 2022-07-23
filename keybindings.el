@@ -1,3 +1,5 @@
+(global-set-key (kbd "M-o") 'open-line)
+
 ;; navigation
 (global-unset-key (kbd "C-v"))
 (global-set-key (kbd "C-<right>") 'switchNextBuffer)
