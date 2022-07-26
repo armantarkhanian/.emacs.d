@@ -2,6 +2,7 @@
 
 ;; navigation
 (global-unset-key (kbd "C-v"))
+(global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-<right>") 'switchNextBuffer)
 (global-set-key (kbd "C-<left>") 'switchPrevBuffer)
 (global-set-key (kbd "<backtab>") 'custom/insert-tab)

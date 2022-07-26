@@ -32,7 +32,6 @@
 (define-obsolete-function-alias 'mine 'smerge-keep-upper "")
 (define-obsolete-function-alias 'their 'smerge-keep-lower "")
 
-
 (defun tidy ()
 	(interactive)
 	(setq result (custom/shell-command "go mod tidy"))
