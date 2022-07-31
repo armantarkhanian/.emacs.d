@@ -503,9 +503,12 @@ type Location, LocationLink, Location[] or LocationLink[]."
 
 (defun calc-region (point mark)
 	(interactive "r")
-	(setq str (buffer-substring point mark))
-	(setq str (string-replace " " "" str))
-	(setq result (calc-eval str))
+	(setq expr (buffer-substring point mark))
+	(setq cleanedExpr (string-replace " " "" expr))
+	(setq result (calc-eval cleanedExpr))
+	(goto-char point)
+	(replace-string-in-region expr cleanedExpr point mark)
+	(end-of-line)
 	(insert (concat " = " result)))
 
 (defun switchNextBuffer()
