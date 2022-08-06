@@ -452,6 +452,7 @@
 	;;:hook (yaml-mode . lsp-deferred)
 	;;:hook (dockerfile-mode . lsp-deferred)
 	:hook (go-mode . lsp-deferred)
+	:hook (rust-mode . lsp-deferred)
 	:hook (kotlin-mode . lsp-deferred)
 	;;:hook (c++-mode . lsp-deferred)
 	:hook (java-mode . lsp)
@@ -666,6 +667,18 @@
 (use-package
 	kotlin-mode
 	:ensure t)
+
+(use-package
+	rust-mode
+	:ensure t)
+
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+(add-hook 'rust-mode-hook
+          (lambda () (prettify-symbols-mode)))
+
+(setq rust-format-on-save t)
+
 
 (use-package
 	go-mode

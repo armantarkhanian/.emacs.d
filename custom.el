@@ -662,6 +662,7 @@ This command does not push text to `kill-ring'."
 		 (not (eq major-mode 'fundamental-mode))
 		 (not (eq major-mode 'org-mode))
 		 (not (eq major-mode 'restclient-mode))
+		 (not (eq major-mode 'web-mode))
 		 (not (eq major-mode 'sql-mode)))
 		(indent-region (point-min) (point-max)))
 
