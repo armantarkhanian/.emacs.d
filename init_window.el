@@ -292,6 +292,7 @@
 				("r" . calc-region)
 				("q" . selected-off)
 				("c" . webpaste-paste-region)
+				("t" . custom/titleize-region)
 				("u" . upcase-region)
 				("d" . downcase-region)
 				("w" . count-words-region)
