@@ -28,6 +28,18 @@
 				(delete-region $p1 $p2)
 				(insert $newStr)))))
 
+(defun custom/titleize-region ()
+	(interactive)
+	(let ($p1 $p2 $input-str $newStr)
+		(if (use-region-p)
+			(setq $p1 (region-beginning) $p2 (region-end))
+			(setq $p1 (line-beginning-position) $p2 (line-end-position)))
+		(setq $input-str (buffer-substring-no-properties $p1 $p2))
+		(setq $newStr (s-titleize $input-str))
+		(delete-region $p1 $p2)
+		(insert $newStr)
+		))
+
 (defun point-in-comment ()
 	(let ((syn (syntax-ppss)))
 		(and (nth 8 syn)
