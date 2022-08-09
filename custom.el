@@ -187,6 +187,7 @@ This depends on major mode having setup syntax table properly."
 		(progn
 			(if (or (eq major-mode 'yaml-mode)
 					(eq major-mode 'python-mode)
+					(eq major-mode 'fundamental-mode)
 					(eq major-mode 'sql-mode))
 				(newline-and-indent)
 				(progn
