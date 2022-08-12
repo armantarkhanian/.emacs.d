@@ -79,12 +79,12 @@
 	:config
 	(setq-default yaml-indent-offset 2))
 
-(defun lsp-yaml-install-save-hooks ()
-	(add-hook 'before-save-hook #'lsp-format-buffer t t))
+;; (defun lsp-yaml-install-save-hooks ()
+;; 	(add-hook 'before-save-hook #'lsp-format-buffer t t))
 
-(add-hook 'yaml-mode-hook #'lsp-yaml-install-save-hooks)
-(add-hook 'yaml-mode-hook #'lsp)
-(add-hook 'yaml-mode-hook #'flycheck-mode)
+;; (add-hook 'yaml-mode-hook #'lsp-yaml-install-save-hooks)
+;; (add-hook 'yaml-mode-hook #'lsp)
+;; (add-hook 'yaml-mode-hook #'flycheck-mode)
 
 (use-package
 	no-littering
@@ -290,11 +290,14 @@
 				;; ("M-b" . smart-shift-left)
 				("TAB" . custom/indent-region)
 				("r" . calc-region)
+				("к" . calc-region)
 				("q" . selected-off)
 				("c" . webpaste-paste-region)
 				("t" . custom/titleize-region)
 				("u" . upcase-region)
+				("г" . upcase-region)
 				("d" . downcase-region)
+				("в" . downcase-region)
 				("w" . count-words-region)
 				("m" . apply-macro-to-region-lines)))
 
