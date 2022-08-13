@@ -1,4 +1,5 @@
 (global-set-key (kbd "M-o") 'open-line)
+(global-set-key (kbd "M-r") 'lsp-restart-workspace)
 
 ;; navigation
 (global-unset-key (kbd "C-v"))
