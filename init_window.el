@@ -652,9 +652,8 @@
 											 "staticcheck"
 											 "govet"
 											 "errcheck"
-											 "wsl"
-											 ))
-	)
+											 ;; "wsl"
+											 )))
 
 (defun +flycheck-checker-get(fn checker property)
     (or (alist-get property (alist-get checker flycheck-local-checkers))
