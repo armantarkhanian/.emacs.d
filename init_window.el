@@ -627,20 +627,40 @@
 	)
 
 (use-package flycheck-golangci-lint
-	:ensure t)
-
-(defvar-local flycheck-local-checkers nil)
+	:ensure t
+	:custom
+	(flycheck-golangci-lint-disable-all t)
+	(flycheck-golangci-lint-enable-linters '(
+											 "gochecknoglobals"
+											 "gochecknoinits"
+											 "revive"
+											 "nakedret"
+											 "gocyclo"
+											 "gosimple"
+											 "gofumpt"
+											 "goconst"
+											 "misspell"
+											 "unconvert"
+											 "varcheck"
+											 "unused"
+											 "deadcode"
+											 "unparam"
+											 "ineffassign"
+											 "gocritic"
+											 "prealloc"
+											 "exportloopref"
+											 "staticcheck"
+											 "govet"
+											 "errcheck"
+											 "wsl"
+											 ))
+	)
 
 (defun +flycheck-checker-get(fn checker property)
     (or (alist-get property (alist-get checker flycheck-local-checkers))
         (funcall fn checker property)))
 
 (advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
-
-
-(add-hook 'go-mode-hook (lambda()
-                            (flycheck-golangci-lint-setup)
-                            (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))))
 
 (use-package yasnippet
 	:ensure t
@@ -732,6 +752,10 @@
 							(flycheck-golangci-lint-setup)
 							(flycheck-select-checker 'golangci-lint)
 							))
+
+(add-hook 'go-mode-hook (lambda()
+                            (flycheck-golangci-lint-setup)
+                            (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))))
 
 (use-package
 	web-mode
