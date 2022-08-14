@@ -479,14 +479,17 @@
 	lsp-ui
 	:ensure t
 	:commands lsp-ui-mode
-	:config
-	(setq lsp-ui-doc-alignment 'window)
-	;; (setq lsp-ui-doc-border "#ccc")
-	(setq lsp-ui-doc-header nil)
-	(setq lsp-ui-doc-max-height 35)
-	(setq lsp-ui-doc-max-width 80)
-	(setq lsp-ui-doc-position 'top)
-	(setq lsp-ui-doc-use-webkit nil)
+	:custom
+	(lsp-ui-doc-enable t)
+	(lsp-ui-doc-show-with-mouse nil)
+	(lsp-ui-doc-show-with-cursor t)
+	(lsp-ui-doc-alignment 'window)
+	;; (lsp-ui-doc-border "#ccc")
+	(lsp-ui-doc-header nil)
+	(lsp-ui-doc-max-height 35)
+	(lsp-ui-doc-max-width 80)
+	(lsp-ui-doc-position 'top)
+	(lsp-ui-doc-use-webkit nil)
 	;; (set-face-attribute 'lsp-ui-doc-background nil :background "#eeeeee")
 	)
 
