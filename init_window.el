@@ -647,7 +647,7 @@
 											 "unparam"
 											 "ineffassign"
 											 "gocritic"
-											 "prealloc"
+											 ;;"prealloc"
 											 "exportloopref"
 											 "staticcheck"
 											 "govet"
@@ -659,7 +659,7 @@
     (or (alist-get property (alist-get checker flycheck-local-checkers))
         (funcall fn checker property)))
 
-(advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
+;; (advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
 
 (use-package yasnippet
 	:ensure t
@@ -682,10 +682,6 @@
 	:bind (:map prog-mode-map
 				("C-i" . company-indent-or-complete-common)
 				("C-M-i" . counsel-company)))
-
-(use-package
-	flycheck-golangci-lint
-	:ensure t)
 
 ;; (use-package lsp-javacomp
 ;; 	:ensure t)
@@ -748,13 +744,9 @@
 							(lsp)
 							(lsp-go-install-save-hooks)
 							(flycheck-mode)
-							(flycheck-golangci-lint-setup)
-							(flycheck-select-checker 'golangci-lint)
+							;; (flycheck-golangci-lint-setup)
+                            ;; (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))
 							))
-
-(add-hook 'go-mode-hook (lambda()
-                            (flycheck-golangci-lint-setup)
-                            (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))))
 
 (use-package
 	web-mode

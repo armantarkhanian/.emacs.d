@@ -549,10 +549,9 @@ type Location, LocationLink, Location[] or LocationLink[]."
 	(setq expr (buffer-substring point mark))
 	(setq cleanedExpr (string-replace " " "" expr))
 	(setq result (calc-eval cleanedExpr))
-	(goto-char point)
-	(replace-string-in-region expr cleanedExpr point mark)
-	(end-of-line)
-	(insert (concat " = " result)))
+	(setq newString (concat cleanedExpr " = " result))
+	(replace-string-in-region expr "" point mark)
+	(insert newString))
 
 (defun switchNextBuffer()
 	(interactive)
