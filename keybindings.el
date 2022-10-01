@@ -77,6 +77,7 @@
 (define-key ibuffer-mode-map (kbd "k") 'kill-this-buffer)
 (define-key ibuffer-mode-map (kbd "h") 'ibuffer/toggle-default-buffers)
 (define-key ibuffer-mode-map (kbd "C-<tab>") 'kill-this-buffer)
+(define-key ibuffer-mode-map (kbd "C-r") 'ibuffer-do-sort-by-recency)
 ;; (define-key ibuffer-mode-map (kbd "1") (lambda (&optional n)
 ;; 										   (interactive)
 ;; 										   (goto-line 1)))

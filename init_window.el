@@ -469,6 +469,7 @@
 	;;:hook (sql-mode . lsp-deferred)
 	;;:hook (yaml-mode . lsp-deferred)
 	;;:hook (dockerfile-mode . lsp-deferred)
+	:hook (lua-mode . lsp-deferred)
 	:hook (go-mode . lsp-deferred)
 	:hook (rust-mode . lsp-deferred)
 	:hook (kotlin-mode . lsp-deferred)
