@@ -16,8 +16,6 @@
 
 (use-package nginx-mode :ensure t)
 
-(global-so-long-mode 1)
-
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
 
