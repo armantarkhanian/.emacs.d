@@ -438,7 +438,8 @@ This depends on major mode having setup syntax table properly."
 
 (defun no ()
 	(interactive)
-	(find-file "~/.emacs.d/notes"))
+	(setq noteFile (format-time-string "%F"))
+	(find-file (concat "~/.notes/" noteFile)))
 
 (defun li ()
 	(interactive)
