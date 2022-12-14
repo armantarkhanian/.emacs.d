@@ -31,6 +31,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
+(use-package rjsx-mode
+	:ensure t)
+
 (use-package blamer
 	:ensure t
 	:bind (("s-i" . blamer-show-commit-info))
