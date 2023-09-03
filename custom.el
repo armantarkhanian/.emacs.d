@@ -443,6 +443,10 @@ This depends on major mode having setup syntax table properly."
 	;;(find-file (concat "~/.notes/" noteFile))
 	)
 
+(defun rest ()
+	(interactive)
+	(find-file "~/.emacs.d/rest"))
+
 (defun li ()
 	(interactive)
 	(find-file "~/.el"))

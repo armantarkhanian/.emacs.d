@@ -1,3 +1,4 @@
+(global-set-key (kbd "C-u") 'uuidgen)
 (global-set-key (kbd "M-o") 'open-line)
 (global-set-key (kbd "M-r") 'lsp-restart-workspace)
 (global-set-key (kbd "C-M-r") 'lsp-rename)
