@@ -24,6 +24,9 @@
 (setq read-process-output-max (* 1024 1024 50)) ;; 50mb
 (setq company-idle-delay 0.0)
 (setq company-minimum-prefix-length 1)
+
+;; (getenv "LSP_USE_PLISTS")
+
 (setq create-lockfiles nil)
 (setq lsp-log-io nil)
 (setq lsp-file-watch-threshold 2000)
@@ -443,12 +446,6 @@
 	:hook ((c-mode c++-mode objc-mode cuda-mode) .
 		   (lambda () (require 'ccls) (lsp))))
 
-(use-package
-	lsp-java
-	:ensure t)
-
-(require 'lsp-java)
-
     ;;;; This snippet enables lua-mode
 ;; This line is not necessary, if lua-mode.el is already on your load-path
 (add-to-list 'load-path "/home/arman/.emacs.d/elpa/lua-mode/")
@@ -698,25 +695,6 @@
 	:bind (:map prog-mode-map
 				("C-i" . company-indent-or-complete-common)
 				("C-M-i" . counsel-company)))
-
-;; (use-package lsp-javacomp
-;; 	:ensure t)
-
-;; :init
-;; (add-hook 'java-mode-hook
-;;           (lambda ()
-;; 			  ;; Load lsp-javacomp before enabling lsp, so that javacomp client
-;; 			  ;; is registed.
-;; 			  (require 'lsp-javacomp')
-;; 			  (lsp)
-;; 			  ;; Use company-lsp as the company completion backend
-;; 			  (set (make-variable-buffer-local 'company-backends) '(company-lsp))
-;; 			  ;; Optional company-mode settings
-;; 			  (set (make-variable-buffer-local 'company-idle-delay) 0.1)
-;; 			  (set (make-variable-buffer-local 'company-minimum-prefix-length) 1)))
-;; ;; Optional, make sure JavaComp is installed. See below.
-;; :config
-;; (lsp-javacomp-install-server))
 
 (use-package
 	kotlin-mode
